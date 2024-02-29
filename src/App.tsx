@@ -1,10 +1,18 @@
-import './App.css'
+import 'react-scroll'
+
+import Catalog from './pages/Catalog';
 
 function App() {
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <div className='h-screen bg-stars bg-no-repeat bg-cover bg-local'>
+      <Catalog/>
+    </div>
+    // <BrowserRouter>
+    // <Routes>
+      
+    // </Routes>
+    // </BrowserRouter>
+    
   )
 }
 export default App
