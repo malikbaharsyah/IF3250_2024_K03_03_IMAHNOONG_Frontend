@@ -1,18 +1,24 @@
-import 'react-scroll'
-
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Catalog from './pages/Catalog';
 
 function App() {
   return (
-    <div className='h-screen bg-stars bg-no-repeat bg-cover bg-local'>
-      <Catalog/>
-    </div>
-    // <BrowserRouter>
-    // <Routes>
-      
-    // </Routes>
-    // </BrowserRouter>
-    
+    <div className='App'>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Catalog/>}>
+            <Route path='catalog' element={<Catalog/>}/>
+            {/* <Route path='otherpages' element={<OtherPages/>}/> */
+            /* <Route path='otherpages' element={<OtherPages/>}/> */
+            /* <Route path='otherpages' element={<OtherPages/>}/> */
+            /* <Route path='otherpages' element={<OtherPages/>}/> */
+            /* <Route path='otherpages' element={<OtherPages/>}/> */
+            }
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </div>    
   )
 }
+
 export default App

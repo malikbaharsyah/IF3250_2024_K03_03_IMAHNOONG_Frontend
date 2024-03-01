@@ -1,9 +1,10 @@
-import Navbar from "../components/Navbar";
+import Navbar from "../components/base/Navbar";
+import CatalogContent from "../components/contents/CatalogContent";
 
 const Catalog = () => {
 
     return (
-        <div>
+        <div className='h-screen bg-stars bg-no-repeat bg-cover bg-local overflow-auto'>
             <div>
                 <Navbar/>
             </div>
@@ -12,6 +13,7 @@ const Catalog = () => {
                     Observatorium and Planetarium
                 </h1>
             </div>
+            <CatalogContent/>
         </div>
     );
 }
