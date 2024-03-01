@@ -1,10 +1,24 @@
-import './App.css'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Catalog from './pages/Catalog';
 
 function App() {
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <div className='App'>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Catalog/>}>
+            <Route path='catalog' element={<Catalog/>}/>
+            {/* <Route path='otherpages' element={<OtherPages/>}/> */
+            /* <Route path='otherpages' element={<OtherPages/>}/> */
+            /* <Route path='otherpages' element={<OtherPages/>}/> */
+            /* <Route path='otherpages' element={<OtherPages/>}/> */
+            /* <Route path='otherpages' element={<OtherPages/>}/> */
+            }
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </div>    
   )
 }
+
 export default App
