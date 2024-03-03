@@ -1,5 +1,4 @@
-import 'react-scroll'
-import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Catalog from './pages/Catalog';
 import Details from './pages/Details';
 
@@ -8,7 +7,7 @@ function App() {
     <div className='App'>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Catalog/>}/>
+          <Route path='/' element={<Catalog/>}>
             <Route path='catalog' element={<Catalog/>}/>
             <Route path='details' element={<Details/>}/>
             {/* <Route path='otherpages' element={<OtherPages/>}/> */
@@ -17,10 +16,11 @@ function App() {
             /* <Route path='otherpages' element={<OtherPages/>}/> */
             /* <Route path='otherpages' element={<OtherPages/>}/> */
             }
-          {/* </Route> */}
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>    
   )
 }
+
 export default App
