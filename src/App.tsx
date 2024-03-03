@@ -1,7 +1,6 @@
 import 'react-scroll'
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import Catalog from './pages/Catalog';
-import Details from './pages/Details';
 
 function App() {
   return (
