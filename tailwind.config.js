@@ -1,6 +1,4 @@
-
 /** @type {import('tailwindcss').Config} */
-
 export default {
   content: 
   {
@@ -12,20 +10,7 @@ export default {
     ],
   },
   theme: {
-    extend: {
-      backgroundImage:{
-        'stars' : 'url(./src/assets/backgrounds/stars.svg)'
-      },
-      fontFamily: {
-        inter: ['Inter', 'sans-serif'],
-      },
-      colors:{
-        'color-1': '#0a061d',
-        'color-2': '#4f1395',
-        'color-3': '#2224a1',
-        'color-4': '#ffffff'
-      }
-    },
+    extend: {},
   },
   plugins: [],
 }
