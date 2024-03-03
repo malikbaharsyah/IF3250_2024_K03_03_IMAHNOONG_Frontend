@@ -1,4 +1,4 @@
-import Navbar from "../components/base/Navbar";
+import Navbar from "../components/Navbar";
 
 const Details = () => {
     return (
@@ -6,7 +6,7 @@ const Details = () => {
             <div>
                 <Navbar/>
             </div>
-            <div>
+            <div> 
 
             </div>
         </div>
