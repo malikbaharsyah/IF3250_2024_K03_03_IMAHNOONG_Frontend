@@ -14,14 +14,38 @@ const Catalog = () => {
                 </h1>
             </div>
             <div className="flex flex-row flex-wrap px-28 gap-[32px] size-fit justify-center">
-                <CatalogContent/>
-                <CatalogContent/>
-                <CatalogContent/>
-                <CatalogContent/>
-                <CatalogContent/>
-                <CatalogContent/>
-                <CatalogContent/>
-                <CatalogContent/>
+                <CatalogContent
+                Title = "Lorem ipsum dolor sit amet"
+                Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat . . ."
+                Location = "Lorem Ipsum Dolor Sit Amet"/>
+                <CatalogContent
+                Title = "Lorem ipsum dolor sit amet"
+                Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat . . ."
+                Location = "Lorem Ipsum Dolor Sit Amet"/>
+                <CatalogContent
+                Title = "Lorem ipsum dolor sit amet"
+                Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat . . ."
+                Location = "Lorem Ipsum Dolor Sit Amet"/>
+                <CatalogContent
+                Title = "Lorem ipsum dolor sit amet"
+                Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat . . ."
+                Location = "Lorem Ipsum Dolor Sit Amet"/>
+                <CatalogContent
+                Title = "Lorem ipsum dolor sit amet"
+                Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat . . ."
+                Location = "Lorem Ipsum Dolor Sit Amet"/>
+                <CatalogContent
+                Title = "Lorem ipsum dolor sit amet"
+                Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat . . ."
+                Location = "Lorem Ipsum Dolor Sit Amet"/>
+                <CatalogContent
+                Title = "Lorem ipsum dolor sit amet"
+                Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat . . ."
+                Location = "Lorem Ipsum Dolor Sit Amet"/>
+                <CatalogContent
+                Title = "Lorem ipsum dolor sit amet"
+                Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat . . ."
+                Location = "Lorem Ipsum Dolor Sit Amet"/>
             </div>
         </div>
     );
