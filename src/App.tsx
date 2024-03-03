@@ -7,7 +7,7 @@ function App() {
     <div className='App'>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Catalog/>}>
+          <Route path='/' element={<Catalog/>}/>
             <Route path='catalog' element={<Catalog/>}/>
             <Route path='details' element={<Details/>}/>
             {/* <Route path='otherpages' element={<OtherPages/>}/> */
@@ -16,7 +16,6 @@ function App() {
             /* <Route path='otherpages' element={<OtherPages/>}/> */
             /* <Route path='otherpages' element={<OtherPages/>}/> */
             }
-          </Route>
         </Routes>
       </BrowserRouter>
     </div>    
