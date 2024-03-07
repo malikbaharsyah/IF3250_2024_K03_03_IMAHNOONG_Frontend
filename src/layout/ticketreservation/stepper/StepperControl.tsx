@@ -1,9 +1,4 @@
-interface StepperControlProps {
-    handleClick: (direction: string) => void;
-    currentStep: number;
-    steps: string[];
-}
-
+import { StepperControlProps } from "../../../interfaces/TicketReservation";
 
 const StepperControl: React.FC<StepperControlProps> = ({handleClick, currentStep, steps}) => {
     return (

@@ -1,10 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import{ useEffect, useRef, useState } from "react";
-    
-interface StepperProps {
-    steps: string[];
-    currentStep: number;
-}
+import { StepperProps } from "../../../interfaces/TicketReservation";
 
 const Stepper: React.FC<StepperProps> = ({steps, currentStep}) => {
     const [newStep, setNewStep] = useState<any>([]);

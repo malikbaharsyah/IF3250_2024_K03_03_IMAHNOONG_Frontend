@@ -1,7 +1,6 @@
 import { FaLocationDot } from "react-icons/fa6";
 import { Link } from "react-router-dom"
-import { CatalogContentProps } from "../../interfaces/planetarium";
-
+import { CatalogContentProps } from "../../interfaces/Planetarium";
 
   const CatalogContent: React.FC<CatalogContentProps> = ({
     imageSrc,
