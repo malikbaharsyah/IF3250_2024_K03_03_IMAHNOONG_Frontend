@@ -1,14 +1,38 @@
 import CatalogContent from "../components/contents/CatalogContent";
+import { useState, useEffect } from 'react';
 import EventContent from "../components/contents/EventContent";
+import { Event } from "../interfaces/Event";
 import Navbar from "../components/base/Navbar";
 import { useRef } from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { PlanetariumLandingPage } from "../interfaces/planetarium";
 
 const LandingPage = () => {
     const OnPRef = useRef<HTMLDivElement | null>(null);
     const AcaraRef = useRef<HTMLDivElement | null>(null);
+
+    const [eventData, setEventData] = useState<Event[]>([]);
+
+    useEffect(() => {
+      fetch('http://localhost:9000/api/jadwal/landingPage/event')
+        .then(response => response.json())
+        .then(data => {setEventData(data);})
+        .catch(error => console.error('Error fetching catalog data:', error));
+    }, []);
+
+    const [catalogData, setCatalogData] = useState<PlanetariumLandingPage[]>([]);
+
+    useEffect(() => {
+      fetch('http://localhost:9000/api/jadwal/landingPage/catalog')
+        .then(response => response.json())
+        .then(data => {setCatalogData(data);})
+            
+        .catch(error => console.error('Error fetching catalog data:', error));
+    }, []);
+
+
 
     const settings = {
         dots: false,
@@ -51,10 +75,20 @@ const LandingPage = () => {
                     <div className="mt-16 w-[92%] mx-auto pr-16">
                         <div className="px-8">
                             <Slider {...settings}>
+                                {/* <div> */}
+                                    {/* <CatalogContent/> */}
+                                    {catalogData.map((catalogItem) => (
+                                        <CatalogContent
+                                            key={catalogItem.id} 
+                                            imageSrc={catalogItem.imagePath} 
+                                            title={catalogItem.namaPlanetarium}
+                                            description={catalogItem.deskripsi}
+                                            location={catalogItem.lokasi}
+                                            
+                                        />
+                                    ))}
+                                {/* </div> */}
                                 {/* <div>
-                                    <CatalogContent/>
-                                </div>
-                                <div>
                                     <CatalogContent/>
                                 </div>
                                 <div>
@@ -78,9 +112,20 @@ const LandingPage = () => {
                         Acara Terdekat
                     </h1>
                     <div className="flex flex-row flex-wrap justify-center gap-12 size-fit my-16">
+                        {eventData.map((eventItem) => (
+                            <EventContent
+                                key={eventItem.id}
+                                eventName={eventItem.namaJadwal}
+                                eventDescription={eventItem.deskripsiJadwal}
+                                eventLocation={eventItem.lokasi}
+                                eventTime={eventItem.waktuKunjungan[1]}
+                                eventDate={eventItem.waktuKunjungan[0]}
+                                eventImage={eventItem.imagePath}
+                            />
+                        ))}
+                        {/* <EventContent/>
                         <EventContent/>
-                        <EventContent/>
-                        <EventContent/>
+                        <EventContent/> */}
                     </div>
                 </div>
             </div>
