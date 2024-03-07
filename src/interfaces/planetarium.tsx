@@ -14,3 +14,11 @@ export interface CatalogContentProps {
     location: string;
     
   }
+
+export interface PlanetariumLandingPage {
+    id: number;
+    imagePath: string[];
+    namaPlanetarium: string;
+    deskripsi: string;
+    lokasi: string;
+}
