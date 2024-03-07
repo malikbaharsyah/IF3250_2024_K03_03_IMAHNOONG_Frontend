@@ -2,10 +2,10 @@ import { useState } from "react";
 import ConfirmPage from "../../layout/ticketreservation/ConfirmPage";
 import PaymentPage from "../../layout/ticketreservation/PaymentPage";
 import RegistrationPage from "../../layout/ticketreservation/RegistrationPage";
-import Stepper from "../../layout/ticketreservation/stepper/Stepper";
-import StepperControl from "../../layout/ticketreservation/stepper/StepperControl";
 import { StepperContext } from "../../context/StepperContext";
 import TicketInformation from "../../layout/ticketreservation/ticketinformation/TicketInformation";
+import Stepper from "../../layout/ticketreservation/Stepper/Stepper";
+import StepperControl from "../../layout/ticketreservation/Stepper/StepperControl";
 
 const TicketReservationContent = () => {
 
