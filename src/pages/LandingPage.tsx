@@ -51,7 +51,7 @@ const LandingPage = () => {
                     <div className="mt-16 w-[92%] mx-auto pr-16">
                         <div className="px-8">
                             <Slider {...settings}>
-                                <div>
+                                {/* <div>
                                     <CatalogContent/>
                                 </div>
                                 <div>
@@ -68,7 +68,7 @@ const LandingPage = () => {
                                 </div>
                                 <div>
                                     <CatalogContent/>
-                                </div>
+                                </div> */}
                             </Slider>
                         </div>
                     </div>
