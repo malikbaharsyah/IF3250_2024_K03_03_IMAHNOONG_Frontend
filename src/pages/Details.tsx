@@ -1,4 +1,5 @@
 import PrimaryButton from "../components/PrimaryButton";
+import ChooseDate from "../components/base/ChooseDate";
 import Navbar from "../components/base/Navbar";
 import EventContent from "../components/contents/EventContent";
 
@@ -18,7 +19,11 @@ const Details = () => {
                     <p className="font-inter text-white text-center mb-4 uppercase">
                         Unassuming observatory with a collection of telescopes in simple surroundings.
                     </p>
-                    {/* TODO(Cari tiket by tanggal Component) */}
+                </div>
+                <div className="relative">
+                    <div className="absolute left-1/2 -translate-x-1/2">
+                        <ChooseDate/>
+                    </div>
                 </div>
             </div>
             <div className="flex flex-row min-h-screen h-fit p-24"
