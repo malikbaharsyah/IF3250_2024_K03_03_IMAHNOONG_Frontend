@@ -14,7 +14,8 @@ export default {
   theme: {
     extend: {
       backgroundImage:{
-        'stars' : 'url(./src/assets/backgrounds/stars.svg)'
+        'stars' : 'url(./src/assets/backgrounds/stars.svg)',
+        'starsLogin' : 'url(./src/assets/backgrounds/starsLogin.svg)'
       },
       fontFamily: {
         inter: ['Inter', 'sans-serif'],
