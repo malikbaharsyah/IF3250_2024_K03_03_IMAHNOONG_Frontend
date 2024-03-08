@@ -1,9 +1,12 @@
 import PrimaryButton from "../components/PrimaryButton";
 import ChooseDate from "../components/base/ChooseDate";
 import Navbar from "../components/base/Navbar";
-import EventContent from "../components/contents/EventContent";
+import EventContent from "../components/obsolete/_EventContent";
 
 const Details = () => {
+
+    
+
     return (
         <div className="h-screen bg-stars bg-no-repeat bg-cover bg-local overflow-auto">
             <div className="mb-[-7%]">
