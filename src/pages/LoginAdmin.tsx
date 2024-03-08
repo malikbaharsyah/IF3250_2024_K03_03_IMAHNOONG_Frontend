@@ -42,7 +42,7 @@ const LoginAdmin = () => {
                     <div className="text-white font-bold">Logo/Web name</div>
                 </div>
             </div>
-            <div className="w-full h-screen bg-white flex items-center justify-center bg-white">
+            <div className="w-full h-screen bg-white flex items-center justify-center">
                 <div className="bg-white w-full">
                     <div className="mx-12 flex flex-col lg:mx-24">
                         <h1 className="font-bold text-2xl md:text-4xl bg-gradient-to-r from-color-2 to-color-3 bg-clip-text text-transparent">Hi!</h1>

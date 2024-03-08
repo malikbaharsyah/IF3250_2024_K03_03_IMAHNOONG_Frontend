@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Navbar from "../components/base/Navbar";
 import CatalogContent from "../components/contents/CatalogContent";
-import { Planetarium } from '../interfaces/planetarium';
+import { Planetarium } from '../interfaces/Planetarium';
 
 const Catalog = () => {
 
@@ -37,13 +37,6 @@ const Catalog = () => {
                         
                     />
                 ))}
-                {/* <CatalogContent/>
-                <CatalogContent/>
-                <CatalogContent/>
-                <CatalogContent/>
-                <CatalogContent/>
-                <CatalogContent/>
-                <CatalogContent/> */}
             </div>
         </div>
     );
