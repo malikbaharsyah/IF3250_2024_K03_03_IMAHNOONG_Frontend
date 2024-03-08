@@ -1,12 +1,22 @@
+import { useEffect, useState } from "react";
 import PrimaryButton from "../components/PrimaryButton";
 import ChooseDate from "../components/base/ChooseDate";
 import Navbar from "../components/base/Navbar";
 import EventContent from "../components/contents/EventContent";
+import { Planetarium } from "../interfaces/Planetarium";
+import { useParams } from "react-router-dom";
+
 
 const Details = () => {
-
-
-
+    const { id } = useParams<{id: string}>();
+    const [detailsData, setDetailsData] = useState<Planetarium>();
+    useEffect(() => {
+        fetch('http://localhost:9000/api/details/'+id)
+          .then(response => response.json())
+          .then(data => {setDetailsData(data);})
+          .catch(error => console.error('Error fetching data:', error));
+      }, [id]);
+      
     return (
         <div className="h-screen bg-stars bg-no-repeat bg-cover bg-local overflow-auto">
             <div className="mb-[-7%]">
@@ -17,7 +27,7 @@ const Details = () => {
                 boxShadow: '0 10vw 10vw rgba(0, 0, 0, 1) inset, 0 -10vw 10vw rgba(0, 0, 0, 1) inset'}}>
                 <div className="w-[50vw] bg-black bg-opacity-50 h-screen flex flex-col items-center justify-center gap-4">
                     <h1 className="font-inter text-white text-center text-5xl font-bold uppercase">
-                        Imah Noong
+                        {detailsData?.namaPlanetarium}
                     </h1>
                     <p className="font-inter text-white text-center mb-4 uppercase">
                         Unassuming observatory with a collection of telescopes in simple surroundings.
@@ -33,10 +43,10 @@ const Details = () => {
             style={{boxShadow: '0 10vw 10vw rgba(0, 0, 0, 0.75) inset'}}>
                 <div className="w-[50vw] p-8 flex flex-col items-center justify-center gap-8">
                     <h1 className="font-inter text-white text-left text-5xl font-bold">
-                        About Imah Noong
+                        About {detailsData?.namaPlanetarium}
                     </h1>
                     <p className="font-inter text-white text-justify mb-4">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    {detailsData?.deskripsi}
                     </p>
                     <PrimaryButton text="Informasi Lebih"/>
                 </div>

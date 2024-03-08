@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Navbar from "../components/base/Navbar";
 import CatalogContent from "../components/contents/CatalogContent";
 import { Planetarium } from '../interfaces/Planetarium';
+import { Link } from 'react-router-dom';
 
 const Catalog = () => {
 
@@ -15,7 +16,6 @@ const Catalog = () => {
         .catch(error => console.error('Error fetching catalog data:', error));
     }, []);
 
-
     return (
         <div className='h-screen bg-stars bg-no-repeat bg-cover bg-local overflow-auto'>
             <div>
@@ -28,14 +28,15 @@ const Catalog = () => {
             </div>
             <div className="flex flex-row flex-wrap px-28 gap-[32px] size-fit justify-center">
             {catalogData.map((catalogItem) => (
-                    <CatalogContent
+                    <Link to="/details/${catalogItem.id}">
+                        <CatalogContent
                         key={catalogItem.id} 
                         imageSrc={catalogItem.imagePath} 
                         title={catalogItem.namaPlanetarium}
                         description={catalogItem.deskripsi}
                         location={catalogItem.lokasi}
-                        
-                    />
+                        />
+                    </Link>
                 ))}
             </div>
         </div>

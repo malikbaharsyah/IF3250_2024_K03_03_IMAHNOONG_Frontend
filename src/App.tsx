@@ -13,7 +13,7 @@ function App() {
           <Route path='/' element={<LandingPage/>}/>
             <Route path='catalog' element={<Catalog/>}/>
             <Route path='ticketreservation' element={<TicketReservation/>}/>
-            <Route path='details' element={<Details/>}/>
+            <Route path='details/:id' element={<Details/>}/>
             {/* <Route path='otherpages' element={<OtherPages/>}/> */
             /* <Route path='otherpages' element={<OtherPages/>}/> */
             /* <Route path='otherpages' element={<OtherPages/>}/> */
