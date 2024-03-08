@@ -1,11 +1,11 @@
 import PrimaryButton from "../components/PrimaryButton";
 import ChooseDate from "../components/base/ChooseDate";
 import Navbar from "../components/base/Navbar";
-import EventContent from "../components/obsolete/_EventContent";
+import EventContent from "../components/contents/EventContent";
 
 const Details = () => {
 
-    
+
 
     return (
         <div className="h-screen bg-stars bg-no-repeat bg-cover bg-local overflow-auto">
@@ -14,7 +14,7 @@ const Details = () => {
             </div>
             <div className="bg-cover bg-center h-screen" style={{
                 backgroundImage: 'url("Imah Noong_ss.png")', 
-                boxShadow: '0 10vw 10vw rgba(0, 0, 0, 0.75) inset, 0 -10vw 10vw rgba(0, 0, 0, 0.75) inset'}}>
+                boxShadow: '0 10vw 10vw rgba(0, 0, 0, 1) inset, 0 -10vw 10vw rgba(0, 0, 0, 1) inset'}}>
                 <div className="w-[50vw] bg-black bg-opacity-50 h-screen flex flex-col items-center justify-center gap-4">
                     <h1 className="font-inter text-white text-center text-5xl font-bold uppercase">
                         Imah Noong
@@ -23,13 +23,13 @@ const Details = () => {
                         Unassuming observatory with a collection of telescopes in simple surroundings.
                     </p>
                 </div>
-                <div className="relative">
+                <div className="relative -top-[25%]">
                     <div className="absolute left-1/2 -translate-x-1/2">
                         <ChooseDate/>
                     </div>
                 </div>
             </div>
-            <div className="flex flex-row min-h-screen h-fit p-24"
+            <div className="flex flex-row min-h-screen h-fit px-24"
             style={{boxShadow: '0 10vw 10vw rgba(0, 0, 0, 0.75) inset'}}>
                 <div className="w-[50vw] p-8 flex flex-col items-center justify-center gap-8">
                     <h1 className="font-inter text-white text-left text-5xl font-bold">
@@ -49,44 +49,38 @@ const Details = () => {
                     </div>
                 </div>
             </div>
-            <div className="min-h-screen h-fit p-24">
+            <div className="min-h-screen h-fit px-24">
                 <h1 className="font-inter text-white text-left text-5xl font-bold mb-8">
                     Acara terdekat
-                </h1>
-                <EventContent
-                Title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-                Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-                Location="Lorem ipsum dolor sit amet"
-                Time="15.30"
-                Date="24.06.2024"
-                Duration="1 Jam"/>
-                <EventContent
-                Title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-                Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-                Location="Lorem ipsum dolor sit amet"
-                Time="15.30"
-                Date="24.06.2024"
-                Duration="1 Jam"/>
+                </h1>  
+                {/* TODO(Fetch from backend), the comment below is sample from obsolete template */}
+                <div className="flex flex-col gap-4">
+                    <EventContent
+                    eventName="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+                    eventDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+                    eventLocation="Lorem ipsum dolor sit amet"
+                    eventTime="15.30"
+                    eventDate="24.06.2024"
+                    eventImage="image.png"
+                    // Duration="1 Jam"
+                    />
+                    <EventContent
+                    eventName="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+                    eventDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+                    eventLocation="Lorem ipsum dolor sit amet"
+                    eventTime="15.30"
+                    eventDate="24.06.2024"
+                    eventImage="image.png"
+                    // Duration="1 Jam"
+                    />
+                </div>
             </div>
-            <div className="min-h-screen h-fit p-24">
+            <div className="min-h-screen h-fit px-24">
                 <h1 className="font-inter text-white text-left text-5xl font-bold mb-8">
                     Informasi
                 </h1>
             </div>
-            {/* <div className="px-12 flex flex-col gap-12">
-                <div className="flex justify-between items-center"> 
-                    
-                    <div className="max-w-[50vw]">
-                        <img className="rounded-lg" src="image.png"/>
-                    </div>
-                </div>
-                <div className="flex justify-between items-center">
-                    
-                    <div className="max-w-[50vw]">
-                        <img className="rounded-lg" src="Imah Noong_ss.png"/>
-                    </div>
-                </div>
-            </div> */}
+            {/* TODO(Informasi lain) */}
         </div>
     );
 }

@@ -3,6 +3,7 @@ import Catalog from './pages/Catalog';
 import LoginAdmin from './pages/LoginAdmin';
 import LandingPage from './pages/LandingPage';
 import TicketReservation from './pages/TicketReservation';
+import Details from './pages/Details';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route path='/' element={<LandingPage/>}/>
             <Route path='catalog' element={<Catalog/>}/>
             <Route path='ticketreservation' element={<TicketReservation/>}/>
+            <Route path='details' element={<Details/>}/>
             {/* <Route path='otherpages' element={<OtherPages/>}/> */
             /* <Route path='otherpages' element={<OtherPages/>}/> */
             /* <Route path='otherpages' element={<OtherPages/>}/> */
