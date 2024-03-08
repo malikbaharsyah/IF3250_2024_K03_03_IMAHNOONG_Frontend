@@ -7,7 +7,7 @@ import { useRef } from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { PlanetariumLandingPage } from "../interfaces/planetarium";
+import { PlanetariumLandingPage } from "../interfaces/Planetarium";
 
 const LandingPage = () => {
     const OnPRef = useRef<HTMLDivElement | null>(null);
