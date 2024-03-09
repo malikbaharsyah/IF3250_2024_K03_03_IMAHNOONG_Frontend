@@ -12,11 +12,10 @@ const Details = () => {
     const [detailsData, setDetailsData] = useState<Planetarium>();
     useEffect(() => {
         fetch('http://localhost:9000/api/details/'+id)
-          .then(response => response.json())
-          .then(data => {setDetailsData(data);})
-          .catch(error => console.error('Error fetching data:', error));
-      }, [id]);
-      
+        .then(response => response.json())
+        .then(data => {setDetailsData(data);})
+        .catch(error => console.error('Error fetching data:', error));
+    }, [id]);
     return (
         <div className="h-screen bg-stars bg-no-repeat bg-cover bg-local overflow-auto">
             <div className="mb-[-7%]">
@@ -30,7 +29,7 @@ const Details = () => {
                         {detailsData?.namaPlanetarium}
                     </h1>
                     <p className="font-inter text-white text-center mb-4 uppercase">
-                        Unassuming observatory with a collection of telescopes in simple surroundings.
+                        {id}
                     </p>
                 </div>
                 <div className="relative -top-[25%]">

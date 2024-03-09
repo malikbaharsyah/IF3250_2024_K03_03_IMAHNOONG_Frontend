@@ -28,7 +28,7 @@ const Catalog = () => {
             </div>
             <div className="flex flex-row flex-wrap px-28 gap-[32px] size-fit justify-center">
             {catalogData.map((catalogItem) => (
-                    <Link to="/details/${catalogItem.id}">
+                    <Link to={"/details/"+catalogItem.id}>
                         <CatalogContent
                         key={catalogItem.id} 
                         imageSrc={catalogItem.imagePath} 
