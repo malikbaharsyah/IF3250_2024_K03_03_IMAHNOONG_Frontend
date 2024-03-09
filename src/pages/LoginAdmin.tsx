@@ -1,12 +1,24 @@
-import React from 'react';
+import React, {useState} from 'react';
+import { RedNotification, GreenNotification } from '../components/base/Notification';
 
 const LoginAdmin = () => {
 
+    const [isRed, setIsRed] = useState(false);
+    const [isGreen, setIsGreen] = useState(false);
+    const [message, setMessage] = useState("");
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+
         const form = event.currentTarget;
         const username = form.username.value;
         const password = form.password.value;
+
+        if (!username || !password) {
+            showRedNotif('Username and Password are required');
+            return;
+        }
+
         fetch('http://localhost:9000/api/login', {
         method: 'POST',
         headers: {
@@ -21,21 +33,57 @@ const LoginAdmin = () => {
                 response.json().then((data) => {
                     // set token di local storage
                     localStorage.setItem('token', data.token);
+                    showGreenNotif('Login successful');
                 })
             }
             else if (response.status === 400) {
-                alert('Invalid username or password');
+                showRedNotif('Invalid username or password');
             }
             else if (response.status == 500) {
-                alert('Internal server error');
+                showRedNotif('Internal server error');
             }
         }).catch((error) => {
             alert(error);
         })
     }
 
+    const showRedNotif = (message: string) => {
+        setMessage(message);
+        setIsRed(true);
+        setTimeout(() => {
+            setIsRed(false);
+            setTimeout(() => setMessage(''), 500);
+        }, 1000);
+    }
+
+    const showGreenNotif = (message: string) => {
+        setMessage(message);
+        setIsGreen(true);
+        setTimeout(() => {
+            setIsGreen(false);
+            setTimeout(() => setMessage(''), 500);
+        }, 1000);
+    }
+
+    const redNotifStyle: React.CSSProperties = {
+        opacity: isRed ? 1 : 0,
+        transition: 'opacity 0.5s ease-out',
+      };
+
+    const greenNotifStyle: React.CSSProperties = {
+        opacity: isGreen ? 1 : 0,
+        transition: 'opacity 0.5s ease-out',
+    }
+
   return (
     <div className="h-screen bg-color-1 bg-starsLogin bg-repeat bg-local font-inter">
+        <div className="red-notif-container absolute top-10 right-0 md:right-10" style={redNotifStyle}
+        > 
+            <RedNotification title="Login Gagal" description={message}/>
+        </div>
+        <div className="green-notif-container absolute top-10 right-0 md:right-10" style={greenNotifStyle}>
+            <GreenNotification title="Login Berhasil" description="Login Berhasil"/>
+        </div>
         <div className="grid lg:grid-cols-2">
             <div className="hidden lg:flex w-full bg-local justify-center items-center" style={{backgroundImage: "url('../../../loginBg.webp')"}} >
                 <div className="text-2xl md:text-4xl">
@@ -62,7 +110,7 @@ const LoginAdmin = () => {
                             </div>
                         </div>
                         <div className="flex justify-center items-center">
-                            <input type="submit" value="Login" className="bg-gradient-to-b from-color-2 to-color-3 hover:scale-105 duration-150 hover:shadow-2xl hover:shadow-color-3  transition ease-in-out mt-24 text-white w-[207px] h-[69px] rounded-full font-inter font-medium text-2xl" />
+                            <input type="submit" value="Login" className="hover:cursor-pointer bg-gradient-to-b from-color-2 to-color-3 hover:scale-105 duration-150 hover:shadow-2xl hover:shadow-color-3  transition ease-in-out mt-24 text-white w-[207px] h-[69px] rounded-full font-inter font-medium text-2xl" />
                         </div>
                         </form>
                     </div>
