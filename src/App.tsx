@@ -4,6 +4,8 @@ import LoginAdmin from './pages/LoginAdmin';
 import LandingPage from './pages/LandingPage';
 import TicketReservation from './pages/TicketReservation';
 import Details from './pages/Details';
+import HelpPage from './pages/help';
+import ListTiket from './pages/view_ticket'
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
           <Route path='/' element={<LandingPage/>}/>
             <Route path='catalog' element={<Catalog/>}/>
             <Route path='ticketreservation' element={<TicketReservation/>}/>
+            <Route path='helppage' element={<HelpPage/>}/>
+            <Route path='listtiket' element={<ListTiket/>}/>
             <Route path='details/:id' element={<Details/>}/>
             {/* <Route path='otherpages' element={<OtherPages/>}/> */
             /* <Route path='otherpages' element={<OtherPages/>}/> */
@@ -28,5 +32,4 @@ function App() {
     </div>    
   )
 }
-
 export default App
