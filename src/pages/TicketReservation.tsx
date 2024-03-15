@@ -8,7 +8,7 @@ const TicketReservation = () => {
             <header>
                 <Navbar/>
             </header>
-            <body>
+            <body className="mt-8">
                 <TicketReservationContent/>
             </body>
             <footer>

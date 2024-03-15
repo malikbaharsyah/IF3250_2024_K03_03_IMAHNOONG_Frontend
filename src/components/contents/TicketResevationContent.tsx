@@ -21,22 +21,12 @@ const TicketReservationContent = () => {
     const [currentStep, setCurrentStep] = useState(1);
     const [userData, setUserData] = useState('');
     const [finalData, setFinalData] = useState([]);
-    const test = true;
-    let steps
-    if (test == true){
-        steps = [
-            "Data Pesanan",
-            "Pembayaran",
-            "Konfirmasi"
-        ];
-    } else {
-        steps = [
-            "Data Pesanan",
-            "Tunggu Konfirmasi",
-            "Pembayaran",
-            "Konfirmasi"
-        ]
-    }
+    const steps = [
+        "Data Pesanan",
+        "Tunggu Konfirmasi",
+        "Pembayaran",
+        "Konfirmasi"
+    ]
 
     const handleClick = (direction: string) => {
         let newStep = currentStep;
@@ -52,7 +42,7 @@ const TicketReservationContent = () => {
                 currentStep={currentStep}/>
                 
             </div>
-            <div className="flex justify-center gap-4 transition">
+            <div className="flex justify-center gap-4 transition mt-6">
                 <StepperContext.Provider value={{
                     userData,
                     setUserData,
