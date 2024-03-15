@@ -14,11 +14,19 @@ const Stepper: React.FC<StepperProps> = ({steps, currentStep}) => {
         const newSteps = [...steps];
         let count = 0;
         while (count < newSteps.length) {
-            if (count < stepNumber){
+            if (count === stepNumber){
                 newSteps[count] = {
                     ...newSteps[count],
                     highlighted: true,
                     selected: true,
+                    completed: true
+                };
+                count++;
+            } else if (count < stepNumber){
+                newSteps[count] = {
+                    ...newSteps[count],
+                    highlighted: true,
+                    selected: false,
                     completed: true,
                 };
                 count++;
@@ -55,17 +63,17 @@ const Stepper: React.FC<StepperProps> = ({steps, currentStep}) => {
         return (
         <div key={index} className={index !== newStep.length-1 ? "flex w-full items-center" : "flex items-center "}>
             <div className="relative flex flex-col items-center text-color-4">
-                <div className={`rounded-xl transition duration-500 ease-in-out h-12 w-12 flex items-center font-medium justify-center py-3 bg-color-2 text-2xl 
-                ${step.selected ? "bg-green-600 text-white font-bold border-green-600": ""}`}>
+                <div className={`rounded-xl transition duration-500 ease-in-out h-12 w-12 flex items-center font-medium justify-center py-3 text-2xl 
+                ${step.selected ? "bg-color-2 text-white font-bold": step.completed ? "bg-green-600": "bg-color-4 bg-opacity-60"}`}>
                     {
-                        step.completed ? (<span className="text-white font-bold text-xl">&#10003;</span>): (index + 1)
+                        step.completed && !step.selected ? (<span className="text-white font-bold text-xl">&#10003;</span>): (index + 1)
                     }
                     </div>
-                    <div className={`absolute top-0 text-center mt-16 w-40 font-medium text-2xl ${step.highlighted ? "text-green-600" : "text-color-4"}`}>
+                    <div className={`absolute top-0 text-center mt-16 w-40 font-medium text-2xl ${step.selected ? "text-color-4" : step.completed ? "text-green-600" : "text-color-4 text-opacity-60"}`}>
                         {step.description}
                     </div>
                 </div>
-            <div className={`flex-auto border-t-2 border-dotted transition duration-500 ease-in-out w-fit ${step.completed ? "border-green-600" : "border-white"}`}></div>
+            <div className={`flex-auto border-t-2 border-dotted transition duration-500 ease-in-out w-fit ${step.selected ? "border-color-4" : step.completed ? "border-green-600 " : "border-color-4"}`}></div>
         </div>
         )
     })

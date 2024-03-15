@@ -5,7 +5,7 @@ const Navbar = () => {
     return (
         <>
             <nav>
-                <div className="h-10vh flex justify-between z-50 text-white lg:py-8 px-20 flex-1">
+                <div className="h-10vh flex justify-between z-50 text-white lg:py-8 px-20 flex-1 bg-color-5 drop-shadow-[0_8px_4px_rgba(0,0,0,1)]">
                     <div className="flex items-center flex-1">
                         <span className="text-xl font-inter font-bold">Logo/web name</span>
                     </div>
