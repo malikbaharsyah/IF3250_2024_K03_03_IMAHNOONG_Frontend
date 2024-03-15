@@ -51,21 +51,21 @@ const Stepper: React.FC<StepperProps> = ({steps, currentStep}) => {
         setNewStep(current);
     }, [steps, currentStep]);
     
-    const displaySteps = newStep.map((step: any, index: any) => {
+    const displaySteps = newStep.map((step: any, index: number) => {
         return (
         <div key={index} className={index !== newStep.length-1 ? "flex w-full items-center" : "flex items-center "}>
             <div className="relative flex flex-col items-center text-color-4">
-                <div className={`rounded-xl transition duration-500 ease-in-out h-12 w-12 flex items-center justify-center py-3 bg-gradient-to-b from-color-2 to-color-3 
-                ${step.selected ? "from-green-600 text-white font-bold border-green-600": ""}`}>
+                <div className={`rounded-xl transition duration-500 ease-in-out h-12 w-12 flex items-center font-medium justify-center py-3 bg-color-2 text-2xl 
+                ${step.selected ? "bg-green-600 text-white font-bold border-green-600": ""}`}>
                     {
                         step.completed ? (<span className="text-white font-bold text-xl">&#10003;</span>): (index + 1)
                     }
                     </div>
-                    <div className={`absolute top-0 text-center mt-16 w-32 text-xs font-medium ${step.highlighted ? "text-white" : "text-gray-400"}`}>
+                    <div className={`absolute top-0 text-center mt-16 w-40 font-medium text-2xl ${step.highlighted ? "text-green-600" : "text-color-4"}`}>
                         {step.description}
                     </div>
                 </div>
-            <div className={`flex-auto border-t-2 border-dotted  transition duration-500 ease-in-out w-fit ${step.completed ? "border-green-600" : "border-white"}`}></div>
+            <div className={`flex-auto border-t-2 border-dotted transition duration-500 ease-in-out w-fit ${step.completed ? "border-green-600" : "border-white"}`}></div>
         </div>
         )
     })
