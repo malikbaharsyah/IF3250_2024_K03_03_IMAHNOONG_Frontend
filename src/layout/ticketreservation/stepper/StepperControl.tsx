@@ -12,7 +12,7 @@ const StepperControl: React.FC<StepperControlProps> = ({handleClick, currentStep
             <button onClick={() => handleClick("next")}
              className={`transition duration-200 ease-in-out w-[202px] h-[69px] rounded-full bg-gradient-to-b hover:from-green-600 hover:to-blue-600 hover:transition from-color-2 to-color-3
                             font-inter font-medium text-[24px]`}>
-                {currentStep !== steps.length ? (test === null ? "Kirim Permintaan" : "Bayar") : "Selesai"}
+                {currentStep !== steps.length ? (test === null ? "Kirim Permintaan" : "Lanjut Bayar") : "Selesai"}
             </button>
         </div>
     );

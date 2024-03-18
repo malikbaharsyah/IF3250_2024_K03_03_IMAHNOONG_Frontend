@@ -2,9 +2,12 @@
 
 const TicketInformation = () =>{
     return (
-        <div className="flex flex-col gap-4">
-            <h2 className="font-semibold text-2xl">Ringkasan Pesanan</h2>
-            <div className="border-color-4 border-[1px] rounded-xl p-4 flex flex-col gap-6 place-content-between">
+        <div className="transition flex flex-col gap-2">
+            <h2 className="font-medium text-base font-inter">Order ID: 453509318</h2>
+            <h2 className="font-semibold text-2xl font-inter">Ringkasan Pesanan</h2>
+            <div className="border-color-4 border-[1px] rounded-xl p-4 flex flex-col gap-3 place-content-between">
+                <h2 className="font-bold text-base">Nama Planetarium atau Observatorium</h2>
+                <h2 className="font-semibold text-base">Nama Show</h2>
                 <div className="grid grid-flow-col gap-5">
                     <div className="flex flex-col gap-1">
                         <h2 className="font-semibold text-xs">Tanggal</h2>
@@ -31,8 +34,6 @@ const TicketInformation = () =>{
                     <h3>Total harga (2 tiket)</h3>
                     <p>Rp200.000,00,-</p>
                 </div>
-            </div>
-            <div className="flex gap-4">          
             </div>
         </div>
     )

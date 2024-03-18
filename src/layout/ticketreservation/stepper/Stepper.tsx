@@ -63,13 +63,13 @@ const Stepper: React.FC<StepperProps> = ({steps, currentStep}) => {
         return (
         <div key={index} className={index !== newStep.length-1 ? "flex w-full items-center" : "flex items-center "}>
             <div className="relative flex flex-col items-center text-color-4">
-                <div className={`rounded-xl transition duration-500 ease-in-out h-12 w-12 flex items-center font-medium justify-center py-3 text-2xl 
+                <div className={`transition duration-500 ease-in-out ${currentStep === 1 ? "rounded-xl h-12 w-12" : "size-8 rounded-lg"} flex items-center font-medium justify-center py-3 text-2xl
                 ${step.selected ? "bg-color-2 text-white font-bold": step.completed ? "bg-green-600": "bg-color-4 bg-opacity-60"}`}>
                     {
-                        step.completed && !step.selected ? (<span className="text-white font-bold text-xl">&#10003;</span>): (index + 1)
+                        step.completed && !step.selected ? (<span className={`text-white ${currentStep === 1 ? "font-bold text-xl": "font-medium text-xl" }`}>&#10003;</span>): (index + 1)
                     }
                     </div>
-                    <div className={`absolute top-0 text-center mt-16 w-40 font-medium text-2xl ${step.selected ? "text-color-4" : step.completed ? "text-green-600" : "text-color-4 text-opacity-60"}`}>
+                    <div className={`absolute top-0 text-center ${currentStep === 1 ? "mt-16":"mt-10"} w-40 font-medium text-base ${step.selected ? "text-color-4" : step.completed ? "text-green-600" : "text-color-4 text-opacity-60"}`}>
                         {step.description}
                     </div>
                 </div>
@@ -78,7 +78,7 @@ const Stepper: React.FC<StepperProps> = ({steps, currentStep}) => {
         )
     })
     return (
-        <div className="w-1/2 mx-4 p-4 flex justify-between items-center pb-20">
+        <div className={`mx-4 p-4 flex justify-between items-center ${currentStep === 1 ? "w-1/2 pb-10" : "w-full p-0 pb-5"}`}>
            {displaySteps}
         </div>
     );
