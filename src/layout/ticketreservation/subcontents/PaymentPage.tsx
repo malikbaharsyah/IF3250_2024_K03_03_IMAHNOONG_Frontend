@@ -2,7 +2,9 @@
 
 const PaymentPage = () => {
     return (
-        <div></div>
+        <div className="w-10">
+
+        </div>
     );
 }
 
