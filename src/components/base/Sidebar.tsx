@@ -1,66 +1,82 @@
-import React, { useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { GoHome } from "react-icons/go";
 import { LuTicket } from "react-icons/lu";
 import { LuCalendar } from "react-icons/lu";
 import { FaRegStar } from "react-icons/fa";
 import { FaRegEdit } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Sidebar = () => {
-  const menus = [
-    { name: "Dashboard", link: "/", icon: GoHome },
-    { name: "Pemesanan", link: "/DetailPemesanan", icon: LuTicket },
-    { name: "Jadwal", link: "/", icon: LuCalendar },
-    { name: "Ulasan", link: "/", icon: FaRegStar},
-    { name: "Edit Profil", link: "/", icon: FaRegEdit }
+    const [isSidebarOpen, setSidebarOpen] = useState(true);
+    const [clickedItem, setClickedItem] = useState(null);
 
-  ];
-  const [open, setOpen] = useState(true);
-  return (
+    const handleToggleSidebar = () => {
+        setSidebarOpen(!isSidebarOpen);
+    };
 
-      <div
-        className={`bg-stars min-h-screen ${
-          open ? "w-72" : "w-16"
-        } duration-500 text-gray-100 px-4`}
-      >
-        <div className="py-3 flex justify-end">
-            <RxHamburgerMenu
-                size={26}
-                className="cursor-pointer"
-                onClick={() => setOpen(!open)}
-            />
+    const handleItemClick = (itemName) => {
+        setClickedItem(itemName === clickedItem ? null : itemName);
+    };
+
+    return (
+        <div className={`flex flex-col h-screen w-fit bg-stars text-white pl-4 transition-all duration-300 ${isSidebarOpen ? 'w-64' : 'w-fit'}`}>
+            <div className={`flex flex-row items-center mb-16 mx-4 mt-8 ${isSidebarOpen ? 'justify-between' : 'justify-center'}`}>
+                <div className={`text-5xl font-bold flex items-center mr-60 ${isSidebarOpen ? '' : 'hidden'}`}>
+                    Logo
+                </div>
+                <div className="flex justify-end">
+                    <button className="text-6xl p-4 hover:bg-white hover:bg-opacity-40 hover:rounded-xl" onClick={handleToggleSidebar}>
+                        <RxHamburgerMenu />
+                    </button>
+                </div>
+            </div>
+            {isSidebarOpen && (
+                <div className="space-y-4 font-semibold text-4xl">
+                    <NavItem icon={<GoHome className="text-6xl"/>} clicked={clickedItem === "Dashboard"} onClick={() => handleItemClick("Dashboard")}>
+                        Dashboard
+                    </NavItem>
+                    <NavItem icon={<LuTicket className="text-6xl"/>} clicked={clickedItem === "Pemesanan"} onClick={() => handleItemClick("Pemesanan")}>
+                        Pemesanan
+                    </NavItem>
+                    <NavItem icon={<LuCalendar className="text-6xl"/>} clicked={clickedItem === "Jadwal"} onClick={() => handleItemClick("Jadwal")}>
+                        Jadwal
+                    </NavItem>
+                    <NavItem icon={<FaRegStar className="text-6xl"/>} clicked={clickedItem === "Ulasan"} onClick={() => handleItemClick("Ulasan")}>
+                        Ulasan
+                    </NavItem>
+                    <NavItem icon={<FaRegEdit className="text-6xl"/>} clicked={clickedItem === "Edit Profil"} onClick={() => handleItemClick("Edit Profil")}>
+                        Edit Profil
+                    </NavItem>
+                </div>
+            )}
+            {!isSidebarOpen && (
+                <div className="space-y-4 font-semibold text-4xl">
+                    <NavItem icon={<GoHome className="text-6xl"/>} clicked={clickedItem === "Dashboard"} onClick={() => handleItemClick("Dashboard")}> </NavItem>
+                    <NavItem icon={<LuTicket className="text-6xl"/>} clicked={clickedItem === "Pemesanan"} onClick={() => handleItemClick("Pemesanan")}> </NavItem>
+                    <NavItem icon={<LuCalendar className="text-6xl"/>} clicked={clickedItem === "Jadwal"} onClick={() => handleItemClick("Jadwal")}> </NavItem>
+                    <NavItem icon={<FaRegStar className="text-6xl"/>} clicked={clickedItem === "Ulasan"} onClick={() => handleItemClick("Ulasan")}> </NavItem>
+                    <NavItem icon={<FaRegEdit className="text-6xl"/>} clicked={clickedItem === "Edit Profil"} onClick={() => handleItemClick("Edit Profil")}> </NavItem>
+                </div>
+                
+            )}
         </div>
-        <div className="mt-4 flex flex-col gap-4 relative">
-          {menus?.map((menu, i) => (
-            <Link
-                to={menu?.link}
-                key={i}
-                className="group flex items-center text-sm  gap-3.5 font-medium p-2 hover:bg-gray-800 rounded-md"
-            >
-              <div>{React.createElement(menu?.icon, { size: "20" })}</div>
-              <h2
-                style={{
-                  transitionDelay: `${i + 3}00ms`,
-                }}
-                className={`whitespace-pre duration-500 ${
-                  !open && "opacity-0 translate-x-28 overflow-hidden"
-                }`}
-              >
-                {menu?.name}
-              </h2>
-              <h2
-                className={`${
-                  open && "hidden"
-                } absolute left-48 bg-white font-semibold whitespace-pre text-gray-900 rounded-md drop-shadow-lg px-0 py-0 w-0 overflow-hidden group-hover:px-2 group-hover:py-1 group-hover:left-14 group-hover:duration-300 group-hover:w-fit  `}
-              >
-                {menu?.name}
-              </h2>
-            </Link>
-          ))}
+    );
+}
+
+const NavItem = ({ children, icon, clicked, onClick }: { children: React.ReactNode, icon: React.ReactNode, clicked: boolean, onClick: () => void }) => {
+    let className = "px-8 py-8 rounded-md transition-colors duration-300 flex items-center";
+    if (clicked) {
+        className += " bg-white bg-opacity-40 hover:rounded-xl cursor-default";
+    } else {
+        className += " hover:bg-white hover:bg-opacity-40 hover:rounded-xl cursor-pointer";
+    }
+
+    return (
+        <div className={className} onClick={onClick}>
+            {icon && <span className="mr-4">{icon}</span>}
+            {children}
         </div>
-      </div>
-  );
-};
+    );
+}
 
 export default Sidebar;
