@@ -23,7 +23,13 @@ export default {
         'color-2': '#4f1395',
         'color-3': '#2224a1',
         'color-4': '#ffffff',
-        'color-5': '#0d0723'
+        'color-5': '#0d0723',
+        'color-6': '#E9EAF6',
+        'color-7': '#009229',
+        'color-8': '#ED6910',
+        'color-9': '#CE1F1F',
+        'color-10': '#95959A',
+        'color-11': '#0C8CE9',
       }
     },
   },
