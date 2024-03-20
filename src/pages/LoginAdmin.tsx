@@ -52,7 +52,6 @@ const LoginAdmin = () => {
         setIsRed(true);
         setTimeout(() => {
             setIsRed(false);
-            setTimeout(() => setMessage(''), 500);
         }, 1000);
     }
 
@@ -61,7 +60,6 @@ const LoginAdmin = () => {
         setIsGreen(true);
         setTimeout(() => {
             setIsGreen(false);
-            setTimeout(() => setMessage(''), 500);
         }, 1000);
     }
 
@@ -82,7 +80,7 @@ const LoginAdmin = () => {
             <RedNotification title="Login Gagal" description={message}/>
         </div>
         <div className="green-notif-container absolute top-10 right-0 md:right-10" style={greenNotifStyle}>
-            <GreenNotification title="Login Berhasil" description="Login Berhasil"/>
+            <GreenNotification title="Login Berhasil" description={message}/>
         </div>
         <div className="grid lg:grid-cols-2">
             <div className="hidden lg:flex w-full bg-local justify-center items-center" style={{backgroundImage: "url('../../../loginBg.webp')"}} >
