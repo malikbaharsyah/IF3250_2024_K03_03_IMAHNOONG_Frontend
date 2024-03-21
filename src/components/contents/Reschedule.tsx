@@ -4,26 +4,26 @@ const Reschedule = () => {
             <div className="flex flex-col bg-white p-8 w-full h-fit rounded-3xl">
                 
                 <div className="flex flex-row justify-between border-b-4 pb-4">
-                    <div className="font-bold text-4xl">
+                    <div className="font-bold text-xl">
                         Penjadwalan Ulang
                     </div>
-                    <div className="font-semibold text-2xl">
+                    <div className="font-semibold text-lg">
                         Jenis : Acara
                         {/* Jenis : Kunjungan
                         Jenis : Permintaan Kunjungan */}
                     </div>
                 </div>
-                <div className="font-semibold text-2xl py-4">
+                <div className="font-semibold text-lg py-4">
                     Order ID : 123123
                     {/* Request ID : 123123 */}
                 </div>
                 
                 <div className="flex flex-row">
                     <div className="flex flex-col pr-8">
-                        <div className="text-3xl font-semibold">
+                        <div className="text-lg font-semibold">
                             Data Pesanan
                         </div>
-                        <div className="font-medium text-2xl mt-2">
+                        <div className="font-medium text-md mt-2">
                             <table>
                                 <tbody>
                                     <tr>
@@ -32,14 +32,26 @@ const Reschedule = () => {
                                         <td style={{ verticalAlign: 'top' }}>Lorem Ipsum</td>
                                     </tr>
                                         <tr>
-                                        <td style={{ verticalAlign: 'top' }}>Tanggal</td>
+                                        <td style={{ verticalAlign: 'top' }}>
+                                            <div className="mb-4">
+                                                Tanggal
+                                            </div>
+                                        </td>
                                         <td style={{ verticalAlign: 'top' }}>:</td>
-                                        <td style={{ verticalAlign: 'top' }}><input type="date" /></td>
+                                        <td style={{ verticalAlign: 'top' }}>
+                                            <input type="date" className=" border border-color-2 rounded-md px-2" />  
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td style={{ verticalAlign: 'top' }}>Waktu</td>
+                                        <td style={{ verticalAlign: 'top' }}>
+                                            <div className="mb-4">
+                                                Waktu
+                                            </div>
+                                        </td>
                                         <td style={{ verticalAlign: 'top' }}>:</td>
-                                        <td style={{ verticalAlign: 'top' }}><input type="time" /></td>
+                                        <td style={{ verticalAlign: 'top' }}>
+                                            <input type="time" className="border border-color-2 rounded-md px-2" />
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td style={{ verticalAlign: 'top' }}>Jumlah Tiket</td>
@@ -65,7 +77,7 @@ const Reschedule = () => {
                                         <td style={{ verticalAlign: 'top' }}>Status</td>
                                         <td style={{ verticalAlign: 'top' }}>:</td>
                                         <td style={{ verticalAlign: 'top' }}>
-                                            <div className="px-4 py-1 bg-color-2 w-fit rounded-2xl text-white">
+                                            <div className="px-4 py-1 bg-color-2 w-fit rounded-xl text-white">
                                                 Lunas
                                             </div>
                                         </td>
@@ -75,10 +87,10 @@ const Reschedule = () => {
                         </div>
                     </div>
                     <div className="flex flex-col" >
-                        <div className="text-3xl font-semibold">
+                        <div className="text-lg font-semibold">
                             Data Pemesan
                         </div>
-                        <div className="font-medium text-2xl mt-2">
+                        <div className="font-medium text-md mt-2">
                             <table>
                                 <tbody >
                                     <tr>
@@ -102,7 +114,7 @@ const Reschedule = () => {
                     </div>
                 </div>
                 <div className="flex flex-col pb-4" >
-                <div className="font-medium text-2xl">
+                <div className="font-medium text-lg">
                     <table>
                         <tbody>
                             <tr>

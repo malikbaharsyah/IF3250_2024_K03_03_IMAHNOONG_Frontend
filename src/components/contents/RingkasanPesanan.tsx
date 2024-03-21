@@ -5,26 +5,26 @@ const RingkasanPesanan = () => {
             <div className="flex flex-col bg-white p-8 w-full h-fit rounded-3xl">
                 
                 <div className="flex flex-row justify-between border-b-4 pb-4">
-                    <div className="font-bold text-4xl">
+                    <div className="font-bold text-xl">
                         Ringkasan Pesanan
                     </div>
-                    <div className="font-semibold text-2xl">
+                    <div className="font-semibold text-lg">
                         Jenis : Acara
                         {/* Jenis : Kunjungan
                         Jenis : Permintaan Kunjungan */}
                     </div>
                 </div>
-                <div className="font-semibold text-2xl py-4">
+                <div className="font-semibold text-lg py-4">
                     Order ID : 123123
                     {/* Request ID : 123123 */}
                 </div>
                 
                 <div className="flex flex-row">
                     <div className="flex flex-col pr-8">
-                        <div className="text-3xl font-semibold">
+                        <div className="text-lg font-semibold">
                             Data Pesanan
                         </div>
-                        <div className="font-medium text-2xl">
+                        <div className="font-medium text-md">
                             <table>
                                 <tbody>
                                     <tr>
@@ -91,10 +91,10 @@ const RingkasanPesanan = () => {
                         </div>
                     </div>
                     <div className="flex flex-col" >
-                        <div className="text-3xl font-semibold">
+                        <div className="text-xl font-semibold">
                             Data Pemesan
                         </div>
-                        <div className="font-medium text-2xl">
+                        <div className="font-medium text-md">
                             <table>
                                 <tbody>
                                     <tr>
@@ -118,7 +118,7 @@ const RingkasanPesanan = () => {
                     </div>
                 </div>
                 <div className="flex flex-col pb-4" >
-                <div className="font-medium text-2xl">
+                <div className="font-medium text-md">
                     <table>
                         <tbody>
                             <tr>
@@ -135,8 +135,8 @@ const RingkasanPesanan = () => {
                 </div>
                 {/* checkbox untuk reschedule */}
                 <div className="flex justify-end"> 
-                <input type="checkbox" className="h-8 w-8 cursor-pointer"/>
-                    <label htmlFor="checkbox" className="ml-2 text-2xl font-medium">
+                <input type="checkbox" className="h-6 w-6 cursor-pointer"/>
+                    <label htmlFor="checkbox" className="ml-2 text-xl font-medium">
                         Lakukan penjadwalan ulang
                     </label>
                 </div>
