@@ -6,6 +6,7 @@ import TicketReservation from './pages/TicketReservation';
 import HelpPage from './pages/help';
 import ListTiket from './pages/view_ticket'
 import Details from './pages/Details';
+import Pemesanan from './pages/Pemesanan';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path='ticketreservation' element={<TicketReservation/>}/>
             <Route path='helppage' element={<HelpPage/>}/>
             <Route path='listtiket' element={<ListTiket/>}/>
+            <Route path='pemesanan' element={<Pemesanan/>}/>
             <Route path='details' element={<Details/>}/>
             {/* <Route path='otherpages' element={<OtherPages/>}/> */
             /* <Route path='otherpages' element={<OtherPages/>}/> */
