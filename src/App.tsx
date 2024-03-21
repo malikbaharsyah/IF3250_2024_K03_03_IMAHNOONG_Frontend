@@ -22,7 +22,6 @@ function App() {
             <Route path='listtiket' element={<ListTiket/>}/>
             <Route path='details' element={<Details/>}/>
             <Route path='detailpemesanan' element={<DetailPemesanan/>}/>
-            <Route path='sidebar' element={<Sidebar/>}/>
             {/* <Route path='otherpages' element={<OtherPages/>}/> */
             /* <Route path='otherpages' element={<OtherPages/>}/> */
             /* <Route path='otherpages' element={<OtherPages/>}/> */
