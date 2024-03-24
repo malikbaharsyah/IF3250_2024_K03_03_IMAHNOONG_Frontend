@@ -8,6 +8,7 @@ import ListTiket from './pages/view_ticket'
 import Details from './pages/Details';
 import DetailPemesanan from './pages/DetailPemesanan';
 import Sidebar from './components/base/Sidebar';
+import { DashboardAdmin } from './pages/DashboardAdmin';
 
 
 function App() {
@@ -22,15 +23,8 @@ function App() {
             <Route path='listtiket' element={<ListTiket/>}/>
             <Route path='details' element={<Details/>}/>
             <Route path='detailpemesanan' element={<DetailPemesanan/>}/>
-            {/* <Route path='otherpages' element={<OtherPages/>}/> */
-            /* <Route path='otherpages' element={<OtherPages/>}/> */
-            /* <Route path='otherpages' element={<OtherPages/>}/> */
-            /* <Route path='otherpages' element={<OtherPages/>}/> */
-            }
-          {/* <Route path='login' element={<LoginAdmin/>}/> */
-          <Route path='login' element={<LoginAdmin/>}/>
-          }
-          {/* </Route> */}
+            <Route path='login' element={<LoginAdmin/>}/>
+            <Route path='dashboard' element={<DashboardAdmin/>}/>
         </Routes>
       </BrowserRouter>
     </div>    

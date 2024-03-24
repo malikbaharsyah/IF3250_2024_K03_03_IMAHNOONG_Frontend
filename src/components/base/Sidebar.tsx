@@ -5,7 +5,7 @@ import { LuTicket } from "react-icons/lu";
 import { LuCalendar } from "react-icons/lu";
 import { FaRegStar } from "react-icons/fa";
 import { FaRegEdit } from "react-icons/fa";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 
 const Sidebar = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(true);
@@ -15,7 +15,7 @@ const Sidebar = () => {
         setSidebarOpen(!isSidebarOpen);
     };
 
-    const handleItemClick = (itemName) => {
+    const handleItemClick = (itemName : SetStateAction<any>) => {
         setClickedItem(itemName === clickedItem ? null : itemName);
     };
 
@@ -47,7 +47,7 @@ const Sidebar = () => {
     }
 
     return (
-        <div className={`flex flex-col h-screen w-fit bg-stars text-white transition-all duration-300 ${isSidebarOpen ? 'w-64' : 'w-fit'}`}>
+        <div className={`flex flex-col self-stretch w-fit bg-stars text-white transition-all duration-300 ${isSidebarOpen ? 'w-64' : 'w-fit'}`}>
             <div className={`flex flex-row my-4 ${isSidebarOpen ? 'ml-8 justify-between' : 'ml-4 justify-end'}`}>
                 <div className={`text-2xl font-bold flex items-center mr-12 ${isSidebarOpen ? '' : 'hidden'}`}>
                     Logo
