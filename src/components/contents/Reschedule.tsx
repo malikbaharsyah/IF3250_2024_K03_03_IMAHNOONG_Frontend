@@ -2,7 +2,6 @@ const Reschedule = () => {
     return (
         <div className="flex flex-col w-full h-fit rounded-3xl font-inter">
             <div className="flex flex-col bg-white p-8 w-full h-fit rounded-3xl">
-                
                 <div className="flex flex-row justify-between border-b-4 pb-4">
                     <div className="font-bold text-xl">
                         Penjadwalan Ulang
@@ -13,9 +12,21 @@ const Reschedule = () => {
                         Jenis : Permintaan Kunjungan */}
                     </div>
                 </div>
-                <div className="font-semibold text-lg py-4">
-                    Order ID : 123123
-                    {/* Request ID : 123123 */}
+                <div className="text-sm py-2">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td className="font-semibold" style={{ verticalAlign: 'top' }}>Order ID</td>
+                                <td style={{ verticalAlign: 'top' }}>:</td>
+                                <td style={{ verticalAlign: 'top' }}>123123</td>
+                            </tr>
+                            <tr>
+                                <td className="font-semibold" style={{ verticalAlign: 'top' }}>Waktu Pemesanan</td>
+                                <td style={{ verticalAlign: 'top' }}>:</td>
+                                <td style={{ verticalAlign: 'top' }}>2024-03-24 15:30 WIB</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 
                 <div className="flex flex-row">
@@ -34,7 +45,7 @@ const Reschedule = () => {
                                         <tr>
                                         <td style={{ verticalAlign: 'top' }}>
                                             <div className="mb-4">
-                                                Tanggal
+                                                Tanggal Kunjungan
                                             </div>
                                         </td>
                                         <td style={{ verticalAlign: 'top' }}>:</td>
@@ -45,7 +56,7 @@ const Reschedule = () => {
                                     <tr>
                                         <td style={{ verticalAlign: 'top' }}>
                                             <div className="mb-4">
-                                                Waktu
+                                                Waktu Kunjungan
                                             </div>
                                         </td>
                                         <td style={{ verticalAlign: 'top' }}>:</td>
@@ -77,7 +88,7 @@ const Reschedule = () => {
                                         <td style={{ verticalAlign: 'top' }}>Status</td>
                                         <td style={{ verticalAlign: 'top' }}>:</td>
                                         <td style={{ verticalAlign: 'top' }}>
-                                            <div className="px-4 py-1 bg-color-2 w-fit rounded-xl text-white">
+                                            <div className="px-4 py-1 bg-color-2 w-fit rounded-full text-white">
                                                 Lunas
                                             </div>
                                         </td>
