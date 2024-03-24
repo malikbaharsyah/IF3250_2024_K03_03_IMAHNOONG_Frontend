@@ -5,7 +5,7 @@ const TicketContent = (test: unknown) => {
             <div className='card'>
                 <a href="#" className="block flex flex-col justify-between bg-transparent border-white border-2 rounded-[20px] w-[408px] h-[7vw] px-[1.5vw] py-[1vw]">
 
-                    <h5 className="font-bold text-[1.5vw] text-white">Nama Planetarium</h5>
+                    <h5 className="font-bold text-[1.5vw] text-white">Nama Show</h5>
                     <div className='time flex justify-between font-semibold text-[1vw]'>
                         <p className="text-white">Minggu, 3 Maret 2024</p>
                         <p className="text-white">03:00</p>
