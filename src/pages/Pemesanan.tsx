@@ -94,19 +94,17 @@ function Pemesanan() {
     const headerTicket = [
         {id:1, title: 'No'},
         {id:2, title: 'ID'},
-        {id:3, title: 'Waktu'},
+        {id:3, title: 'Waktu Pemesanan'},
         {id:4, title: 'Nama'},
         {id:5, title: 'Email'},
         {id:6, title: 'Acara'},
-        {id:7, title: 'Tanggal'},
+        {id:7, title: 'Tanggal Kunjungan'},
         {id:8, title: 'Status'}
     ]
 
 return (
     <div className='flex'>
-        <div>
             <Sidebar />
-        </div>
         <div className="flex flex-col w-full items-center bg-[#E9EAF6] min-h-[100vh] bg-no-repeat bg-[length:100vw]">
             <div className='w-full'>
                 <NavbarAdmin />
@@ -133,7 +131,7 @@ return (
                                     onChange={handleTimeChange} 
                                     defaultOpenValue={dayjs('00:00:00', 'HH:mm:ss')} 
                                     needConfirm={false}
-                                    placeholder='Waktu'
+                                    placeholder='Waktu Pemesanan'
                                     className="bg-transparent w-full text-gray-500 text-[1vw] cursor-pointer border-none focus:border-none"
                                 />
                             </div>
