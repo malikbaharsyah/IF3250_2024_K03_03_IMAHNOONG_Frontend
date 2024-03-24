@@ -1,47 +1,101 @@
-import { Link } from "react-scroll" ;
-import home from '../../../public/Home.svg';
-import ticket from '../../../public/Ticket.svg';
-import calendar from '../../../public/calendar.svg';
-import star from "../../../public/Star.svg"
-import editProfile from '../../../public/Edit Square.svg'
+import { IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowBack } from "react-icons/io";
+import { GoHome } from "react-icons/go";
+import { LuTicket } from "react-icons/lu";
+import { LuCalendar } from "react-icons/lu";
+import { FaRegStar } from "react-icons/fa";
+import { FaRegEdit } from "react-icons/fa";
+import { useState } from "react";
 
 const Sidebar = () => {
+    const [isSidebarOpen, setSidebarOpen] = useState(true);
+    const [clickedItem, setClickedItem] = useState(null);
+
+    const handleToggleSidebar = () => {
+        setSidebarOpen(!isSidebarOpen);
+    };
+
+    const handleItemClick = (itemName) => {
+        setClickedItem(itemName === clickedItem ? null : itemName);
+    };
+
+    const NavItem = ({ children, icon, clicked, onClick}: { children: React.ReactNode, icon: React.ReactNode, clicked: boolean, onClick: () => void }) => {
+        let className = "flex items-center px-2 py-2 rounded-md transition-colors duration-300";
+        // px-2 py-2 rounded-md transition-colors duration-300 flex items-center
+        if (clicked) {
+            className += " bg-white bg-opacity-40 hover:rounded-md cursor-default";
+        } else {
+            className += " hover:bg-white hover:bg-opacity-40 cursor-pointer";
+        }
+    
+        return (
+            <div className={className} onClick={onClick}>
+                {isSidebarOpen && (
+                    <div className="flex items-center">
+                        {icon && <span className="mr-4">{icon}</span>}
+                        {children}
+                    </div>
+                )}    
+                {!isSidebarOpen && (
+                    <div className="flex items-center">
+                        {icon && <span>{icon}</span>}
+                        {children}
+                    </div>
+                )}    
+            </div>
+        );
+    }
 
     return (
-        <nav>
-            <div className="h-screen w-[20vw] flex flex-col justify-center z-50 text-white lg:py-8 bg-[url('../../public/Bg_Sidebar.svg')] ">
-                <div className="flex items-center justify-center">
-                    <span className="text-[2vw] font-inter font-semibold">Logo/web name</span>
+        <div className={`flex flex-col h-screen w-fit bg-stars text-white transition-all duration-300 ${isSidebarOpen ? 'w-64' : 'w-fit'}`}>
+            <div className={`flex flex-row my-4 ${isSidebarOpen ? 'ml-8 justify-between' : 'ml-4 justify-end'}`}>
+                <div className={`text-2xl font-bold flex items-center mr-12 ${isSidebarOpen ? '' : 'hidden'}`}>
+                    Logo
                 </div>
-                <div className="flex-1 pt-[5vw] justify-start font-inter">
-                    <div className="flex-10 font-semibold">
-                        <ul className="flex flex-col gap-5 mr-1">
-                            <Link spy={true} smooth={true} to="/" className="flex hover:bg-[url('../../public/bg_hover.svg')] transition cursor-pointer px-[2vw] py-[1vw]">
-                                <img src={home} alt="home" />
-                                <li className="bg-gradient-to-b bg-clip-text text-[1.5vw] font-normal mx-5">Dashboard</li>
-                            </Link>
-                            <Link spy={true} smooth={true} to="Catalog" className="flex hover:bg-[url('../../public/bg_hover.svg')] transition cursor-pointer px-[2vw] py-[1vw]">
-                                <img src={ticket} alt="ticket" />
-                                <li className="bg-gradient-to-b bg-clip-text text-[1.5vw] font-normal mx-5">Pemesanan</li>
-                            </Link>
-                            <Link spy={true} smooth={true} to="Bantuan" className="flex hover:bg-[url('../../public/bg_hover.svg')] transition cursor-pointer px-[2vw] py-[1vw]">
-                                <img src={calendar} alt="calendar" />
-                                <li className="bg-gradient-to-b bg-clip-text text-[1.5vw] font-normal mx-5">Jadwal</li>
-                            </Link>
-                            <Link spy={true} smooth={true} to="Bantuan" className="flex hover:bg-[url('../../public/bg_hover.svg')] transition cursor-pointer px-[2vw] py-[1vw]">
-                                <img src={star} alt="star" />
-                                <li className="bg-gradient-to-b bg-clip-text text-[1.5vw] font-normal mx-5">Ulasan</li>
-                            </Link>
-                            <Link spy={true} smooth={true} to="Bantuan" className="flex hover:bg-[url('../../public/bg_hover.svg')] transition cursor-pointer px-[2vw] py-[1vw]">
-                                <img src={editProfile} alt="editProfile" />
-                                <li className="bg-gradient-to-b bg-clip-text text-[1.5vw] font-normal mx-5">Edit Profil</li>
-                            </Link>
-                        </ul>
-                    </div> 
+                <div className="flex justify-end">
+                    {isSidebarOpen && (
+                        <button className="h-fit text-md py-2 border-y border-l rounded-l-md" onClick={handleToggleSidebar}>
+                            <IoIosArrowBack />
+                        </button>                        
+                    )}
+                    {!isSidebarOpen && (
+                        <button className="text-md py-2 border-y border-l rounded-l-md" onClick={handleToggleSidebar}>
+                            <IoIosArrowForward />
+                        </button>                        
+                    )}
                 </div>
             </div>
-        </nav>
-    )
+            {isSidebarOpen && (
+                <div className="space-y-2 font-semibold text-sm mx-4">
+                    <NavItem icon={<GoHome className="text-2xl"/>} clicked={clickedItem === "Dashboard"} onClick={() => handleItemClick("Dashboard")}>
+                        Dashboard
+                    </NavItem>
+                    <NavItem icon={<LuTicket className="text-2xl"/>} clicked={clickedItem === "Pemesanan"} onClick={() => handleItemClick("Pemesanan")}>
+                        Pemesanan
+                    </NavItem>
+                    <NavItem icon={<LuCalendar className="text-2xl"/>} clicked={clickedItem === "Jadwal"} onClick={() => handleItemClick("Jadwal")}>
+                        Jadwal
+                    </NavItem>
+                    <NavItem icon={<FaRegStar className="text-2xl"/>} clicked={clickedItem === "Ulasan"} onClick={() => handleItemClick("Ulasan")}>
+                        Ulasan
+                    </NavItem>
+                    <NavItem icon={<FaRegEdit className="text-2xl"/>} clicked={clickedItem === "Edit Profil"} onClick={() => handleItemClick("Edit Profil")}>
+                        Edit Profil
+                    </NavItem>
+                </div>
+            )}
+            {!isSidebarOpen && (
+                <div className="space-y-4 font-semibold text-4xl mx-2">
+                    <NavItem icon={<GoHome className="text-2xl "/>} clicked={clickedItem === "Dashboard"} onClick={() => handleItemClick("Dashboard")}> </NavItem>
+                    <NavItem icon={<LuTicket className="text-2xl"/>} clicked={clickedItem === "Pemesanan"} onClick={() => handleItemClick("Pemesanan")}> </NavItem>
+                    <NavItem icon={<LuCalendar className="text-2xl"/>} clicked={clickedItem === "Jadwal"} onClick={() => handleItemClick("Jadwal")}> </NavItem>
+                    <NavItem icon={<FaRegStar className="text-2xl"/>} clicked={clickedItem === "Ulasan"} onClick={() => handleItemClick("Ulasan")}> </NavItem>
+                    <NavItem icon={<FaRegEdit className="text-2xl"/>} clicked={clickedItem === "Edit Profil"} onClick={() => handleItemClick("Edit Profil")}> </NavItem>
+                </div>
+                
+            )}
+        </div>
+    );
 }
 
-export default Sidebar
+export default Sidebar;

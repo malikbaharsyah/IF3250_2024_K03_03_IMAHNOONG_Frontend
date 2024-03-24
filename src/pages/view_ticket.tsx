@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Navbar from '../components/base/Navbar';
 import Footer from '../components/base/footer';
 import Datepicker from '../components/base/datepicker';

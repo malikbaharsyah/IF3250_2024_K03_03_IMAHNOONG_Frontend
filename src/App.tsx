@@ -6,6 +6,9 @@ import TicketReservation from './pages/TicketReservation';
 import HelpPage from './pages/help';
 import ListTiket from './pages/view_ticket'
 import Details from './pages/Details';
+import DetailPemesanan from './pages/DetailPemesanan';
+import Sidebar from './components/base/Sidebar';
+
 import Pemesanan from './pages/Pemesanan';
 
 function App() {
@@ -20,6 +23,7 @@ function App() {
             <Route path='listtiket' element={<ListTiket/>}/>
             <Route path='pemesanan' element={<Pemesanan/>}/>
             <Route path='details' element={<Details/>}/>
+            <Route path='detailpemesanan' element={<DetailPemesanan/>}/>
             {/* <Route path='otherpages' element={<OtherPages/>}/> */
             /* <Route path='otherpages' element={<OtherPages/>}/> */
             /* <Route path='otherpages' element={<OtherPages/>}/> */
