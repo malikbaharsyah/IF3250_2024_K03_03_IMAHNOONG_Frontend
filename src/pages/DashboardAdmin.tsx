@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import Sidebar from "../components/base/Sidebar";
-import { FaChevronDown, FaRegBell, FaRegUser } from "react-icons/fa";
+import { FaRegBell, FaRegUser } from "react-icons/fa";
 import Chart from "react-apexcharts"
 import { ApexOptions } from "apexcharts";
-// import { Component } from "./Component";
-// import { ComponentWrapper } from "./ComponentWrapper";
-// import { Profile } from "./Profile";
+import { CalendarContainer } from "react-datepicker";
+import DatePickerComponent from "../components/base/datepicker";
 
 const dashboardFieldStyle = "pb-2 bg-white rounded-[20px] overflow-hidden "
 const dashboardFieldTitleStyle = "px-4 py-6 mx-4 text-start font-semibold text-black text-[20px] tracking-[0] leading-[normal] whitespace-nowrap border-b "
@@ -140,10 +139,8 @@ const TopBar = () => {
 }
 const DashboardCalendar = () => {
     return (
-    <div className={dashboardFieldStyle + "minw-[387px] min-h-[345px]"}>
-         <div className="">
-
-         </div>
+    <div className={dashboardFieldStyle + "flex justify-around min-w-[387px] min-h-[345px]"}>
+        <DatePickerComponent integrated className="grow"/>
     </div>
     )
 }
@@ -153,6 +150,7 @@ const DashboardGraph = () => {
         type: "line",
     }
     const chartSeries : ApexAxisChartSeries = [{
+        name: "penjualan",
         data: penjualanPerHari,
     }]
     const chartOptions : ApexOptions = {
@@ -229,9 +227,14 @@ const DashboardGraph = () => {
     }
     return (
     <div className={dashboardFieldStyle + "min-w-[634px] min-h-[552px]"}>
-       <div className={dashboardFieldTitleStyle}>
-            Statistik pemesanan
-        </div>
+       <div className={dashboardFieldTitleStyle + "flex items-center justify-between"}>
+            <div className="">
+                    Statistik pemesanan
+            </div>
+            <div>
+                <DatePickerComponent month/>
+            </div>
+       </div>
         <div>
             <Chart 
             type={chartConfig.type}
@@ -246,7 +249,7 @@ const GraphCalCombo = () => {
     return (
     <div className="flex gap-4">
         <DashboardGraph/>
-        <DashboardCalendar/>
+        {/* <DashboardCalendar/> */}
     </div>
     )
 }
