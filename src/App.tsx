@@ -6,6 +6,11 @@ import TicketReservation from './pages/TicketReservation';
 import HelpPage from './pages/help';
 import ListTiket from './pages/view_ticket'
 import Details from './pages/Details';
+import DetailPemesanan from './pages/DetailPemesanan';
+import Sidebar from './components/base/Sidebar';
+import { DashboardAdmin } from './pages/DashboardAdmin';
+
+import Pemesanan from './pages/Pemesanan';
 
 function App() {
   return (
@@ -17,16 +22,11 @@ function App() {
             <Route path='ticketreservation' element={<TicketReservation/>}/>
             <Route path='helppage' element={<HelpPage/>}/>
             <Route path='listtiket' element={<ListTiket/>}/>
+            <Route path='pemesanan' element={<Pemesanan/>}/>
             <Route path='details' element={<Details/>}/>
-            {/* <Route path='otherpages' element={<OtherPages/>}/> */
-            /* <Route path='otherpages' element={<OtherPages/>}/> */
-            /* <Route path='otherpages' element={<OtherPages/>}/> */
-            /* <Route path='otherpages' element={<OtherPages/>}/> */
-            }
-          {/* <Route path='login' element={<LoginAdmin/>}/> */
-          <Route path='login' element={<LoginAdmin/>}/>
-          }
-          {/* </Route> */}
+            <Route path='detailpemesanan' element={<DetailPemesanan/>}/>
+            <Route path='login' element={<LoginAdmin/>}/>
+            <Route path='dashboard' element={<DashboardAdmin/>}/>
         </Routes>
       </BrowserRouter>
     </div>    

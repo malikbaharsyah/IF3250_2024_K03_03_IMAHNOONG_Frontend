@@ -8,6 +8,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { PlanetariumLandingPage } from "../interfaces/Planetarium";
+import { ArrowForwardIosRounded, ArrowBackIosRounded } from '@mui/icons-material';
 
 const LandingPage = () => {
     const OnPRef = useRef<HTMLDivElement | null>(null);
@@ -33,6 +34,28 @@ const LandingPage = () => {
     }, []);
 
 
+    const NextArrow = (props: any) => {
+        const { onClick } = props;
+        return (
+            <div
+                className="custom-arrow-next text-white z-10 absolute w-5 h-5 flex items-center justify-center rounded-full top-1/2 transform -translate-y-1/2 right-0 cursor-pointer"
+                onClick={onClick}>
+                <ArrowForwardIosRounded fontSize="large"/>
+            </div>
+        );
+    };
+
+    const PrevArrow = (props: any) => {
+        const { onClick } = props;
+        return (
+            <div
+                className="custom-arrow-prev text-white z-10 absolute w-5 h-5 flex items-center justify-center rounded-full top-1/2 transform -translate-y-1/2 left-0 cursor-pointer"
+                onClick={onClick}>
+                <ArrowBackIosRounded fontSize="large"/>
+            </div>
+        );
+    };
+
 
     const settings = {
         dots: false,
@@ -40,8 +63,8 @@ const LandingPage = () => {
         speed: 500,
         slidesToShow: 3,
         slidesToScroll: 1,
-        // nextArrow: <SampleNextArrow />,
-        // prevArrow: <SamplePrevArrow /> 
+        nextArrow: <NextArrow />,
+        prevArrow: <PrevArrow /> 
 
       };
     return (
