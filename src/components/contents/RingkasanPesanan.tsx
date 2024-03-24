@@ -3,22 +3,32 @@ const RingkasanPesanan = () => {
     return (
         <div className="flex flex-col w-full h-fit rounded-3xl font-inter">
             <div className="flex flex-col bg-white p-8 w-full h-fit rounded-3xl">
-                
                 <div className="flex flex-row justify-between border-b-4 pb-4">
                     <div className="font-bold text-xl">
                         Ringkasan Pesanan
                     </div>
                     <div className="font-semibold text-lg">
-                        Jenis : Acara
+                        Jenis: Acara
                         {/* Jenis : Kunjungan
                         Jenis : Permintaan Kunjungan */}
                     </div>
                 </div>
-                <div className="font-semibold text-lg py-4">
-                    Order ID : 123123
-                    {/* Request ID : 123123 */}
+                <div className="text-sm py-2">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td className="font-semibold" style={{ verticalAlign: 'top' }}>Order ID</td>
+                                <td style={{ verticalAlign: 'top' }}>:</td>
+                                <td style={{ verticalAlign: 'top' }}>123123</td>
+                            </tr>
+                            <tr>
+                                <td className="font-semibold" style={{ verticalAlign: 'top' }}>Waktu Pemesanan</td>
+                                <td style={{ verticalAlign: 'top' }}>:</td>
+                                <td style={{ verticalAlign: 'top' }}>2024-03-24 15:30 WIB</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                
                 <div className="flex flex-row">
                     <div className="flex flex-col pr-8">
                         <div className="text-lg font-semibold">
@@ -33,12 +43,12 @@ const RingkasanPesanan = () => {
                                         <td style={{ verticalAlign: 'top' }}>Lorem Ipsum</td>
                                     </tr>
                                     <tr>
-                                        <td style={{ verticalAlign: 'top' }}>Tanggal</td>
+                                        <td style={{ verticalAlign: 'top' }}>Tanggal Kunjungan</td>
                                         <td style={{ verticalAlign: 'top' }}>:</td>
                                         <td style={{ verticalAlign: 'top' }}>24/06/2024</td>
                                     </tr>
                                     <tr>
-                                        <td style={{ verticalAlign: 'top' }}>Waktu</td>
+                                        <td style={{ verticalAlign: 'top' }}>Waktu Kunjungan</td>
                                         <td style={{ verticalAlign: 'top' }}>:</td>
                                         <td style={{ verticalAlign: 'top' }}>15:30 WIB</td>
                                     </tr>
@@ -66,10 +76,10 @@ const RingkasanPesanan = () => {
                                         <td style={{ verticalAlign: 'top' }}>Status</td>
                                         <td style={{ verticalAlign: 'top' }}>:</td>
                                         <td style={{ verticalAlign: 'top' }}>
-                                            <div className="px-4 py-1 bg-color-2 w-fit rounded-2xl text-white">
+                                            <div className="px-4 py-1 bg-color-2 w-fit rounded-full text-white">
                                                 Lunas
                                             </div>
-                                            <div className="px-4 py-1 bg-color-11 w-fit rounded-2xl text-white">
+                                            <div className="px-4 py-1 bg-color-11 w-fit rounded-full text-white">
                                                 Proses bayar
                                             </div>
                                             <div className="px-4 py-1 bg-color-8 w-fit rounded-2xl text-white">
