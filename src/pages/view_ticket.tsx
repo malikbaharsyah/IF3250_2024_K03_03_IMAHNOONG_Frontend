@@ -2,60 +2,13 @@
 import Navbar from '../components/base/Navbar';
 import Footer from '../components/base/footer';
 import Datepicker from '../components/base/datepicker';
-import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { ArrowForwardIosRounded, ArrowBackIosRounded } from '@mui/icons-material';
-
-interface DateItem {
-    date: Date;
-}
-
+import TicketContent from '../components/contents/TicketContent';
+import CarouselDate from '../components/contents/CarouselDate';
 
 
 function view_ticket() {
-    const tanggal: DateItem[] = [
-        {date: new Date()},
-        {date: new Date()},
-        {date: new Date()},
-        {date: new Date()},
-        {date: new Date()},
-        {date: new Date()},
-        {date: new Date()},
-    ];
-
-    const CustomNextArrow = (props: any) => {
-        const { onClick } = props;
-        return (
-          <div
-            className="custom-arrow-next text-white z-10 absolute w-5 h-5 flex items-center justify-center rounded-full top-1/2 transform -translate-y-1/2 right-0 cursor-pointer"
-            onClick={onClick}
-          >
-            <ArrowForwardIosRounded fontSize="large"/>
-          </div>
-        );
-      };
-      
-      const CustomPrevArrow = (props: any) => {
-        const { onClick } = props;
-        return (
-          <div
-            className="custom-arrow-prev text-white z-10 absolute w-5 h-5 flex items-center justify-center rounded-full top-1/2 transform -translate-y-1/2 left-0 cursor-pointer"
-            onClick={onClick}
-          >
-            <ArrowBackIosRounded fontSize="large"/>
-          </div>
-        );
-      };
-    
-    const settings = {
-        infinite: false,
-        speed: 500,
-        slidesToShow: 5,
-        slidesToScroll: 1,
-        nextArrow: <CustomNextArrow />,
-        prevArrow: <CustomPrevArrow />,
-      };
 
     return (
         <div className="">
@@ -83,135 +36,14 @@ function view_ticket() {
                 </div>
                 <div className='tanggal mt-[2vw]'>
                     <div className=" w-[1280px]">
-                        <Slider {...settings} className="custom-slider w-full px-[1vw]">
-                            {tanggal.map((date, index) => (
-                                <div className="flex items-center my-5" key={index}>
-                                    <div className="w-[208px] h-[83px] rounded-2xl bg-gradient-to-r from-[#4F1395] to-[#2224A1] cursor-pointer mx-auto flex flex-col items-center justify-center gap-y-2">
-                                        <h3 className="font-bold text-[20px] text-white">{date.date.toLocaleDateString('id-ID', { weekday: 'long' })}</h3>
-                                        <h4 className='font-medium text-[1vw] text-white'>{date.date.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</h4>
-                                    </div>
-                                </div>
-                            ))}
-                        </Slider>
+                        <CarouselDate />
                     </div>
                 </div>
                 <div className='ticket w-[1280px] mt-[2vw] grid grid-cols-2 gap-y-[2vw]'>
-                    <div className='container flex gap-x-[1vw]'>
-                        <div className='card'>
-                            <a href="#" className="block flex flex-col justify-between bg-transparent border-white border-2 rounded-[20px] w-[408px] h-[7vw] px-[1.5vw] py-[1vw]">
-
-                                <h5 className="font-bold text-[1.5vw] text-white">Nama Planetarium</h5>
-                                <div className='time flex justify-between font-semibold text-[1vw]'>
-                                    <p className="text-white">Minggu, 3 Maret 2024</p>
-                                    <p className="text-white">03:00</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div className='container-harga flex flex-col items-center justify-between'>
-                            <div className='harga'>
-                                <p className='text-white text-[1.5vw] font-semibold'>
-                                    Rp. 100.000
-                                </p>
-                            </div>
-                            <div className='status'>
-                                <p className='text-white text-[1vw] font-medium'>
-                                    Tersedia
-                                </p>
-                            </div>
-                            <div className='beli-tiket'>
-                                <button className='text-white bg-gradient-to-r from-[#4F1395] to-[#2224A1] w-[10vw] rounded-full h-[3vw]'>
-                                    Beli Tiket
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='container flex gap-x-[1vw]'>
-                        <div className='card'>
-                            <a href="#" className="block flex flex-col justify-between bg-transparent border-white border-2 rounded-[20px] w-[408px] h-[7vw] px-[1.5vw] py-[1vw]">
-
-                                <h5 className="font-bold text-[1.5vw] text-white">Nama Planetarium</h5>
-                                <div className='time flex justify-between font-semibold text-[1vw]'>
-                                    <p className="text-white">Minggu, 3 Maret 2024</p>
-                                    <p className="text-white">03:00</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div className='container-harga flex flex-col items-center justify-between'>
-                            <div className='harga'>
-                                <p className='text-white text-[1.5vw] font-semibold'>
-                                    Rp. 100.000
-                                </p>
-                            </div>
-                            <div className='status'>
-                                <p className='text-white text-[1vw] font-medium'>
-                                    Tersedia
-                                </p>
-                            </div>
-                            <div className='beli-tiket'>
-                                <button className='text-white bg-gradient-to-r from-[#4F1395] to-[#2224A1] w-[10vw] rounded-full h-[3vw]'>
-                                    Beli Tiket
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='container flex gap-x-[1vw]'>
-                        <div className='card'>
-                            <a href="#" className="block flex flex-col justify-between bg-transparent border-white border-2 rounded-[20px] w-[408px] h-[7vw] px-[1.5vw] py-[1vw]">
-
-                                <h5 className="font-bold text-[1.5vw] text-white">Nama Planetarium</h5>
-                                <div className='time flex justify-between font-semibold text-[1vw]'>
-                                    <p className="text-white">Minggu, 3 Maret 2024</p>
-                                    <p className="text-white">03:00</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div className='container-harga flex flex-col items-center justify-between'>
-                            <div className='harga'>
-                                <p className='text-white text-[1.5vw] font-semibold'>
-                                    Rp. 100.000
-                                </p>
-                            </div>
-                            <div className='status'>
-                                <p className='text-white text-[1vw] font-medium'>
-                                    Tersedia
-                                </p>
-                            </div>
-                            <div className='beli-tiket'>
-                                <button className='text-white bg-gradient-to-r from-[#4F1395] to-[#2224A1] w-[10vw] rounded-full h-[3vw]'>
-                                    Beli Tiket
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='container flex gap-x-[1vw]'>
-                        <div className='card'>
-                            <a href="#" className="block flex flex-col justify-between bg-transparent border-white border-2 rounded-[20px] w-[408px] h-[7vw] px-[1.5vw] py-[1vw]">
-
-                                <h5 className="font-bold text-[1.5vw] text-white">Nama Planetarium</h5>
-                                <div className='time flex justify-between font-semibold text-[1vw]'>
-                                    <p className="text-white">Minggu, 3 Maret 2024</p>
-                                    <p className="text-white">03:00</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div className='container-harga flex flex-col items-center justify-between'>
-                            <div className='harga'>
-                                <p className='text-white text-[1.5vw] font-semibold'>
-                                    Rp. 100.000
-                                </p>
-                            </div>
-                            <div className='status'>
-                                <p className='text-white text-[1vw] font-medium'>
-                                    Tersedia
-                                </p>
-                            </div>
-                            <div className='beli-tiket'>
-                                <button className='text-white bg-gradient-to-r from-[#4F1395] to-[#2224A1] w-[10vw] rounded-full h-[3vw]'>
-                                    Beli Tiket
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    <TicketContent />
+                    <TicketContent />
+                    <TicketContent />
+                    <TicketContent />
                 </div>  
                 <div className='w-screen z-[999] mt-[5vw]'>
                     <Footer />
