@@ -1,100 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "../components/base/Sidebar";
 import { FaChevronDown, FaRegBell, FaRegUser } from "react-icons/fa";
 import Chart from "react-apexcharts"
+import { ApexOptions } from "apexcharts";
 // import { Component } from "./Component";
 // import { ComponentWrapper } from "./ComponentWrapper";
 // import { Profile } from "./Profile";
 
 const dashboardFieldStyle = "pb-2 bg-white rounded-[20px] overflow-hidden "
 const dashboardFieldTitleStyle = "px-4 py-6 mx-4 text-start font-semibold text-black text-[20px] tracking-[0] leading-[normal] whitespace-nowrap border-b "
-
-const penjualanPerHari = Array(31).fill(0).map(() => Math.floor(Math.random() * 10) + 1) //TODO(connect to backend)
-const chartConfig = {
-    type: 'line',
-    // height: 240,
-    // width: 320,
-    series: [
-      {
-        name: "Penjualan",
-        data: penjualanPerHari,
-      },
-    ],
-    options: {
-        chart: {
-            toolbar: {
-            show: false,
-            },
-        },
-        title: {
-            show: false,
-        },
-        dataLabels: {
-            enabled: false,
-        },
-        colors: ["#4F1395"],
-        stroke: {
-            lineCap: "round",
-            curve: "smooth",
-        },
-        markers: {
-            size: 0,
-        },
-        xaxis: {
-            axisTicks: {
-            show: false,
-            },
-            axisBorder: {
-            show: true,
-            },
-            labels: {
-            style: {
-                colors: "#616161",
-                fontSize: "12px",
-                fontFamily: "inherit",
-                fontWeight: 400,
-            },
-            },
-            categories: Array(31).fill(0).map((_, i) => i + 1) // banyak baris, TODO(sesuaikan dengan jumlah hari dengan bulan yang dipilih)
-            ,
-        },
-        yaxis: {
-            axisBorder: {
-                show: true,
-            },
-            labels: {
-            style: {
-                colors: "#616161",
-                fontSize: "12px",
-                fontFamily: "inherit",
-                fontWeight: 400,
-            },
-            },
-        },
-        grid: {
-            show: false,
-            borderColor: "#dddddd",
-            strokeDashArray: 5,
-            xaxis: {
-            lines: {
-                show: false,
-            },
-            },
-            padding: {
-            top: 5,
-            right: 20,
-            },
-        },
-        fill: {
-            opacity: 0.8,
-        },
-        tooltip: {
-            theme: "dark",
-        },
-    },
-  };
-
-//TODO(define ChartUseStates)
 
 const TodayOrders = () => {
     return (
@@ -234,13 +148,96 @@ const DashboardCalendar = () => {
     )
 }
 const DashboardGraph = () => {
+    const penjualanPerHari = Array(31).fill(0).map(() => Math.floor(Math.random() * 10) + 1) //TODO(connect to backend)
+    const chartConfig : ApexChart = {
+        type: "line",
+    }
+    const chartSeries : ApexAxisChartSeries = [{
+        data: penjualanPerHari,
+    }]
+    const chartOptions : ApexOptions = {
+        chart: {
+            toolbar: {
+            show: false,
+            },
+        },
+        // title: {
+        //     show: "",
+        // },
+        dataLabels: {
+            enabled: false,
+        },
+        colors: ["#4F1395"],
+        stroke: {
+            lineCap: "round",
+            curve: "smooth",
+        },
+        markers: {
+            size: 0,
+        },
+        xaxis: {
+            axisTicks: {
+            show: false,
+            },
+            axisBorder: {
+            show: true,
+            },
+            labels: {
+            style: {
+                colors: "#616161",
+                fontSize: "12px",
+                fontFamily: "inherit",
+                fontWeight: 400,
+            },
+            },
+            categories: Array(31).fill(0).map((_, i) => i + 1) // banyak baris, TODO(sesuaikan dengan jumlah hari dengan bulan yang dipilih)
+            ,
+        },
+        yaxis: {
+            axisBorder: {
+                show: true,
+            },
+            labels: {
+            style: {
+                colors: "#616161",
+                fontSize: "12px",
+                fontFamily: "inherit",
+                fontWeight: 400,
+            },
+            },
+        },
+        grid: {
+            show: false,
+            borderColor: "#dddddd",
+            strokeDashArray: 5,
+            xaxis: {
+            lines: {
+                show: false,
+            },
+            },
+            padding: {
+            top: 5,
+            right: 20,
+            },
+        },
+        fill: {
+            opacity: 0.8,
+        },
+        tooltip: {
+            theme: "dark",
+        },
+    }
     return (
     <div className={dashboardFieldStyle + "min-w-[634px] min-h-[552px]"}>
        <div className={dashboardFieldTitleStyle}>
             Statistik pemesanan
         </div>
         <div>
-            <Chart {...chartConfig} />
+            <Chart 
+            type={chartConfig.type}
+            options={chartOptions}
+            series={chartSeries}
+            />
         </div>
     </div>
     )
