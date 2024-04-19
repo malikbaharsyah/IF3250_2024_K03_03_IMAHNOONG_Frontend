@@ -6,6 +6,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import TicketContent from '../components/contents/TicketContent';
 import CarouselDate from '../components/contents/CarouselDate';
+import ReqButton from '../components/contents/ReqButton';
 
 
 function view_ticket() {
@@ -38,6 +39,9 @@ function view_ticket() {
                     <div className=" w-[1280px]">
                         <CarouselDate />
                     </div>
+                </div>
+                <div className='mt-[1vw] w-[1280px] h-[7vw]'>
+                    <ReqButton />
                 </div>
                 <div className='ticket w-[1280px] mt-[2vw] grid grid-cols-2 gap-y-[2vw]'>
                     <TicketContent />
