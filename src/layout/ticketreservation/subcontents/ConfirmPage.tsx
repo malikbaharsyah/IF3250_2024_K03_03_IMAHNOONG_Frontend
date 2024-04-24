@@ -2,8 +2,8 @@
 
 const ConfirmPage = () => {
     return (
-        <div>
-            Confirm 
+        <div className="font-inter">
+            
         </div>
     );
 }
