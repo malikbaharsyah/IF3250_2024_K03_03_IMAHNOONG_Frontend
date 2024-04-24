@@ -39,7 +39,7 @@ const PaymentMethod = () => {
                                 </label>    
                                 {item}
                             </div>
-                            <img className="rounded-lg" src={logoPayment[index]} alt="Catalog Item"/>
+                            <img className="rounded-lg" src={logoPayment[index]} alt={`${listPayment[index]}`}/>
                         </div>
                     ))
                 }
