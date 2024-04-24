@@ -19,8 +19,12 @@ const StepperControl: React.FC<StepperControlProps> = ({handleClick, currentStep
             </button>}
             <button onClick={() => {
                 if (currentStep !== steps.length){
+                    {/*TODO: Backend to send finished ticket process*/}
                     handleClick("next");
-                } else {
+                } else if (currentStep !== steps.length-1) {
+                    {/*TODO: Payment gateway prcess here*/}
+                    handleClick("next");
+                } else {    
                     routeChange();
                 }
                 
