@@ -70,14 +70,7 @@ const EditAcara = () => {
                                         id="hargaTiket"
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2"
                                         value={hargaTiket}
-                                        onChange={(e) => {
-                                            const value = parseInt(e.target.value);
-                                            if (!isNaN(value) && value >= 0) {
-                                                setHargaTiket(value);
-                                            }
-                                        }} 
-                                        pattern="[0-9]*"
-                                        min="0"
+                                        onChange={(e) => setHargaTiket(e.target.value)} 
                                     />
                                 </div>
                                 <div>
@@ -85,18 +78,11 @@ const EditAcara = () => {
                                         <span className="ml-1 text-xs text-gray-500">(Isi dengan angka)</span>
                                     </label>
                                     <input 
-                                        type="number" 
-                                        id="jumlahTiket" 
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2" 
-                                        value={jumlahTiket} 
-                                        onChange={(e) => {
-                                            const value = parseInt(e.target.value);
-                                            if (!isNaN(value) && value >= 0) {
-                                                setJumlahTiket(value);
-                                            }
-                                        }} 
-                                        pattern="[0-9]*"
-                                        min="0"
+                                        type="number"
+                                        id="jumlahTiket"
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2"
+                                        value={jumlahTiket}
+                                        onChange={(e) => setJumlahTiket(e.target.value)} 
                                     />
                                 </div>
                             </div>
