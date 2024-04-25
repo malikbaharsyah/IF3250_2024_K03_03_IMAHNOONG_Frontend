@@ -10,7 +10,7 @@ import DetailPemesanan from './pages/DetailPemesanan';
 import Sidebar from './components/base/Sidebar';
 import Jadwal from './pages/Jadwal';
 import { DashboardAdmin } from './pages/DashboardAdmin';
-
+import RatingPage from './pages/Rating'
 import Pemesanan from './pages/Pemesanan';
 import AddAcara from './pages/AddAcara';
 import AddKunjungan from './pages/AddKunjungan';
@@ -37,7 +37,7 @@ function App() {
             <Route path='editacara' element={<EditAcara/>}/>
             <Route path='addkunjungan' element={<AddKunjungan/>}/> 
             <Route path='editkunjungan' element={<EditKunjungan/>}/>
-
+            <Route path='rating' element={<RatingPage/>}/>
         </Routes>
       </BrowserRouter>
     </div>    
