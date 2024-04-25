@@ -6,7 +6,7 @@ const RegistrationPage = () => {
     const [email, setEmail] = useState<string>();
     const [phoneNumber, setPhoneNumber] = useState<string>();
     const [numberOfTickets, setNumberOfTickets] = useState<number>();
-    const [notes, setNotes] = useState<string | number | readonly string[] | undefined>();
+    const [notes, setNotes] = useState<string>();
     return (
         <div className="flex flex-col items-center">
             <div className="flex justify-center gap-4">

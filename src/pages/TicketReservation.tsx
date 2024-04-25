@@ -2,7 +2,7 @@ import TicketReservationContent from "../components/contents/TicketResevationCon
 
 const TicketReservation = () => {
     return (
-        <div className='h-screen bg-stars bg-no-repeat bg-cover bg-local overflow-hidden'>
+        <div className='h-screen bg-stars bg-no-repeat bg-cover bg-local overflow-x-hidden'>
             <TicketReservationContent/>
         </div>
     )
