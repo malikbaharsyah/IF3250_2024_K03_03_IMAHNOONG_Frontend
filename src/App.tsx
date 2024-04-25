@@ -9,6 +9,7 @@ import Details from './pages/Details';
 import DetailPemesanan from './pages/DetailPemesanan';
 import Sidebar from './components/base/Sidebar';
 import { DashboardAdmin } from './pages/DashboardAdmin';
+import RatingPage from './pages/Rating'
 
 import Pemesanan from './pages/Pemesanan';
 
@@ -27,6 +28,7 @@ function App() {
             <Route path='detailpemesanan' element={<DetailPemesanan/>}/>
             <Route path='login' element={<LoginAdmin/>}/>
             <Route path='dashboard' element={<DashboardAdmin/>}/>
+            <Route path='rating' element={<RatingPage/>}/>
         </Routes>
       </BrowserRouter>
     </div>    
