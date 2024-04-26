@@ -16,6 +16,7 @@ import AddAcara from './pages/AddAcara';
 import AddKunjungan from './pages/AddKunjungan';
 import EditAcara from './pages/EditAcara';
 import EditKunjungan from './pages/EditKunjungan';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
             <Route path='addkunjungan' element={<AddKunjungan/>}/> 
             <Route path='editkunjungan' element={<EditKunjungan/>}/>
             <Route path='rating' element={<RatingPage/>}/>
+            <Route path='profile' element={<Profile/>}/>
         </Routes>
       </BrowserRouter>
     </div>    
