@@ -11,4 +11,5 @@ export interface StepperControlProps {
     handleClick: (direction: string) => void;
     currentStep: number;
     steps: string[];
+    type: number;
 }

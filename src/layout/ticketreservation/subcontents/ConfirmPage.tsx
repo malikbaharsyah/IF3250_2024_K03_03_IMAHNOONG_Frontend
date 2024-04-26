@@ -34,10 +34,8 @@ const ConfirmPage = () => {
                     <h4>
                         Pesan
                     </h4>
-                    <textarea disabled className="bg-transparent resize-none font-regular text-[16px]">
-                        Transaksi berhasil pada 2/03/2024&#10;
-                        17:08 WIB
-                    </textarea>
+                    <textarea disabled className="bg-transparent resize-none font-regular text-[16px]"
+                              defaultValue={"Transaksi berhasil pada 2/03/2024\n17:08 WIB"}/>
                 </div>
                 <div className="flex flex-col gap-4 font-medium text-[24px]">
                     <h4>
