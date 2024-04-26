@@ -1,12 +1,11 @@
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import Sidebar from "../components/base/Sidebar";
 import JadwalAcara from "../components/contents/JadwalAcara";
 import JadwalKunjungan from "../components/contents/JadwalKunjungan";
 import DatePicker from "react-datepicker";
 import { MdAdd } from "react-icons/md";
 import "react-datepicker/dist/react-datepicker.css";
-
-
 
 const Jadwal = () => {
     const [activeTab, setActiveTab] = useState('jadwal-kunjungan');
@@ -35,11 +34,6 @@ const Jadwal = () => {
 
     const handleToggleOptions = () => {
         setShowOptions(!showOptions);
-    };
-
-    const handleAddNew = (type) => {
-        // Handle add new acara or kunjungan
-        console.log("Tambah", type);
     };
 
     return (
@@ -76,8 +70,8 @@ const Jadwal = () => {
                             <a href="#" onClick={() => changeTab('jadwal-acara')} className={`inline-block px-4 py-2 rounded-t-lg ${activeTab === 'jadwal-acara' ? 'text-color-2 bg-white font-bold' : 'hover:text-gray-600 hover:bg-gray-50 '}`}>Jadwal Acara</a>
                         </li>
                     </ul>
-                    {activeTab === 'jadwal-kunjungan' && <JadwalKunjungan searchText={searchText} selectedDate={selectedDate} />}
-                    {activeTab === 'jadwal-acara' && <JadwalAcara searchText={searchText} selectedDate={selectedDate} />}
+                    {activeTab === 'jadwal-kunjungan' && <JadwalKunjungan />}
+                    {activeTab === 'jadwal-acara' && <JadwalAcara />}
                 </div>
                 <div className="fixed bottom-8 right-8 z-50">
                     <button onClick={handleToggleOptions} className="bg-color-2 text-white p-2 rounded-full shadow-lg hover:bg-opacity-80">
@@ -85,10 +79,9 @@ const Jadwal = () => {
                     </button>
                     {showOptions && (
                         <div className="absolute bottom-8 right-12 bg-white p-2 rounded-lg shadow-lg w-[200px]">
-                            <button onClick={() => handleAddNew('acara')} className="block w-full py-2 text-left hover:bg-gray-100 focus:outline-none">Tambah Acara Baru</button>
-                            <button onClick={() => handleAddNew('kunjungan')} className="block w-full py-2 text-left hover:bg-gray-100 focus:outline-none">Tambah Kunjungan Baru</button>
+                            <NavLink to="/addkunjungan" className="block w-full py-2 text-left hover:bg-gray-100 focus:outline-none">Tambah Kunjungan Baru</NavLink>
+                            <NavLink to="/addacara" className="block w-full py-2 text-left hover:bg-gray-100 focus:outline-none">Tambah Acara Baru</NavLink>
                         </div>
-                    
                     )}
                 </div>
             </section>

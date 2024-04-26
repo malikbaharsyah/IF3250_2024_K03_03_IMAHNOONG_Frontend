@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { NavLink } from 'react-router-dom';
 
 const JadwalAcara = () => {
     return (
@@ -74,7 +74,7 @@ const JadwalAcara = () => {
                             2 jam
                         </td>
                         <td className="px-4 py-4">
-                            <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                            <NavLink to="/editAcara" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</NavLink>
                         </td>
                         <td className="px-4 py-4">
                             <a href="#" className="font-medium text-blue-600 dark:text-red-500 hover:underline">Hapus</a>
@@ -83,44 +83,7 @@ const JadwalAcara = () => {
                             <a href="#" className="font-medium text-blue-600 dark:text-green-500 hover:underline">Lihat</a>
                         </td>
                     </tr>
-                    <tr className="odd:bg-white even:bg-gray-50 border-b">
-                        <th scope="row" className="px-4 py-4 font-medium text-gray-900 whitespace-nowrap">
-                            2
-                        </th>
-                        <td className="px-4 py-4">
-                            <img src="path_to_image" alt="Acara 1" className="w-8 h-8" />
-                        </td>
-                        <td className="px-4 py-4">
-                            <p className="line-clamp-3">Nulla dolor velit adipisicing duis excepteur esse in duis nostrud occaecat mollit incididunt deserunt sunt. Ut ut sunt laborum</p>
-                        </td>
-                        <td className="px-4 py-4">
-                            <p className="line-clamp-3">Nulla dolor velit adipisicing duis excepteur esse in duis nostrud occaecat mollit incididunt deserunt sunt. Ut ut sunt laborum</p>
-                        </td>
-                        <td className="px-4 py-4">
-                            Rp20.000
-                        </td>
-                        <td className="px-4 py-4">
-                            200/200
-                        </td>
-                        <td className="px-4 py-4">
-                            24/04/2024
-                        </td>
-                        <td className="px-4 py-4">
-                            12:06
-                        </td>
-                        <td className="px-4 py-4">
-                            2 jam
-                        </td>
-                        <td className="px-4 py-4">
-                            <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                        </td>
-                        <td className="px-4 py-4">
-                            <a href="#" className="font-medium text-blue-600 dark:text-red-500 hover:underline">Hapus</a>
-                        </td>
-                        <td className="px-4 py-4">
-                            <a href="#" className="font-medium text-blue-600 dark:text-green-500 hover:underline">Lihat</a>
-                        </td>
-                    </tr>
+                    {/* Tambah baris jadwal acara lainnya di sini */}
                 </tbody>
             </table>
         </div>

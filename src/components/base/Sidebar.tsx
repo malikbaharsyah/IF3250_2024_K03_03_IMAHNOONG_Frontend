@@ -1,50 +1,35 @@
-import { IoIosArrowForward } from "react-icons/io";
-import { IoIosArrowBack } from "react-icons/io";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import { GoHome } from "react-icons/go";
-import { LuTicket } from "react-icons/lu";
-import { LuCalendar } from "react-icons/lu";
-import { FaRegStar } from "react-icons/fa";
-import { FaRegEdit } from "react-icons/fa";
-import { SetStateAction, useState } from "react";
+import { LuTicket, LuCalendar } from "react-icons/lu";
+import { FaRegStar, FaRegEdit } from "react-icons/fa";
 
 const Sidebar = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(true);
-    const [clickedItem, setClickedItem] = useState(null);
+    const [clickedItem, setClickedItem] = useState<string | null>(null);
 
     const handleToggleSidebar = () => {
         setSidebarOpen(!isSidebarOpen);
     };
 
-    const handleItemClick = (itemName : SetStateAction<any>) => {
+    const handleItemClick = (itemName: string) => {
         setClickedItem(itemName === clickedItem ? null : itemName);
     };
 
-    const NavItem = ({ children, icon, clicked, onClick}: { children: React.ReactNode, icon: React.ReactNode, clicked: boolean, onClick: () => void }) => {
-        let className = "flex items-center px-2 py-2 rounded-md transition-colors duration-300";
-        // px-2 py-2 rounded-md transition-colors duration-300 flex items-center
-        if (clicked) {
-            className += " bg-white bg-opacity-40 hover:rounded-md cursor-default";
-        } else {
-            className += " hover:bg-white hover:bg-opacity-40 cursor-pointer";
-        }
-    
+    const NavItem = ({ children, icon, to }: { children?: React.ReactNode; icon: React.ReactNode; to: string; }) => {
         return (
-            <div className={className} onClick={onClick}>
-                {isSidebarOpen && (
-                    <div className="flex items-center">
-                        {icon && <span className="mr-4">{icon}</span>}
-                        {children}
-                    </div>
-                )}    
-                {!isSidebarOpen && (
-                    <div className="flex items-center">
-                        {icon && <span>{icon}</span>}
-                        {children}
-                    </div>
-                )}    
-            </div>
+            <NavLink
+                to={to}
+                activeClassName="bg-white bg-opacity-40 hover:bg-opacity-40 rounded-md"
+                className={`flex items-center px-2 py-2 rounded-md hover:bg-white hover:bg-opacity-40 cursor-pointer transition-colors duration-300 ${clickedItem === to ? 'bg-white bg-opacity-40 rounded-md' : ''}`}
+                onClick={() => handleItemClick(to)}
+            >
+                <span className="mr-4">{icon}</span>
+                {children}
+            </NavLink>
         );
-    }
+    };
 
     return (
         <div className={`flex flex-col self-stretch w-fit bg-stars text-white transition-all duration-300 ${isSidebarOpen ? 'w-64' : 'w-fit'}`}>
@@ -53,46 +38,33 @@ const Sidebar = () => {
                     Logo
                 </div>
                 <div className="flex justify-end">
-                    {isSidebarOpen && (
+                    {isSidebarOpen ? (
                         <button className="h-fit text-md py-2 border-y border-l rounded-l-md" onClick={handleToggleSidebar}>
                             <IoIosArrowBack />
-                        </button>                        
-                    )}
-                    {!isSidebarOpen && (
+                        </button>
+                    ) : (
                         <button className="text-md py-2 border-y border-l rounded-l-md" onClick={handleToggleSidebar}>
                             <IoIosArrowForward />
-                        </button>                        
+                        </button>
                     )}
                 </div>
             </div>
-            {isSidebarOpen && (
+            {isSidebarOpen ? (
                 <div className="space-y-2 font-semibold text-sm mx-4">
-                    <NavItem icon={<GoHome className="text-2xl"/>} clicked={clickedItem === "Dashboard"} onClick={() => handleItemClick("Dashboard")}>
-                        Dashboard
-                    </NavItem>
-                    <NavItem icon={<LuTicket className="text-2xl"/>} clicked={clickedItem === "Pemesanan"} onClick={() => handleItemClick("Pemesanan")}>
-                        Pemesanan
-                    </NavItem>
-                    <NavItem icon={<LuCalendar className="text-2xl"/>} clicked={clickedItem === "Jadwal"} onClick={() => handleItemClick("Jadwal")}>
-                        Jadwal
-                    </NavItem>
-                    <NavItem icon={<FaRegStar className="text-2xl"/>} clicked={clickedItem === "Ulasan"} onClick={() => handleItemClick("Ulasan")}>
-                        Ulasan
-                    </NavItem>
-                    <NavItem icon={<FaRegEdit className="text-2xl"/>} clicked={clickedItem === "Edit Profil"} onClick={() => handleItemClick("Edit Profil")}>
-                        Edit Profil
-                    </NavItem>
+                    <NavItem to="/dashboard" icon={<GoHome className="text-2xl"/>}>Dashboard</NavItem>
+                    <NavItem to="/pemesanan" icon={<LuTicket className="text-2xl"/>}>Pemesanan</NavItem>
+                    <NavItem to="/jadwal" icon={<LuCalendar className="text-2xl"/>}>Jadwal</NavItem>
+                    <NavItem to="/rating" icon={<FaRegStar className="text-2xl"/>}>Ulasan</NavItem>
+                    <NavItem to="/profile" icon={<FaRegEdit className="text-2xl"/>}>Edit Profil</NavItem>
                 </div>
-            )}
-            {!isSidebarOpen && (
+            ) : (
                 <div className="space-y-4 font-semibold text-4xl mx-2">
-                    <NavItem icon={<GoHome className="text-2xl "/>} clicked={clickedItem === "Dashboard"} onClick={() => handleItemClick("Dashboard")}> </NavItem>
-                    <NavItem icon={<LuTicket className="text-2xl"/>} clicked={clickedItem === "Pemesanan"} onClick={() => handleItemClick("Pemesanan")}> </NavItem>
-                    <NavItem icon={<LuCalendar className="text-2xl"/>} clicked={clickedItem === "Jadwal"} onClick={() => handleItemClick("Jadwal")}> </NavItem>
-                    <NavItem icon={<FaRegStar className="text-2xl"/>} clicked={clickedItem === "Ulasan"} onClick={() => handleItemClick("Ulasan")}> </NavItem>
-                    <NavItem icon={<FaRegEdit className="text-2xl"/>} clicked={clickedItem === "Edit Profil"} onClick={() => handleItemClick("Edit Profil")}> </NavItem>
+                    <NavItem to="/dashboard" icon={<GoHome className="text-4xl"/>}></NavItem>
+                    <NavItem to="/pemesanan" icon={<LuTicket className="text-4xl"/>}></NavItem>
+                    <NavItem to="/jadwal" icon={<LuCalendar className="text-4xl"/>}></NavItem>
+                    <NavItem to="/rating" icon={<FaRegStar className="text-4xl"/>}></NavItem>
+                    <NavItem to="/profile" icon={<FaRegEdit className="text-4xl"/>}></NavItem>
                 </div>
-                
             )}
         </div>
     );
