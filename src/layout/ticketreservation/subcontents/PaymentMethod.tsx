@@ -23,7 +23,8 @@ const PaymentMethod = () => {
             <div className="w-[744px] bg-color-4 h-px"></div>
             <ul className="font-medium text-2xl text-color-4 flex flex-col w-full gap-5">{
                     listPayment.map((item, index)=>(
-                        <div className="flex justify-between w-full">
+                        <div className="flex justify-between w-full"
+                             key={item}>
                             <div className="inline-flex items-center">
                                 <label className="relative flex items-center p-3 rounded-full cursor-pointer" htmlFor="black">
                                     <input name="color" type="radio"

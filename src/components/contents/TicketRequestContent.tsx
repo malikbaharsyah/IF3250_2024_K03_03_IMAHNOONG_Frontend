@@ -1,7 +1,6 @@
 import { useState } from "react";
 import ConfirmPage from "../../layout/ticketreservation/subcontents/ConfirmPage";
 import PaymentPage from "../../layout/ticketreservation/subcontents/PaymentPage";
-import RegistrationPage from "../../layout/ticketreservation/subcontents/RegistrationPage";
 import { StepperContext } from "../../context/StepperContext";
 import TicketInformation from "../../layout/ticketreservation/ticketinformation/TicketInformation";
 import Stepper from "../../layout/ticketreservation/stepper/Stepper";
@@ -9,13 +8,16 @@ import StepperControl from "../../layout/ticketreservation/stepper/StepperContro
 import NavbarReservation from "../../layout/ticketreservation/base/NavbarReservation";
 import { motion, AnimatePresence } from "framer-motion"
 import PaymentMethod from "../../layout/ticketreservation/subcontents/PaymentMethod";
-const TicketReservationContent = () => {
+import RequestPage from "../../layout/ticketreservation/subcontents/RequestPage";
+import ConfirmationPending from "../../layout/ticketreservation/subcontents/ConfirmationPending";
+const TicketRequestContent = () => {
 
     const [currentStep, setCurrentStep] = useState(1);
     const [userData, setUserData] = useState('');
     const [finalData, setFinalData] = useState([]);
     const steps = [
         "Data Pesanan",
+        "Tunggu Konfirmasi",
         "Metode Pembayaran",
         "Pembayaran",
         "Konfirmasi"
@@ -30,12 +32,14 @@ const TicketReservationContent = () => {
     function setComponent(currentStep: number){
         switch (currentStep) {
             case 1:
-                return <RegistrationPage/>
+                return <RequestPage/>
             case 2:
-                return <PaymentMethod/>
+                return <ConfirmationPending/>
             case 3:
-                return <PaymentPage/>
+                return <PaymentMethod/>
             case 4:
+                return <PaymentPage/>
+            case 5:
                 return <ConfirmPage/>
             default:
         }
@@ -43,11 +47,11 @@ const TicketReservationContent = () => {
 
     return (
         <>
-            <header>
+            <div>
                 <NavbarReservation currentStep={currentStep}
                                    steps={steps}/>
-            </header>
-            <body className="mt-8">
+            </div>
+            <div className="mt-8">
                 <div className="relative flex flex-col justify-center">
                     <AnimatePresence>
                         {currentStep === 1 && (
@@ -76,14 +80,14 @@ const TicketReservationContent = () => {
                                 handleClick={handleClick}
                                 currentStep={currentStep}
                                 steps={steps}
-                                type={1}
+                                type={0}
                             />
                         </div>
                     </div>
                 </div>
-            </body>
+            </div>
         </>
     );
 }
 
-export default TicketReservationContent;
+export default TicketRequestContent;

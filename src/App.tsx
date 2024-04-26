@@ -7,7 +7,6 @@ import HelpPage from './pages/help';
 import ListTiket from './pages/view_ticket'
 import Details from './pages/Details';
 import DetailPemesanan from './pages/DetailPemesanan';
-import Sidebar from './components/base/Sidebar';
 import Jadwal from './pages/Jadwal';
 import { DashboardAdmin } from './pages/DashboardAdmin';
 import RatingPage from './pages/Rating'
@@ -17,6 +16,7 @@ import AddKunjungan from './pages/AddKunjungan';
 import EditAcara from './pages/EditAcara';
 import EditKunjungan from './pages/EditKunjungan';
 import Profile from './pages/Profile';
+import TicketRequest from './pages/TicketRequest';
 
 function App() {
   return (
@@ -26,6 +26,7 @@ function App() {
           <Route path='/' element={<LandingPage/>}/>
             <Route path='catalog' element={<Catalog/>}/>
             <Route path='ticketreservation' element={<TicketReservation/>}/>
+            <Route path='ticketrequest' element={<TicketRequest/>}/>
             <Route path='helppage' element={<HelpPage/>}/>
             <Route path='listtiket' element={<ListTiket/>}/>
             <Route path='pemesanan' element={<Pemesanan/>}/>
