@@ -18,37 +18,44 @@ import EditAcara from './pages/EditAcara';
 import EditKunjungan from './pages/EditKunjungan';
 import TicketRequest from './pages/TicketRequest';
 import EditProfil from './pages/EditProfil';
+import { Navigate } from 'react-router-dom';
 
 function App() {
   return (
     <div className='App'>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<LandingPage/>}/>
-            <Route path='catalog' element={<Catalog/>}/>
-            <Route path='ticketreservation' element={<TicketReservation/>}/>
-            <Route path='ticketrequest' element={<TicketRequest/>}/>
-            <Route path='helppage' element={<HelpPage/>}/>
-            <Route path='listtiket' element={<ListTiket/>}/>
-            <Route path='details' element={<Details/>}/>
-            <Route path='login' element={<LoginAdmin/>}/>
+          <Route path='/' element={<LandingPage />} />
+          <Route path='catalog' element={<Catalog />} />
+          <Route path='ticketreservation' element={<TicketReservation />} />
+          <Route path='ticketrequest' element={<TicketRequest />} />
+          <Route path='helppage' element={<HelpPage />} />
+          <Route path='listtiket' element={<ListTiket />} />
+          <Route path='details' element={<Details />} />
+          <Route path='login' element={<LoginAdmin />} />
+          <Route path='*' element={<AdminRoutes />} />
         </Routes>
-        <Sidebar>
-          <Routes>
-            <Route path='pemesanan' element={<PemesananAdmin/>}/>
-            <Route path='detailpemesanan' element={<DetailPemesanan/>}/>
-            <Route path='dashboard' element={<DashboardAdmin/>}/>
-            <Route path='jadwal' element={<Jadwal/>}/>
-            <Route path='addacara' element={<AddAcara/>}/>
-            <Route path='editacara' element={<EditAcara/>}/>
-            <Route path='addkunjungan' element={<AddKunjungan/>}/> 
-            <Route path='editkunjungan' element={<EditKunjungan/>}/>
-            <Route path='rating' element={<RatingPage/>}/>
-            <Route path='profile' element={<EditProfil/>}/>
-          </Routes>
-        </Sidebar>
       </BrowserRouter>
-    </div>    
-  )
+    </div>
+  );
 }
-export default App
+
+const AdminRoutes = () => (
+  <Sidebar>
+    <Routes>
+      <Route path='dashboard' element={<DashboardAdmin />} />
+      <Route path='pemesanan' element={<PemesananAdmin />} />
+      <Route path='detailpemesanan' element={<DetailPemesanan />} />
+      <Route path='jadwal' element={<Jadwal />} />
+      <Route path='addacara' element={<AddAcara />} />
+      <Route path='editacara' element={<EditAcara />} />
+      <Route path='addkunjungan' element={<AddKunjungan />} />
+      <Route path='editkunjungan' element={<EditKunjungan />} />
+      <Route path='rating' element={<RatingPage />} />
+      <Route path='profile' element={<EditProfil />} />
+      <Route path='*' element={<Navigate to='dashboard' />} />
+    </Routes>
+  </Sidebar>
+);
+
+export default App;

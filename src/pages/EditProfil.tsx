@@ -12,9 +12,6 @@ const EditProfil = () => {
     const [prosedurPendaftaran, setProsedurPendaftaran] = useState('');
     const [tataTertib, setTataTertib] = useState('');
     const [noTelp, setNoTelp] = useState('');
-    const [tanggal, setTanggal] = useState('');
-    const [waktu, setWaktu] = useState('');
-    const [waktuZone, setWaktuZone] = useState('WIB');
     const [gambarFiles, setGambarFiles] = useState([]);
     const [gambarUrls, setGambarUrls] = useState([]);
 
