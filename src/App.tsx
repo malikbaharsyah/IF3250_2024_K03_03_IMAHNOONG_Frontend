@@ -16,12 +16,8 @@ import AddAcara from './pages/AddAcara';
 import AddKunjungan from './pages/AddKunjungan';
 import EditAcara from './pages/EditAcara';
 import EditKunjungan from './pages/EditKunjungan';
-import Profile from './pages/EditProfil';
 import TicketRequest from './pages/TicketRequest';
-import SideNavBar from './components/base/SideNavBar';
-import AdminPage from './pages/AdminPage';
 import EditProfil from './pages/EditProfil';
-import Rating1 from './pages/Rating1';
 
 function App() {
   return (
@@ -36,7 +32,6 @@ function App() {
             <Route path='listtiket' element={<ListTiket/>}/>
             <Route path='details' element={<Details/>}/>
             <Route path='login' element={<LoginAdmin/>}/>
-            <Route path='rating1' element={<Rating1/>}/>
         </Routes>
         <Sidebar>
           <Routes>
@@ -50,8 +45,6 @@ function App() {
             <Route path='editkunjungan' element={<EditKunjungan/>}/>
             <Route path='rating' element={<RatingPage/>}/>
             <Route path='profile' element={<EditProfil/>}/>
-            {/* <Route path='sidenavbar' element={<SideNavBar/>}/>
-            <Route path='adminpage' element={<AdminPage/>}/> */}
           </Routes>
         </Sidebar>
       </BrowserRouter>
