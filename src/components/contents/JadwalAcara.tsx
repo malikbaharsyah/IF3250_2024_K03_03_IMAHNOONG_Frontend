@@ -4,8 +4,8 @@ const JadwalAcara = () => {
     return (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table className="w-full text-sm text-center rtl:text-right text-gray-500">
-                <thead className="text-xs text-gray-700 uppercase bg-white">
-                    <tr>
+                <thead className="text-xs text-black uppercase">
+                    <tr className="bg-white border-b-2">
                         <th scope="col" className="px-4 py-3">
                             No.
                         </th>
