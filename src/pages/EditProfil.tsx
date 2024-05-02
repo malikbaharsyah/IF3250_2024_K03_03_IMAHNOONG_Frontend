@@ -152,56 +152,6 @@ const EditProfil = () => {
                         </div>
                         <div className="flex flex-row items-center justify-between pt-4">
                             <div className="font-medium text-sm">
-                                Foto Planetarium
-                            </div>
-                            <div className="font-normal text-sm">
-                                maks. 1 foto
-                            </div>
-                        </div>
-                        <div className="flex flex-col mt-4">
-                            {gambarUrls.map((url, index) => (
-                                <div
-                                    key={index}
-                                    className="w-1/3 p-2 relative"
-                                >
-                                    <img
-                                        src={url}
-                                        alt={`gambar-${index}`}
-                                        className="w-full h-full object-cover rounded-lg"
-                                    />
-                                    <button
-                                        type="button"
-                                        className="absolute top-2 right-2 bg-red-500 text-white rounded-full h-6 w-6 flex items-center justify-center"
-                                        onClick={() => {
-                                            const newFiles = [...gambarFiles];
-                                            const newUrls = [...gambarUrls];
-                                            newFiles.splice(index, 1);
-                                            newUrls.splice(index, 1);
-                                            setGambarFiles(newFiles);
-                                            setGambarUrls(newUrls);
-                                        }}
-                                    >
-                                        &times;
-                                    </button>
-                                </div>
-                            ))}
-                        </div>
-                        <div className="mt-4">
-                            <input
-                                type="file"
-                                id="gambar"
-                                className="hidden"
-                                onChange={handleFotoChange}
-                            />
-                            <label
-                                htmlFor="gambar"
-                                className="bg-gray-200 flex flex-col w-fit items-center justify-center cursor-pointer inline-block rounded-lg p-4">
-                                <FaPlus className="text-xl" />
-                                Tambah Foto
-                            </label>
-                        </div>
-                        <div className="flex flex-row items-center justify-between pt-4">
-                            <div className="font-medium text-sm">
                                 Slideshow Foto
                             </div>
                             <div className="font-normal text-sm">
@@ -243,6 +193,56 @@ const EditProfil = () => {
                                 className="hidden"
                                 multiple
                                 onChange={handleSlideshowChange}
+                            />
+                            <label
+                                htmlFor="gambar"
+                                className="bg-gray-200 flex flex-col w-fit items-center justify-center cursor-pointer inline-block rounded-lg p-4">
+                                <FaPlus className="text-xl" />
+                                Tambah Foto
+                            </label>
+                        </div>
+                        <div className="flex flex-row items-center justify-between pt-4">
+                            <div className="font-medium text-sm">
+                                Foto Planetarium
+                            </div>
+                            <div className="font-normal text-sm">
+                                maks. 1 foto
+                            </div>
+                        </div>
+                        <div className="flex flex-col mt-4">
+                            {gambarUrls.map((url, index) => (
+                                <div
+                                    key={index}
+                                    className="w-1/3 p-2 relative"
+                                >
+                                    <img
+                                        src={url}
+                                        alt={`gambar-${index}`}
+                                        className="w-full h-full object-cover rounded-lg"
+                                    />
+                                    <button
+                                        type="button"
+                                        className="absolute top-2 right-2 bg-red-500 text-white rounded-full h-6 w-6 flex items-center justify-center"
+                                        onClick={() => {
+                                            const newFiles = [...gambarFiles];
+                                            const newUrls = [...gambarUrls];
+                                            newFiles.splice(index, 1);
+                                            newUrls.splice(index, 1);
+                                            setGambarFiles(newFiles);
+                                            setGambarUrls(newUrls);
+                                        }}
+                                    >
+                                        &times;
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="mt-4">
+                            <input
+                                type="file"
+                                id="gambar"
+                                className="hidden"
+                                onChange={handleFotoChange}
                             />
                             <label
                                 htmlFor="gambar"
