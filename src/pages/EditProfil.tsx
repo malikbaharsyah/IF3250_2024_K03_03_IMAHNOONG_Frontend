@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { FaPlus } from "react-icons/fa6";
 import { Button, Modal } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+import axios from "axios";
+import {EditPlanetarium} from "../interfaces/Planetarium";
 
 
 const EditProfil = () => {
@@ -14,6 +16,7 @@ const EditProfil = () => {
     const [noTelp, setNoTelp] = useState('');
     const [gambarFiles, setGambarFiles] = useState([]);
     const [gambarUrls, setGambarUrls] = useState([]);
+    const [isNamaPlanetariumUpdated, setIsNamaPlanetariumUpdated] = useState(false);
 
     const handleSlideshowChange = (e) => {
         const files = e.target.files;
@@ -77,11 +80,60 @@ const EditProfil = () => {
 
     const [openModal, setOpenModal] = useState(false);
 
-    const handleConfirm = () => {
-        // Handle submit
-        console.log('Submit');
-        setOpenModal(false);
+    const handleConfirm = async () => {
+        try {
+            setOpenModal(false);
+            console.log('Submit');
+            // if(!tanggal) return alert('Tanggal belum diisi');
+            // if(!waktu) return alert('Waktu belum diisi');
+            if(!namaPlanetarium) return alert('Nama planetarium belum diisi');
+
+
+            const response = await axios.post('http://localhost:9000/api/details/editPlanetarium', {
+            id : planetariumId,
+            namaPlanetarium: namaPlanetarium,
+            deskripsi: tentangPlanetarium,
+            prosedurPendaftaran: prosedurPendaftaran,
+            tataTertib: tataTertib,
+            noTelepon: noTelp,
+            imagePath: [""], // TODO
+            lokasi: "",
+            });
+            console.log('Planetarium edit successfully:', response.data);
+        } catch (error) {
+            console.error('Error edit Planetarium:', error);
+        }
+
       };
+
+    const [eventData, setEventData] = useState<EditPlanetarium>();
+
+    const planetariumId = 1; //TODO
+
+    useEffect(() => {
+    fetch('http://localhost:9000/api/details/' + planetariumId)
+        .then(response => response.json())
+        .then(data => {setEventData(data);})
+        .catch(error => console.error('Error fetching catalog data:', error));
+    }, []);
+
+    if (eventData && !isNamaPlanetariumUpdated) {
+        if (namaPlanetarium !== eventData.namaPlanetarium) {
+            setNamaPlanetarium(eventData.namaPlanetarium);
+            setTentangPlanetarium(eventData.deskripsi);
+            console.log(eventData);
+            setProsedurPendaftaran(eventData.prosedurPendaftaran);
+            setTataTertib(eventData.tataTertib);
+            setNoTelp(eventData.noTelepon);
+            
+            // imageRef.current = eventData.imagePath[0];
+            // console.log(image);
+            setIsNamaPlanetariumUpdated(true);
+        } 
+        
+    }
+
+
 
     return (
         <section className="flex-1">
