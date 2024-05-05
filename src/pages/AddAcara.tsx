@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Button, Modal } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+import axios from 'axios';
 
 const AddAcara = () => {
     const [namaAcara, setNamaAcara] = useState('');
@@ -13,7 +14,7 @@ const AddAcara = () => {
     const [tanggal, setTanggal] = useState('');
     const [waktu, setWaktu] = useState('');
     const [waktuZone, setWaktuZone] = useState('WIB');
-    const [gambar, setGambar] = useState('');
+    const [gambar, setGambar] = useState<File>(null);
     const [gambarUrl, setGambarUrl] = useState(null);
 
     const handleFileChange = (e) => {
@@ -47,10 +48,65 @@ const AddAcara = () => {
     const [openModal, setOpenModal] = useState(false);
     const [openCancelModal, setOpenCancelModal] = useState(false);
 
-    const handleConfirm = () => {
-        setOpenModal(false);
-        // Handle submit action
-        console.log('Submit');
+    const handleConfirm = async () => {
+        try {
+            setOpenModal(false);
+            // Handle submit action
+            console.log('Submit');
+            // console.log({
+            //     namaAcara,
+            //     deskripsiAcara,
+            //     hargaTiket,
+            //     jumlahTiket,
+            //     tanggal,
+            //     waktu,
+            //     waktuZone,
+            //     gambar
+            // });
+            
+            if(!tanggal) return alert('Tanggal belum diisi');
+            if(!waktu) return alert('Waktu belum diisi');
+            if(!namaAcara) return alert('Nama acara belum diisi');
+            const [hours, minutes] = waktu.split(':').map(Number);
+
+            // if(!gambar) return alert('Gambar belum diisi');
+            const combined = new Date(tanggal);
+            combined.setHours(hours); 
+            combined.setMinutes(minutes);
+
+            if (waktuZone === 'WITA') combined.setHours(combined.getHours() - 1);
+            else if (waktuZone === 'WIT') combined.setHours(combined.getHours() - 2);
+            
+            const isoString = combined.toISOString();
+            // console.log(isoString);
+            // const temp = new Date(isoString);
+            // const formattedDateWithDay = temp.toLocaleString('id-ID', {
+            //     weekday: 'long',
+            //     day: 'numeric',
+            //     month: 'long',
+            //     year: 'numeric',
+            //     hour: 'numeric',
+            //     minute: 'numeric',
+            // });
+            // console.log(formattedDateWithDay);
+            // console.log(gambar.name);
+            const response = await axios.post('http://localhost:9000/api/jadwal/addJadwal', {
+                title : namaAcara,
+                date: isoString,
+                kapasitas: Number(jumlahTiket),
+                hargaTiket: Number(hargaTiket),
+                planetariumId : 1,
+                deskripsiJadwal : deskripsiAcara,
+                isKunjungan: false,
+                durasi: 60,
+                imagePath : gambar ? "../../../" + gambar.name : "",
+            });
+            console.log('Jadwal added successfully:', response.data);
+        } catch (error) {
+            console.error('Error adding jadwal:', error);
+        }
+
+        
     };
 
     return (
@@ -113,7 +169,7 @@ const AddAcara = () => {
                                 <label htmlFor="tanggal" className="block text-sm font-medium text-gray-700">Tanggal</label>
                                 <DatePicker 
                                     selected={tanggal} 
-                                    onChange={(date) => setTanggal(date)} 
+                                    onChange={(date: Date | null) => setTanggal(date)} 
                                     placeholderText="Pilih tanggal"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block p-2" />
                             </div>
