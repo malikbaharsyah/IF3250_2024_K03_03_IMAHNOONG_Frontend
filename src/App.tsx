@@ -48,9 +48,9 @@ const AdminRoutes = () => (
       <Route path='detailpemesanan' element={<DetailPemesanan />} />
       <Route path='jadwal' element={<Jadwal />} />
       <Route path='addacara' element={<AddAcara />} />
-      <Route path='editacara' element={<EditAcara />} />
+      <Route path='editacara/:jadwalId' element={<EditAcara />} />
       <Route path='addkunjungan' element={<AddKunjungan />} />
-      <Route path='editkunjungan' element={<EditKunjungan />} />
+      <Route path='editkunjungan/:jadwalId' element={<EditKunjungan />} />
       <Route path='rating' element={<RatingPage />} />
       <Route path='profile' element={<EditProfil />} />
       <Route path='*' element={<Navigate to='dashboard' />} />
