@@ -45,7 +45,7 @@ const AdminRoutes = () => (
     <Routes>
       <Route path='dashboard' element={<DashboardAdmin />} />
       <Route path='pemesanan' element={<PemesananAdmin />} />
-      <Route path='detailpemesanan' element={<DetailPemesanan />} />
+      <Route path='detailpemesanan/:id' element={<DetailPemesanan />} />
       <Route path='jadwal' element={<Jadwal />} />
       <Route path='addacara' element={<AddAcara />} />
       <Route path='editacara/:jadwalId' element={<EditAcara />} />

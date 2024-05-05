@@ -1,9 +1,15 @@
 import Sidebar from "../components/base/Sidebar";
+import { useParams } from 'react-router-dom';
 import RingkasanPesanan from "../components/contents/RingkasanPesanan";
 
 const DetailPemesanan = () => {
 
+    let { id } = useParams<{ id: string }>();
+    id = id || '-1';
 
+    if (id==='-1') {
+        return <h1> TIKET TIDAK DITEMUKAN</h1>
+    }
     return (
         <section className="flex-1">
             <div className="flex flex-col bg-color-6 h-full p-8">
