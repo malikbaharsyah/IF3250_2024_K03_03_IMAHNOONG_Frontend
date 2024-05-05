@@ -1,9 +1,13 @@
 import Sidebar from "../components/base/Sidebar";
-import { useState } from "react";
+import { useParams } from 'react-router-dom';
+// import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Button, Modal } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+import axios from "axios";
+import { useState, useEffect, useRef } from 'react';
+import { editEvent } from "../interfaces/Event";
 
 const EditAcara = () => {
     const [namaAcara, setNamaAcara] = useState('');
@@ -13,8 +17,11 @@ const EditAcara = () => {
     const [tanggal, setTanggal] = useState('');
     const [waktu, setWaktu] = useState('');
     const [waktuZone, setWaktuZone] = useState('WIB');
-    const [gambar, setGambar] = useState('');
+    const [gambar, setGambar] = useState<File>(null);
     const [gambarUrl, setGambarUrl] = useState(null);
+    const [isNamaAcaraUpdated, setIsNamaAcaraUpdated] = useState(false);
+    const imageRef = useRef("");
+    // var firstRender = true;
 
     const handleFileChange = (e) => {
         // Handle file change
@@ -47,11 +54,79 @@ const EditAcara = () => {
     const [openModal, setOpenModal] = useState(false);
     const [openCancelModal, setOpenCancelModal] = useState(false);
 
-    const handleConfirm = () => {
-        setOpenModal(false);
-        // Handle submit action
-        console.log('Submit');
+    const handleConfirm = async () => {
+        try {
+            setOpenModal(false);
+            console.log('Submit');
+            // if(!tanggal) return alert('Tanggal belum diisi');
+            // if(!waktu) return alert('Waktu belum diisi');
+            if(!namaAcara) return alert('Nama acara belum diisi');
+
+            const [hours, minutes] = waktu.split(':').map(Number);
+            const combined = new Date(tanggal);
+            combined.setHours(hours); 
+            combined.setMinutes(minutes);
+
+            if (waktuZone === 'WITA') combined.setHours(combined.getHours() - 1);
+            else if (waktuZone === 'WIT') combined.setHours(combined.getHours() - 2);
+            // console.log(image);
+            const isoString = combined.toISOString();
+
+            const response = await axios.post('http://localhost:9000/api/jadwal/editJadwal', {
+            id : Number(jadwalId),
+            title : namaAcara,
+            date: isoString,
+            kapasitas: Number(jumlahTiket),
+            hargaTiket: Number(hargaTiket),
+            planetariumId : 1, // TODO
+            deskripsiJadwal : deskripsiAcara,
+            imagePath : gambar ? "../../../" + gambar.name : imageRef.current,
+            isKunjungan: false,
+            durasi: 60,
+            });
+            console.log('Jadwal edit successfully:', response.data);
+        } catch (error) {
+            console.error('Error edit jadwal:', error);
+        }
     };
+
+    const [eventData, setEventData] = useState<editEvent>();
+
+    const { jadwalId } = useParams();
+
+    useEffect(() => {
+      fetch('http://localhost:9000/api/jadwal/viewJadwal/' + jadwalId)
+        .then(response => response.json())
+        .then(data => {setEventData(data);})
+        .catch(error => console.error('Error fetching catalog data:', error));
+    }, []);
+
+    if (eventData && !isNamaAcaraUpdated) {
+        if (namaAcara !== eventData.namaJadwal) {
+            setNamaAcara(eventData.namaJadwal);
+            setDeskripsiAcara(eventData.deskripsiJadwal);
+            setHargaTiket(eventData.hargaTiket.toString());
+            setJumlahTiket(eventData.kapasitas.toString());
+            var dateKunjungan = new Date(eventData.waktuKunjungan);
+            const tanggalKunjungan = dateKunjungan.toLocaleString('id-ID', {
+                day: 'numeric',
+                month: 'numeric',
+                year: 'numeric',
+            });
+            
+            setTanggal(tanggalKunjungan);
+
+            const hour = String(dateKunjungan.getHours()).padStart(2, '0'); 
+            const minute = String(dateKunjungan.getMinutes()).padStart(2, '0'); 
+
+            const waktuKunjungan = `${hour}:${minute}`;
+            setWaktu(waktuKunjungan);
+            imageRef.current = eventData.imagePath[0];
+            // console.log(image);
+            setIsNamaAcaraUpdated(true);
+        } 
+        
+    }
 
     return (
         <section className="flex-1">
