@@ -43,114 +43,72 @@ function Rating() {
   ];
 
   return (
-    <div className="flex">
-      <Sidebar />
-      <div className="flex flex-col w-full items-center bg-[#E9EAF6] min-h-[100vh] bg-no-repeat bg-[length:100vw]">
-        <div className="w-full">
-          <NavbarAdmin />
-        </div>
-        <div className="w-full h-full px-[1vw] py-[1.5vw]">
-          <section className="bg-white rounded-[2vw] w-full h-full pl-0">
-            <div
-              className={
-                dashboardFieldTitleStyle + "flex items-center justify-between"
-              }
-            >
-              <div className="">Rating & Ulasan</div>
-              <div>
+    <div className="flex flex-col bg-color-6 h-full p-8">
+        <div className="flex flex-col bg-white p-8 mb-4 w-full h-fit rounded-3xl">
+            <div className="flex flex-row items-center justify-between font-bold text-xl border-b-4 pb-4">
+                Rating
                 <DatePickerComponent month />
-              </div>
             </div>
-            <div className="flex justify-around">
-              <div className="box bg-white p-4 m-2 rounded">
-                <div className="p-4 flex">
-                  <div className="mr-5 flex flex-col justify-center items-center">
-                    <div style={{ fontSize: "40px" }}>{rating}</div>
-                    <div>
-                      <StarRating initialRating={4} />
-                    </div>
-                  </div>
+            <div className="flex flex-col sm:flex-col md:flex-col lg:flex-row items-center pt-8">
+                <div className="flex flex-col w-fit p-4 xl:mr-16 rounded justify-center items-center text-3xl font-semibold">
+                    {rating}
+                    <StarRating initialRating={4} />
                 </div>
-              </div>
-              <div className="box bg-white p-4 m-2 rounded-[1vw]">
-                <div className="rounded-[2vw] border-2 border-gray-400 p-4 flex">
-                  <div className="mr-5 flex flex-col justify-center items-center">
-                    <div>
-                      <CircularProgress percentage={100} />
+                <div className="flex flex-col sm:flex-col md:flex-row w-full">
+                    <div className="flex sm:flex-row md:flex-col xl:flex-row w-full justify-around p-4 m-2 rounded-3xl border-2 border-gray-400">
+                        <div className="flex flex-col justify-center items-center">
+                            <CircularProgress percentage={100} />
+                            <StarRating initialRating={5} />
+                        </div>
+                        <div className="flex flex-col justify-center items-center">
+                            <p className="text-md text-center">Total Rating</p>
+                            <p className="text-2xl text-center">{totalRating}</p>
+                            <p className="text-sm text-center">Rating dari 1.0 - 5.0</p>
+                        </div>
                     </div>
-                    <div>
-                      <StarRating initialRating={5} />
+                    <div className="flex sm:flex-row md:flex-col xl:flex-row w-full justify-around p-4 m-2 rounded-3xl border-2 border-gray-400">
+                        <div className="flex flex-col justify-center items-center">
+                            <CircularProgress percentage={(40 / 50) * 100} />
+                            <StarRating initialRating={4} />
+                        </div>
+                        <div className="flex flex-col justify-center items-center">
+                            <p className="text-md text-center">Positif</p>
+                            <p className="text-2xl text-center">{positif}</p>
+                            <p className="text-sm text-center">Rating diatas 4.0</p>
+                        </div>
                     </div>
-                  </div>
-                  <div className="mr-5 flex flex-col justify-center items-center">
-                    <div style={{ fontSize: "16px" }}>Total Rating</div>
-                    <div style={{ fontSize: "24px" }}>{totalRating}</div>
-                    <div style={{ fontSize: "12px" }}>
-                      Rating dari 1.0 - 5.0
+                    <div className="flex sm:flex-row md:flex-col xl:flex-row w-full justify-around p-4 m-2 rounded-3xl border-2 border-gray-400">
+                        <div className="flex flex-col justify-center items-center">
+                            <CircularProgress percentage={(10 / 50) * 100} />
+                            <StarRating initialRating={2} />
+                        </div>
+                        <div className="flex flex-col justify-center items-center">
+                            <p className="text-md text-center">Positif</p>
+                            <p className="text-2xl text-center">{rataRata}</p>
+                            <p className="text-sm text-center">Rating dari 3.0 - 3.5</p>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
-              <div className="box bg-white p-4 m-2 rounded-[1vw]">
-                <div className="rounded-[2vw] border-2 border-gray-400 p-4 flex">
-                  <div className="mr-5 flex flex-col justify-center items-center">
-                    <div>
-                      <CircularProgress percentage={(40 / 50) * 100} />
-                    </div>
-                    <div>
-                      <StarRating initialRating={4} />
-                    </div>
-                  </div>
-                  <div className="mr-5 flex flex-col justify-center items-center">
-                    <div style={{ fontSize: "16px" }}>Positif</div>
-                    <div style={{ fontSize: "24px" }}>{positif}</div>
-                    <div style={{ fontSize: "12px" }}>Rating diatas 4.0</div>
-                  </div>
-                </div>
-              </div>
-              <div className="box bg-white p-4 m-2 rounded-[1vw]">
-                <div className="rounded-[2vw] border-2 border-gray-400 p-4 flex">
-                  <div className="mr-5 flex flex-col justify-center items-center">
-                    <div>
-                      <CircularProgress percentage={(10 / 50) * 100} />
-                    </div>
-                    <div>
-                      <StarRating initialRating={3} />
-                    </div>
-                  </div>
-                  <div className="mr-5 flex flex-col justify-center items-center">
-                    <div style={{ fontSize: "16px" }}>Rata-rata</div>
-                    <div style={{ fontSize: "24px" }}>{rataRata}</div>
-                    <div style={{ fontSize: "12px" }}>
-                      Rating dari 3.0 - 3.5
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
-          </section>
         </div>
-        <main className="w-full h-full px-[1vw] py-[1.5vw]">
-          <section className="bg-white rounded-[2vw] w-full h-full pl-0 p-5">
-            <div className="px-20 py-3 mx-4 text-start font-semibold text-black text-[20px] tracking-[0] leading-[normal] flex">
-              Ulasan
+        <div className="flex flex-col bg-white p-8 w-full h-fit rounded-3xl">
+            <div className="font-bold text-xl border-b-4 pb-4">
+                Ulasan
             </div>
-            <div className="body ">
-              <ul className="mx-80">
-                <li className="h-[30vw] overflow-auto items-center justify-between space-y-4">
-                  {reviews.map((item) => (
-                    <ReviewCard
-                      username={item.username}
-                      rating={item.rating}
-                      review={item.review}
-                    />
-                  ))}
-                </li>
-              </ul>
+            <div className="mt-8">
+                <ul>
+                    <li className="overflow-auto items-center justify-between space-y-4">
+                        {reviews.map((item) => (
+                            <ReviewCard
+                                username={item.username}
+                                rating={item.rating}
+                                review={item.review}
+                            />
+                        ))}
+                    </li>
+                </ul>
             </div>
-          </section>
-        </main>
-      </div>
+        </div>
     </div>
   );
 }

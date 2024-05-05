@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Sidebar from "../components/base/Sidebar";
 import { FaRegBell, FaRegUser } from "react-icons/fa";
 import Chart from "react-apexcharts"
 import { ApexOptions } from "apexcharts";
@@ -11,8 +10,8 @@ const dashboardFieldTitleStyle = "px-4 py-6 mx-4 text-start font-semibold text-b
 
 const TodayOrders = () => {
     return (
-        <div className={dashboardFieldStyle}>
-            <div className={dashboardFieldTitleStyle}>
+        <div className="flex flex-col bg-white p-8 mb-4 w-full h-fit rounded-3xl">
+            <div className="flex flex-row items-center justify-between font-bold text-xl border-b-4 pb-4">
                 Pemesanan hari ini
             </div>
             <TodayOrdersTable/>
@@ -55,7 +54,7 @@ const TodayOrdersTable = () => {
         },
     ]
     return (
-        <div className="mx-4">
+        <div className="mr-4 overflow-auto">
             <table className="w-full">
                 <thead>
                     <tr>
@@ -124,19 +123,19 @@ const TodayOrdersTable = () => {
     )
 }
 
-const TopBar = () => {
-    return (
-        <div className="flex items-center justify-end gap-[43px] p-8 bg-white">
-            <FaRegBell/>
-            <div className="inline-flex items-center justify-center gap-[10px] relative flex-[0_0_auto]">
-            <FaRegUser/>
-                <div className="relative w-fit [font-family:'Inter-SemiBold',Helvetica] font-semibold text-[#0a061d] text-[20px] tracking-[0] leading-[normal] whitespace-nowrap">
-                    Admin
-                </div>
-            </div>
-        </div>
-    )
-}
+// const TopBar = () => {
+//     return (
+//         <div className="flex items-center justify-end gap-[43px] p-8 bg-white">
+//             <FaRegBell/>
+//             <div className="inline-flex items-center justify-center gap-[10px] relative flex-[0_0_auto]">
+//             <FaRegUser/>
+//                 <div className="relative w-fit [font-family:'Inter-SemiBold',Helvetica] font-semibold text-[#0a061d] text-[20px] tracking-[0] leading-[normal] whitespace-nowrap">
+//                     Admin
+//                 </div>
+//             </div>
+//         </div>
+//     )
+// }
 const DashboardCalendar = () => {
     return (
     <div className={dashboardFieldStyle + "flex justify-around min-w-[387px] min-h-[345px]"}>
@@ -226,23 +225,19 @@ const DashboardGraph = () => {
         },
     }
     return (
-    <div className={dashboardFieldStyle + "min-w-[634px] min-h-[552px]"}>
-       <div className={dashboardFieldTitleStyle + "flex items-center justify-between"}>
-            <div className="">
-                    Statistik pemesanan
+        <div className="flex flex-col bg-white p-8 mb-4 w-full h-fit rounded-3xl">
+            <div className="flex flex-row items-center justify-between font-bold text-xl border-b-4 pb-4">
+                Statistik pemesanan
+                <DatePickerComponent month />
             </div>
             <div>
-                <DatePickerComponent month/>
+                <Chart 
+                type={chartConfig.type}
+                options={chartOptions}
+                series={chartSeries}
+                />
             </div>
-       </div>
-        <div>
-            <Chart 
-            type={chartConfig.type}
-            options={chartOptions}
-            series={chartSeries}
-            />
         </div>
-    </div>
     )
 }
 const GraphCalCombo = () => {
@@ -258,11 +253,7 @@ const GraphCalCombo = () => {
 export const DashboardAdmin = () => {
     return (
     <div className="flex flex-row">
-        <Sidebar/>
-        <div className="grow bg-[#e9eaf6] flex flex-col">
-            {/* <div className="relative h-[1024px]"> */}
-            {/* <div className="absolute w-[1103px] h-[1024px] top-0 left-px bg-white rotate-180" /> */}
-            <TopBar/>
+        <div className="flex flex-col w-full bg-[#E9EAF6] min-h-[100vh] bg-no-repeat bg-[length:100vw]">
             <div className="p-8 grow flex flex-col gap-4">
                 <TodayOrders/>
                 <GraphCalCombo/>
@@ -270,4 +261,5 @@ export const DashboardAdmin = () => {
         </div>
     </div>
   );
-};
+}
+export default DashboardAdmin;

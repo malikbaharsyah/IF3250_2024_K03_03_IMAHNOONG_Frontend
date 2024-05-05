@@ -1,43 +1,37 @@
 import { NavLink } from 'react-router-dom';
 
-const JadwalAcara = () => {
+const PemesananRequest = () => {
     return (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table className="w-full text-sm text-center rtl:text-right text-gray-500">
-                <thead className="text-xs text-black uppercase">
-                    <tr className="bg-white border-b-2">
+                <thead className="text-xs text-gray-700 uppercase bg-white">
+                    <tr className='bg-white border-b-2'>
                         <th scope="col" className="px-4 py-3">
                             No.
                         </th>
                         <th scope="col" className="px-4 py-3">
-                            Foto
+                            ID
                         </th>
                         <th scope="col" className="px-4 py-3">
-                            Nama Acara
+                            Jenis Pemesanan
                         </th>
                         <th scope="col" className="px-4 py-3">
-                            Deskripsi
+                            Waktu Pemesanan
                         </th>
                         <th scope="col" className="px-4 py-3">
-                            Harga Tiket
+                            Nama Pemesan
                         </th>
                         <th scope="col" className="px-4 py-3">
-                            Kapasitas
+                            Email
                         </th>
                         <th scope="col" className="px-4 py-3">
-                            Tanggal
+                          Acara / Kunjungan  
                         </th>
                         <th scope="col" className="px-4 py-3">
-                            Pukul
+                            Waktu & Tanggal Kunjungan
                         </th>
                         <th scope="col" className="px-4 py-3">
-                            Durasi
-                        </th>
-                        <th scope="col" className="px-4 py-3">
-                            Edit
-                        </th>
-                        <th scope="col" className="px-4 py-3">
-                            Hapus
+                            Status
                         </th>
                         <th scope="col" className="px-4 py-3">
                             Lihat Pemesanan
@@ -50,44 +44,55 @@ const JadwalAcara = () => {
                             1
                         </th>
                         <td className="px-4 py-4">
-                            <img src="path_to_image" alt="Acara 1" className="w-8 h-8" />
+                            123456
                         </td>
                         <td className="px-4 py-4">
-                            <p className="line-clamp-3">Nulla dolor velit adipisicing duis excepteur esse in duis nostrud occaecat mollit incididunt deserunt sunt. Ut ut sunt laborum</p>
+                            Request
                         </td>
                         <td className="px-4 py-4">
-                            <p className="line-clamp-3">Nulla dolor velit adipisicing duis excepteur esse in duis nostrud occaecat mollit incididunt deserunt sunt. Ut ut sunt laborum</p>
+                            18:46
                         </td>
                         <td className="px-4 py-4">
-                            Rp20.000
+                            Veveel
                         </td>
                         <td className="px-4 py-4">
-                            200/200
+                            iloveppl@gmail.com
                         </td>
                         <td className="px-4 py-4">
-                            24/04/2024
+                            Acara
                         </td>
                         <td className="px-4 py-4">
-                            12:06
+                            <p>18:09</p>
+                            <p>2024-04-11</p>
                         </td>
                         <td className="px-4 py-4">
-                            2 jam
+                            <div className="px-4 py-1 bg-color-2 w-fit rounded-full text-white">
+                                Lunas
+                            </div>
+                            {/* <div className="px-4 py-1 bg-color-11 w-fit rounded-full text-white">
+                                Proses bayar
+                            </div>
+                            <div className="px-4 py-1 bg-color-8 w-fit rounded-2xl text-white">
+                                Perlu konfirmasi
+                            </div>
+                            <div className="px-4 py-1 bg-color-10 w-fit rounded-2xl text-white">
+                                Pembayaran gagal
+                            </div>
+                            <div className="px-4 py-1 bg-color-7 w-fit rounded-2xl text-white">
+                                Permintaan diterima
+                            </div>
+                            <div className="px-4 py-1 bg-color-9 w-fit rounded-2xl text-white">
+                                Permintaan ditolak
+                            </div> */}
                         </td>
                         <td className="px-4 py-4">
-                            <NavLink to="/editAcara" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</NavLink>
-                        </td>
-                        <td className="px-4 py-4">
-                            <a href="#" className="font-medium text-blue-600 dark:text-red-500 hover:underline">Hapus</a>
-                        </td>
-                        <td className="px-4 py-4">
-                            <a href="#" className="font-medium text-blue-600 dark:text-green-500 hover:underline">Lihat</a>
+                            <a href="/detailpemesanan" className="font-medium text-blue-600 dark:text-green-500 hover:underline">Lihat</a>
                         </td>
                     </tr>
-                    {/* Tambah baris jadwal acara lainnya di sini */}
                 </tbody>
             </table>
         </div>
     );
 }
 
-export default JadwalAcara;
+export default PemesananRequest;
