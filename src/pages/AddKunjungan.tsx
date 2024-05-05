@@ -4,7 +4,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Button, Modal } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
-
+import axios from "axios";
 
 const AddKunjungan = () => {
     const [namaAcara, setNamaAcara] = useState('');
@@ -32,10 +32,43 @@ const AddKunjungan = () => {
     const [openModal, setOpenModal] = useState(false);
     const [openCancelModal, setOpenCancelModal] = useState(false);
 
-    const handleConfirm = () => {
-        setOpenModal(false);
-        // Handle submit action
-        console.log('Submit');
+    const handleConfirm = async () => {
+        try {
+            setOpenModal(false);
+            // Handle submit action
+            console.log('Submit');
+            if(!tanggal) return alert('Tanggal belum diisi');
+            if(!waktu) return alert('Waktu belum diisi');
+            if(!namaAcara) return alert('Nama acara belum diisi');
+            const [hours, minutes] = waktu.split(':').map(Number);
+            
+            const combined = new Date(tanggal);
+            combined.setHours(hours); 
+            combined.setMinutes(minutes);
+
+            if (waktuZone === 'WITA') combined.setHours(combined.getHours() - 1);
+            else if (waktuZone === 'WIT') combined.setHours(combined.getHours() - 2);
+            
+            const isoString = combined.toISOString();
+
+            const response = await axios.post('http://localhost:9000/api/jadwal/addJadwal', {
+                title : namaAcara,
+                date: isoString,
+                kapasitas: Number(jumlahTiket),
+                hargaTiket: Number(hargaTiket),
+                planetariumId : 1,
+                deskripsiJadwal : "",
+                imagePath : "",
+                isKunjungan: true,
+                durasi: 0,
+            });
+            console.log('Jadwal added successfully:', response.data);
+        } catch (error) {
+            console.error('Error adding jadwal:', error);
+        }
+
+
+
     };
 
     return (
