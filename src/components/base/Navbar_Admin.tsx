@@ -16,18 +16,18 @@ const Navbar = () => {
 
     return (
         <nav>
-            <div className="h-[5vw] flex justify-end z-50 bg-white text-black">
-                <div className="flex items-center justify-end font-inter px-[5vw]">
+            <div className="h-fit flex justify-end z-50 bg-white text-black border-b-4 border-black-900">
+                <div className="flex items-center justify-end font-inter px-8 py-4">
                     <div className="flex-10 font-semibold">
-                        <Menu as="div" className="">
-                            <ul className="flex gap-[2vw] mr-1">
+                        <Menu as="div">
+                            <ul className="flex space-x-6 mr-1">
                                 <Link spy={true} smooth={true} to="/" className="cursor-pointer">
                                     <img src={notifOff} alt="notif" />
                                 </Link>
                                 <Link spy={true} smooth={true} to="Catalog">
-                                    <Menu.Button className="flex cursor-pointer gap-[0.5vw]">
+                                    <Menu.Button className="flex items-center justify-center cursor-pointer gap-[0.5vw]">
                                     <img src={profile} alt="profile" />
-                                        <li className="text-black text-[1.2vw]">Admin</li>
+                                        <li className="text-black text-sm">Admin</li>
 
                                     </Menu.Button>
                                 </Link>

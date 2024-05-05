@@ -22,3 +22,14 @@ export interface PlanetariumLandingPage {
     deskripsi: string;
     lokasi: string;
 }
+
+export interface EditPlanetarium {
+    id: number;
+    namaPlanetarium: string;
+    deskripsi: string;
+    prosedurPendaftaran: string;
+    tataTertib: string;
+    noTelepon: string;
+    imagePath: string[];
+    lokasi: string;
+}
