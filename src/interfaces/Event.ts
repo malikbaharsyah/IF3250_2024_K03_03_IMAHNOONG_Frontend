@@ -19,3 +19,14 @@ export interface EventContentProps {
     eventTime: string;
     eventDate: string;
 }
+
+export interface editEvent{
+  id: number;
+  namaJadwal: string;
+  waktuKunjungan: string;
+  kapasitas: number;
+  hargaTiket: number;
+  planetariumId: number;
+  deskripsiJadwal: string;
+  imagePath: string[];
+}
