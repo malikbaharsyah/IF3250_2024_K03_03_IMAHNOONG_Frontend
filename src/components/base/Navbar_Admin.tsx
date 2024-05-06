@@ -6,6 +6,7 @@ import notifOff from "../../../public/Notification_off.svg"
 import notifOn from "../../../public/notification_on.svg"
 import profile from "../../../public/Profile.svg";
 import logout from "../../../public/Logout.svg";
+import { useNavigate } from 'react-router-dom';
 
 
 function classNames(...classes: any[]) {
@@ -13,6 +14,13 @@ function classNames(...classes: any[]) {
   }
 
 const Navbar = () => {
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('username');
+        localStorage.removeItem('idPlanetarium');
+        navigate('/login'); 
+    };
 
     return (
         <nav>
@@ -27,7 +35,7 @@ const Navbar = () => {
                                 <Link spy={true} smooth={true} to="Catalog">
                                     <Menu.Button className="flex items-center justify-center cursor-pointer gap-[0.5vw]">
                                     <img src={profile} alt="profile" />
-                                        <li className="text-black text-sm">Admin</li>
+                                        <li className="text-black text-sm">{localStorage.getItem("username")}</li>
 
                                     </Menu.Button>
                                 </Link>
@@ -45,8 +53,8 @@ const Navbar = () => {
                                     <div className="py-2">
                                         <Menu.Item>
                                         {({ active }) => (
-                                            <a
-                                            href="#"
+                                            <button
+                                            onClick={handleLogout}
                                             className={classNames(
                                                 active ? 'bg-gray-100 text-gray-900 flex gap-5' : 'text-gray-700',
                                                 'block px-4 py-2 text-sm flex gap-5'
@@ -54,7 +62,7 @@ const Navbar = () => {
                                             >
                                             <img src={logout} alt="logout" />
                                             Keluar Akun
-                                            </a>
+                                            </button>
                                         )}
                                         </Menu.Item>
                                     </div>

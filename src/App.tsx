@@ -11,7 +11,7 @@ import Sidebar from './components/base/Sidebar';
 import Jadwal from './pages/Jadwal';
 import { DashboardAdmin } from './pages/DashboardAdmin';
 import RatingPage from './pages/Rating'
-import ProtectedRoute from './components/base/ProtectedRoute'
+import { ProtectedRoute } from './utils/ProtectedRoute'
 
 import PemesananAdmin from './pages/PemesananAdmin';
 import AddAcara from './pages/AddAcara';
