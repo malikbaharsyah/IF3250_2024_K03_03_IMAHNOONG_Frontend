@@ -22,6 +22,7 @@ import TicketRequest from './pages/TicketRequest';
 import EditProfil from './pages/EditProfil';
 import { Navigate } from 'react-router-dom';
 import Notification from './pages/Notification';
+import RatingUser from './pages/RatingUser'
 
 function App() {
   return (
@@ -35,9 +36,10 @@ function App() {
           <Route path='helppage' element={<HelpPage />} />
           <Route path='listtiket' element={<ListTiket />} />
           <Route path='details' element={<Details />} />
-          <Route path='login' element={<LoginAdmin />} />
+          <Route path='login' element={<LoginAdmin />} />          
+          <Route path='notification' element={<Notification/>} />
+          <Route path='ratinguser' element={<RatingUser />} />
           <Route path='*' element={<ProtectedRoute><AdminRoutes /></ProtectedRoute>}/>
-            <Route path='notification' element={<Notification/>} />
         </Routes>
       </BrowserRouter>
     </div>

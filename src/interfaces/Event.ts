@@ -7,7 +7,8 @@ export interface Event {
     hargaTiket: number;
     planetariumId: number;
     deskripsiJadwal: string;
-    imagePath: string;
+    imagePath: string[];
+    durasi: number;
     lokasi: string;
   }
 
@@ -18,6 +19,7 @@ export interface EventContentProps {
     eventLocation: string;
     eventTime: string;
     eventDate: string;
+    eventDuration: string;
 }
 
 export interface editEvent{
