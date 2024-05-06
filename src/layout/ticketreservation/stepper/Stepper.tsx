@@ -73,7 +73,7 @@ const Stepper: React.FC<StepperProps> = ({steps, currentStep}) => {
                         {step.description}
                     </div>
                 </div>
-            <div className={`flex-auto border-t-2 border-dotted transition duration-500 ease-in-out w-fit ${step.selected ? "border-color-4" : step.completed ? "border-green-600 " : "border-color-4"}`}></div>
+            <div className={`flex-auto border-t-2 border-1 transition duration-500 ease-in-out w-fit ${step.selected ? "border-color-4" : step.completed ? "border-green-600 " : "border-color-4"}`}></div>
         </div>
         )
     })

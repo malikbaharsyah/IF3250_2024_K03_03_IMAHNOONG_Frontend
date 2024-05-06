@@ -5,6 +5,7 @@ export default {
     relative: true,
     files: [
       './src/**/*.{html,js,jsx,tsx}',
+      './node_modules/react-tailwindcss-datepicker/dist/index.esm.js',
       '.{html,js,jsx,tsx}',
       './index.html',
     ],

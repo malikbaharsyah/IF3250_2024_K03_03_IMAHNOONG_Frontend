@@ -26,7 +26,7 @@ const LandingPage = () => {
     const [catalogData, setCatalogData] = useState<PlanetariumLandingPage[]>([]);
 
     useEffect(() => {
-      fetch('http://localhost:9000/api/jadwal/landingPage/catalog')
+      fetch('http://localhost:9000/api/jadwalDefault/landingPage/catalog')
         .then(response => response.json())
         .then(data => {setCatalogData(data);})
             
