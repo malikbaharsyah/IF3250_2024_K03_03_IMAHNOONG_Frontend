@@ -9,8 +9,10 @@ import Details from './pages/Details';
 import DetailPemesanan from './pages/DetailPemesanan';
 import Sidebar from './components/base/Sidebar';
 import { DashboardAdmin } from './pages/DashboardAdmin';
+import ProtectedRoute from './components/base/ProtectedRoute'
 
 import Pemesanan from './pages/Pemesanan';
+import Notification from './pages/Notification';
 
 function App() {
   return (
@@ -26,7 +28,8 @@ function App() {
             <Route path='details' element={<Details/>}/>
             <Route path='detailpemesanan' element={<DetailPemesanan/>}/>
             <Route path='login' element={<LoginAdmin/>}/>
-            <Route path='dashboard' element={<DashboardAdmin/>}/>
+            <Route path='dashboard' element={<ProtectedRoute><DashboardAdmin/></ProtectedRoute>}/>
+            <Route path='notification' element={<Notification/>}/>
         </Routes>
       </BrowserRouter>
     </div>    
