@@ -6,6 +6,7 @@ import { Button, Modal } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import axios from "axios";
 import {EditPlanetarium} from "../interfaces/Planetarium";
+import api from "../services/api";
 
 
 const EditProfil = () => {
@@ -89,7 +90,7 @@ const EditProfil = () => {
             if(!namaPlanetarium) return alert('Nama planetarium belum diisi');
 
 
-            const response = await axios.post('http://localhost:9000/api/details/editPlanetarium', {
+            const response = await api.post('/api/details/editPlanetarium', {
             id : planetariumId,
             namaPlanetarium: namaPlanetarium,
             deskripsi: tentangPlanetarium,
