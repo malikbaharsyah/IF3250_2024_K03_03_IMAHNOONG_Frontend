@@ -27,7 +27,7 @@ const JadwalKunjungan = () => {
               Nama Show
             </th>
             <th scope="col" className="px-4 py-3">
-              Tanggal
+              Hari
             </th>
             <th scope="col" className="px-4 py-3">
               Pukul
@@ -63,10 +63,10 @@ const JadwalKunjungan = () => {
                   {item.namaJadwal}
                 </p>
               </td>
-              <td className="px-4 py-4">{item.tanggal}</td>
+              <td className="px-4 py-4">{item.hari}</td>
               <td className="px-4 py-4">{item.waktu}</td>
               <td className="px-4 py-4">{item.kapasitas}</td>
-              <td className="px-4 py-4">Rp20.000</td>
+              <td className="px-4 py-4">Rp{item.hargaTiket}</td>
               <td className="px-4 py-4">
                 <NavLink
                   to="/editkunjungan"

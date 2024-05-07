@@ -94,11 +94,11 @@ const JadwalAcara = () => {
                   {item.deskripsiJadwal}
                 </p>
               </td>
-              <td className="px-4 py-4">Rp20.000</td>
+              <td className="px-4 py-4">Rp{item.hargaTiket}</td>
               <td className="px-4 py-4">{item.kapasitas}</td>
               <td className="px-4 py-4">{item.tanggal}</td>
               <td className="px-4 py-4">{item.waktu}</td>
-              <td className="px-4 py-4">2 jam</td>
+              <td className="px-4 py-4">{item.durasi} menit</td>
               <td className="px-4 py-4">
                 <NavLink
                   to={"/editAcara/" + item.id.toString()}

@@ -4,6 +4,14 @@ import { DetailPesanan } from "../../interfaces/DetailPesanan";
 import axios from 'axios';
 
 const RingkasanPesanan = ({ id }: { id: string }) => {
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxChange = (event: {
+    target: { checked: boolean | ((prevState: boolean) => boolean) };
+  }) => {
+    setIsChecked(event.target.checked);
+  };
+
   const [pesananData, setPesananData] = useState<DetailPesanan>();
 
   useEffect(() => {
@@ -59,12 +67,12 @@ const RingkasanPesanan = ({ id }: { id: string }) => {
     }
   }
 
-//   const rescheduleProp: DetailPesanan & {
-//     statusDiv: string | JSX.Element;
-//   } = {
-//     ...pesananData!!,
-//     statusDiv: getStatusDiv(pesananData?.statusTiket || ""),
-//   };
+  const rescheduleProp: DetailPesanan & {
+    statusDiv: string | JSX.Element;
+  } = {
+    ...pesananData!!,
+    statusDiv: getStatusDiv(pesananData?.statusTiket || ""),
+  };
 
 //   let rescheduleDiv = null;
 //   if (pesananData != null) {
@@ -267,7 +275,12 @@ const Terima = async () => {
         </div>
         {/* checkbox untuk reschedule */}
         <div className="flex justify-end">
-          <input type="checkbox" className="h-6 w-6 cursor-pointer" />
+          <input
+            type="checkbox"
+            className="h-6 w-6 cursor-pointer"
+            checked={isChecked}
+            onChange={handleCheckboxChange}
+          />
           <label htmlFor="checkbox" className="ml-2 text-xl font-medium">
             Lakukan penjadwalan ulang
           </label>
@@ -285,7 +298,7 @@ const Terima = async () => {
           </button>
         </div>
       </div>
-      {/* {rescheduleDiv} */}
+      {isChecked && rescheduleDiv}
     </div>
   );
 };
