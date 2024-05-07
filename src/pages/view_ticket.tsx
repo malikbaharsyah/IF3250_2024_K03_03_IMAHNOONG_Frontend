@@ -54,7 +54,7 @@ const TicketContent: React.FC<{ date: Date }> = ({ date }) => {
 
   return (
     <div className='flex space-x-4'>
-      <a href="#" className="flex flex-col justify-between bg-transparent border-white border-2 rounded-2xl w-[408px] h-[7vw] px-6 py-4">
+      <a href="#" className="flex flex-col justify-between bg-transparent border-white rounded-2xl w-[408px] h-[7vw] px-6 py-4">
         <h5 className="font-bold text-[1.5vw] text-white">Nama Show</h5>
         <div className='flex justify-between font-semibold text-[1vw]'>
           <p className="text-white">{date.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</p>
@@ -86,7 +86,7 @@ const TicketContent: React.FC<{ date: Date }> = ({ date }) => {
     const { onClick } = props;
     return (
       <div
-        className="custom-arrow-next text-white z-10 absolute w-3 h-3 flex items-center justify-center rounded-full top-1/2 transform -translate-y-1/2 right-0 cursor-pointer"
+        className="custom-arrow-next text-white z-10 absolute flex items-center justify-center rounded-full top-1/2 transform -translate-y-1/2 right-10 cursor-pointer"
         onClick={onClick}
       >
         <ArrowForwardIosRounded fontSize="large" />
@@ -98,7 +98,7 @@ const TicketContent: React.FC<{ date: Date }> = ({ date }) => {
     const { onClick } = props;
     return (
       <div
-        className="flex items-center justify-center text-white absolute rounded-full top-1/2 z-10 transform -translate-y-1/2 cursor-pointer"
+        className="flex items-center justify-center text-white absolute rounded-full top-1/2 z-10 transform -translate-y-1/2 left-10  cursor-pointer"
         onClick={onClick}
       >
         <ArrowBackIosRounded fontSize="large" />
@@ -135,19 +135,19 @@ const TicketContent: React.FC<{ date: Date }> = ({ date }) => {
               className="text-white rounded-full py-2 px-6 bg-gradient-to-r from-[#4F1395] to-[#2224A1] ">
               Cari & Pesan Tiket
             </button>
-          </form>
-        </div>
-        <Slider {...settings} className="w-full px-16">
-          {filteredDates.map((dateItem, index) => (
-            <div className="flex items-center my-5" key={index} onClick={() => handleDateItemClick(dateItem.date)}>
-              <div className={`flex flex-col w-fit h-fit rounded-2xl cursor-pointer px-12 py-2 items-center justify-center space-y-2 ${dateItem.date === selectedDate ? "bg-white text-black" : "bg-gradient-to-r from-[#4F1395] to-[#2224A1] text-white"}`}>
-                <h3 className="font-bold text-xl">{dateItem.date.toLocaleDateString('id-ID', { weekday: 'long' })}</h3>
-                <h4 className='font-medium text-lg'>{dateItem.date.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</h4>
-              </div>
+            </form>
             </div>
-          ))}
-        </Slider>
-        <div className="flex flex-col items-center mt-8">
+            <Slider {...settings} className="w-full px-20">
+              {filteredDates.map((dateItem, index) => (
+                <div className="flex items-center justify-center my-5" key={index} onClick={() => handleDateItemClick(dateItem.date)}>
+                  <div className={`flex flex-col mx-auto w-fit h-fit rounded-2xl cursor-pointer px-12 py-2 items-center justify-center space-y-2 ${dateItem.date === selectedDate ? "bg-white text-black" : "bg-gradient-to-r from-[#4F1395] to-[#2224A1] text-white"}`}>
+                    <h3 className="font-bold text-xl">{dateItem.date.toLocaleDateString('id-ID', { weekday: 'long' })}</h3>
+                    <h4 className='font-medium text-lg'>{dateItem.date.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</h4>
+                  </div>
+                </div>
+              ))}
+            </Slider>
+            <div className="flex flex-col items-center mt-8">
           <p className="text-white font-semibold text-xl my-4">Daftar Tiket Tersedia</p>
           <div className="grid grid-cols-2 gap-4 mt-4">
             {selectedDate && tickets.map((item, index) => (
