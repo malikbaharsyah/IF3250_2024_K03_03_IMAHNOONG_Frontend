@@ -3,6 +3,14 @@ import { useState, useEffect } from "react";
 import { DetailPesanan } from "../../interfaces/DetailPesanan";
 
 const RingkasanPesanan = ({ id }: { id: string }) => {
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxChange = (event: {
+    target: { checked: boolean | ((prevState: boolean) => boolean) };
+  }) => {
+    setIsChecked(event.target.checked);
+  };
+
   const [pesananData, setPesananData] = useState<DetailPesanan>();
 
   useEffect(() => {
@@ -58,21 +66,21 @@ const RingkasanPesanan = ({ id }: { id: string }) => {
     }
   }
 
-//   const rescheduleProp: DetailPesanan & {
-//     statusDiv: string | JSX.Element;
-//   } = {
-//     ...pesananData!!,
-//     statusDiv: getStatusDiv(pesananData?.statusTiket || ""),
-//   };
+  const rescheduleProp: DetailPesanan & {
+    statusDiv: string | JSX.Element;
+  } = {
+    ...pesananData!!,
+    statusDiv: getStatusDiv(pesananData?.statusTiket || ""),
+  };
 
-//   let rescheduleDiv = null;
-//   if (pesananData != null) {
-//     rescheduleDiv = (
-//       <div className="mt-8">
-//         <Reschedule {...rescheduleProp} />
-//       </div>
-//     );
-//   }
+  let rescheduleDiv = null;
+  if (pesananData != null) {
+    rescheduleDiv = (
+      <div className="mt-8">
+        <Reschedule {...rescheduleProp} />
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col w-full h-fit rounded-3xl font-inter">
@@ -227,23 +235,29 @@ const RingkasanPesanan = ({ id }: { id: string }) => {
         </div>
         {/* checkbox untuk reschedule */}
         <div className="flex justify-end">
-          <input type="checkbox" className="h-6 w-6 cursor-pointer" />
+          <input
+            type="checkbox"
+            className="h-6 w-6 cursor-pointer"
+            checked={isChecked}
+            onChange={handleCheckboxChange}
+          />
           <label htmlFor="checkbox" className="ml-2 text-xl font-medium">
             Lakukan penjadwalan ulang
           </label>
         </div>
 
-        {/* button konfirmasi request */}
-        <div className="flex flex-row justify-end">
-          <button className="bg-color-9 w-fit text-white font-inter font-medium text-xl py-2 px-8 mx-4 rounded-3xl hover:scale-105">
-            Tolak
-          </button>
-          <button className="bg-color-7 w-fit text-white font-inter font-regular text-xl py-2 px-8 rounded-3xl hover:scale-105">
-            Terima
-          </button>
-        </div>
+        {pesananData?.statusTiket === "Perlu Konfirmasi" && (
+          <div className="flex flex-row justify-end">
+            <button className="bg-color-9 w-fit text-white font-inter font-medium text-xl py-2 px-8 mx-4 rounded-3xl hover:scale-105">
+              Tolak
+            </button>
+            <button className="bg-color-7 w-fit text-white font-inter font-regular text-xl py-2 px-8 rounded-3xl hover:scale-105">
+              Terima
+            </button>
+          </div>
+        )}
       </div>
-      {/* {rescheduleDiv} */}
+      {isChecked && rescheduleDiv}
     </div>
   );
 };

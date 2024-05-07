@@ -91,7 +91,7 @@ const PemesananReguler = () => {
               Status
             </th>
             <th scope="col" className="px-4 py-3">
-              Lihat Pemesanan
+              Lihat Detail
             </th>
           </tr>
         </thead>
@@ -107,7 +107,7 @@ const PemesananReguler = () => {
               </th>
               <td className="px-4 py-4">{item.id}</td>
               <td className="px-4 py-4">{item.jenis === "Request" ? item.jenis : "Reguler"}</td>
-              <td className="px-4 py-4">{item.waktuDipesan[1]}</td>
+              <td className="px-4 py-4">{item.waktuDipesan[2] + " " + item.waktuDipesan[1]}</td>
               <td className="px-4 py-4">{item.namaPemesan}</td>
               <td className="px-4 py-4">{item.email}</td>
               <td className="px-4 py-4">{item.jenis}</td>
@@ -120,7 +120,7 @@ const PemesananReguler = () => {
               </td>
               <td className="px-4 py-4">
                 <a
-                  href="/detailpemesanan"
+                  href={"/detailpemesanan?id="+item.id}
                   className="font-medium text-blue-600 dark:text-green-500 hover:underline"
                 >
                   Lihat

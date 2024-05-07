@@ -1,4 +1,4 @@
-export type Pesanan = {
+export interface Pesanan {
     id: number | string;
     namaPemesan: string;
     email: string;

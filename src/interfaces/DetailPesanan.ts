@@ -1,4 +1,4 @@
-export type DetailPesanan = {
+export interface DetailPesanan {
   id: number | string;
   planetariumId: number;
   namaPemesan: string;
