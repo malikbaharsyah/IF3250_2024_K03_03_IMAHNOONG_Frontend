@@ -19,6 +19,7 @@ import EditKunjungan from './pages/EditKunjungan';
 import TicketRequest from './pages/TicketRequest';
 import EditProfil from './pages/EditProfil';
 import { Navigate } from 'react-router-dom';
+import RatingUser from './pages/RatingUser'
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path='listtiket' element={<ListTiket />} />
           <Route path='details' element={<Details />} />
           <Route path='login' element={<LoginAdmin />} />
+          <Route path='ratinguser' element={<RatingUser />} />
           <Route path='*' element={<AdminRoutes />} />
         </Routes>
       </BrowserRouter>

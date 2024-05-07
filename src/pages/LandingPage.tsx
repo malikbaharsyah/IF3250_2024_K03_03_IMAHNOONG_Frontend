@@ -136,6 +136,7 @@ const LandingPage = () => {
                     </h1>
                     <div className="flex flex-row flex-wrap justify-center gap-12 size-fit my-16">
                         {eventData.map((eventItem) => (
+                            
                             <EventContent
                                 key={eventItem.id}
                                 eventName={eventItem.namaJadwal}
@@ -143,7 +144,9 @@ const LandingPage = () => {
                                 eventLocation={eventItem.lokasi}
                                 eventTime={eventItem.waktuKunjungan[1]}
                                 eventDate={eventItem.waktuKunjungan[0]}
-                                eventImage={eventItem.imagePath}
+                                eventImage={eventItem.imagePath[0]}
+                                
+                                eventDuration={(eventItem.durasi / 60).toString() + "." + (eventItem.durasi % 60).toString()}
                             />
                         ))}
                         {/* <EventContent/>

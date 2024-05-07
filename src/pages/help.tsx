@@ -16,18 +16,18 @@ function help() {
                 </div>
                 <Search></Search>
                 <div className='card flex w-[1090px] justify-between mt-[5vw]'>
-                    <div className='container bg-[#4F1395] opacity-50 hover:opacity-100 w-[330px] h-[354px] rounded-[20px] flex flex-col items-center gap-y-5 py-5'>
+                    <div className='container bg-[#4F1395] opacity-50 hover:opacity-100 w-auto h-min rounded-[20px] flex flex-col items-center gap-y-5 py-5'>
                         <div className='icon border-white border-2 rounded-full size-[100px] flex items-center justify-center'>
                             <img className='size-[70px]' src={rocket} alt="rocket"/>
                         </div>
-                        <div className='title text-white text-center font-medium text-[1.5vw]'>
+                        <div className='title text-white text-center font-medium text-[1.5rem]'>
                             <h1>Getting Started</h1>
                         </div>
-                        <div className='desc text-white text-center font-normal text-[1vw] w-[80%]'>
+                        <div className='desc text-white text-center font-normal text-[1rem] w-[80%]'>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                         </div>
                         <div className='button'>
-                            <button className='text-white text-center font-medium text-[1.2vw]'>
+                            <button className='text-white text-center font-medium text-[1.5rem]'>
                                 Learn More
                             </button>
                         </div>

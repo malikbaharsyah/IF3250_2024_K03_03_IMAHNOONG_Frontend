@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { JadwalAdmin } from "../../interfaces/JadwalAdmin";
+import axios from 'axios';
 
 const JadwalAcara = () => {
   const [jadwalData, setJadwalData] = useState<JadwalAdmin[]>([]);
@@ -14,6 +15,19 @@ const JadwalAcara = () => {
 
       .catch((error) => console.error("Error fetching jadwal data:", error));
   }, []);
+
+  const handleDeleteClick = async (id: string) => {
+  
+    try {
+        const response = await axios.post('http://localhost:9000/api/jadwal/deleteJadwal', {
+            jadwalId : parseInt(id),
+        });
+        console.log('jadwal delete successfully:', response.data);
+    } catch (error) {
+        console.error('Error delete jadwal :', error);
+    }
+    setJadwalData(prevJadwalData => prevJadwalData.filter(item => item.id.toString() !== id));
+  };
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -87,17 +101,18 @@ const JadwalAcara = () => {
               <td className="px-4 py-4">{item.durasi} menit</td>
               <td className="px-4 py-4">
                 <NavLink
-                  to="/editAcara"
+                  to={"/editAcara/" + item.id.toString()}
                   className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                 >
                   Edit
                 </NavLink>
               </td>
               <td className="px-4 py-4">
-                <a
-                  href="#"
-                  className="font-medium text-blue-600 dark:text-red-500 hover:underline"
-                >
+              <a
+                href="#"
+                className="font-medium text-blue-600 dark:text-red-500 hover:underline"
+                onClick={() => handleDeleteClick(item.id.toString())}
+              >
                   Hapus
                 </a>
               </td>
