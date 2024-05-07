@@ -1,18 +1,19 @@
 import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { JadwalAdmin } from "../../interfaces/JadwalAdmin";
+import api from "../../services/api";
 
 const JadwalKunjungan = () => {
   const [jadwalData, setJadwalData] = useState<JadwalAdmin[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:9000/api/jadwalAdmin/Kunjungan/1")
-      .then((response) => response.json())
-      .then((data) => {
-        setJadwalData(data);
+    api.get(`/api/jadwalAdmin/Kunjungan/${localStorage.getItem("idPlanetarium")}`)
+      .then((response) => {
+        setJadwalData(response.data);
       })
-
-      .catch((error) => console.error("Error fetching jadwal data:", error));
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
 
   return (

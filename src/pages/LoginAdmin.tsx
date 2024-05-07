@@ -1,7 +1,20 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { RedNotification, GreenNotification } from '../components/base/Notification';
+import { useNavigate } from 'react-router-dom';
+import { isLoggedIn } from '../utils/ProtectedRoute';
 
 const LoginAdmin = () => {
+    const navigate = useNavigate();
+    useEffect(() => {
+        const checkAuth = async () => {
+            const authStatus = await isLoggedIn();
+            if (authStatus) {
+                navigate('/dashboard');
+            }
+        };
+
+        checkAuth();
+    }, [navigate]);
 
     const [isRed, setIsRed] = useState(false);
     const [isGreen, setIsGreen] = useState(false);
@@ -34,6 +47,7 @@ const LoginAdmin = () => {
                     // set token di local storage
                     localStorage.setItem('token', data.token);
                     showGreenNotif('Login successful');
+                    navigate('/dashboard');
                 })
             }
             else if (response.status === 400) {

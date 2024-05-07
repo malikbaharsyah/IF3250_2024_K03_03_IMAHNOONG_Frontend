@@ -1,18 +1,19 @@
 import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Pesanan } from "../../interfaces/Pesanan";
+import api from "../../services/api";
 
 const PemesananReguler = () => {
   const [pesananData, setPesananData] = useState<Pesanan[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:9000/api/pesanan/listPesanan/1/reguler")
-      .then((response) => response.json())
-      .then((data) => {
-        setPesananData(data);
+    api.get(`/api/pesanan/listPesanan/${localStorage.getItem("idPlanetarium")}/reguler`)
+      .then((response) => {
+        setPesananData(response.data);
       })
-
-      .catch((error) => console.error("Error fetching jadwal data:", error));
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
 
   function getStatusDiv(status: string) {

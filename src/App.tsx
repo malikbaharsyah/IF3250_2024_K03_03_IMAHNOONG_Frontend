@@ -11,6 +11,8 @@ import Sidebar from './components/base/Sidebar';
 import Jadwal from './pages/Jadwal';
 import { DashboardAdmin } from './pages/DashboardAdmin';
 import RatingPage from './pages/Rating'
+import { ProtectedRoute } from './utils/ProtectedRoute'
+
 import PemesananAdmin from './pages/PemesananAdmin';
 import AddAcara from './pages/AddAcara';
 import AddKunjungan from './pages/AddKunjungan';
@@ -19,6 +21,7 @@ import EditKunjungan from './pages/EditKunjungan';
 import TicketRequest from './pages/TicketRequest';
 import EditProfil from './pages/EditProfil';
 import { Navigate } from 'react-router-dom';
+import Notification from './pages/Notification';
 import RatingUser from './pages/RatingUser'
 
 function App() {
@@ -33,9 +36,10 @@ function App() {
           <Route path='helppage' element={<HelpPage />} />
           <Route path='listtiket' element={<ListTiket />} />
           <Route path='details' element={<Details />} />
-          <Route path='login' element={<LoginAdmin />} />
+          <Route path='login' element={<LoginAdmin />} />          
+          <Route path='notification' element={<Notification/>} />
           <Route path='ratinguser' element={<RatingUser />} />
-          <Route path='*' element={<AdminRoutes />} />
+          <Route path='*' element={<ProtectedRoute><AdminRoutes /></ProtectedRoute>}/>
         </Routes>
       </BrowserRouter>
     </div>
