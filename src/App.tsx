@@ -22,7 +22,9 @@ import TicketRequest from './pages/TicketRequest';
 import EditProfil from './pages/EditProfil';
 import { Navigate } from 'react-router-dom';
 import Notification from './pages/Notification';
-import RatingUser from './pages/RatingUser'
+import RatingUser from './pages/RatingUser';
+import BuatPlanetarium from './pages/BuatPlanetarium';
+import PilihAdmin from './pages/PilihAdmin';
 
 function App() {
   return (
@@ -40,6 +42,8 @@ function App() {
           <Route path='notification' element={<Notification/>} />
           <Route path='ratinguser' element={<RatingUser />} />
           <Route path='*' element={<ProtectedRoute><AdminRoutes /></ProtectedRoute>}/>
+          <Route path='buatplanetarium' element={<BuatPlanetarium />} />
+          <Route path='pilihadmin' element={<PilihAdmin />} />
         </Routes>
       </BrowserRouter>
     </div>
