@@ -12,4 +12,16 @@ export interface StepperControlProps {
     currentStep: number;
     steps: string[];
     type: number;
+    condition: {
+        isFormValid: boolean,
+        paymentMethod: string,
+    }
+}
+
+export interface RegistrationProps {
+    setIsFormValid: (isValid: boolean) => void;
+}
+
+export interface PaymentProps {
+    setPaymentMethod: (isValid: string) => void;
 }

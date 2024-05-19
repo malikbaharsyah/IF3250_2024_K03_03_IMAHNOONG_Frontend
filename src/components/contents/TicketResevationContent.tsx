@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ConfirmPage from "../../layout/ticketreservation/subcontents/ConfirmPage";
 import PaymentPage from "../../layout/ticketreservation/subcontents/PaymentPage";
 import RegistrationPage from "../../layout/ticketreservation/subcontents/RegistrationPage";
@@ -14,6 +14,8 @@ const TicketReservationContent = () => {
     const [currentStep, setCurrentStep] = useState(1);
     const [userData, setUserData] = useState('');
     const [finalData, setFinalData] = useState([]);
+    const [isFormValid, setIsFormValid] = useState(false);
+    const [payment, setPayment] = useState("");
     const steps = [
         "Data Pesanan",
         "Metode Pembayaran",
@@ -30,9 +32,13 @@ const TicketReservationContent = () => {
     function setComponent(currentStep: number){
         switch (currentStep) {
             case 1:
-                return <RegistrationPage/>
+                return <RegistrationPage
+                    setIsFormValid = {setIsFormValid}
+                />
             case 2:
-                return <PaymentMethod/>
+                return <PaymentMethod
+                    setPaymentMethod = {setPayment}
+                />
             case 3:
                 return <PaymentPage/>
             case 4:
@@ -40,6 +46,18 @@ const TicketReservationContent = () => {
             default:
         }
     }
+
+    const condition = useMemo(() => {
+        return {
+            isFormValid: isFormValid,
+            paymentMethod: payment,
+        }
+    }, [isFormValid, payment]);
+
+    useEffect(() => {
+        condition.isFormValid = isFormValid;
+        condition.paymentMethod = payment;
+    },[condition, payment, isFormValid]);
 
     return (
         <>
@@ -77,6 +95,7 @@ const TicketReservationContent = () => {
                                 currentStep={currentStep}
                                 steps={steps}
                                 type={1}
+                                condition={condition}
                             />
                         </div>
                     </div>

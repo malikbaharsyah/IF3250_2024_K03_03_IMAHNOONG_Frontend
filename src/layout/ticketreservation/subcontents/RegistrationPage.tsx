@@ -1,12 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PhoneInput from "react-phone-number-input/input";
+import { RegistrationProps } from "../../../interfaces/TicketReservation";
 
-const RegistrationPage = () => {
+const RegistrationPage: React.FC<RegistrationProps> = ({setIsFormValid}) => {
     const [fullname, setFullname] = useState<string>();
     const [email, setEmail] = useState<string>();
     const [phoneNumber, setPhoneNumber] = useState<string>();
     const [numberOfTickets, setNumberOfTickets] = useState<number>();
     const [notes, setNotes] = useState<string>();
+    useEffect(() => {
+        // Check form validity and update parent component
+        if (fullname && email && phoneNumber && numberOfTickets)
+            { setIsFormValid(true); }
+        else
+            { setIsFormValid(false); }
+      }, [fullname, email, phoneNumber, numberOfTickets, setIsFormValid]);
+    
     return (
         <div className="flex flex-col items-center">
             <div className="flex justify-center gap-4">

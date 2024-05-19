@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { PaymentProps } from "../../../interfaces/TicketReservation";
 
-const PaymentMethod = () => {
+const PaymentMethod: React.FC<PaymentProps> = ({setPaymentMethod}) => {
 
     const [payment, setPayment] = useState<string>('')
     console.log(payment);
@@ -14,6 +15,10 @@ const PaymentMethod = () => {
         "./PaymentLogo/LogoBCA.svg",
         "./PaymentLogo/LogoQRIS.svg"
     ];
+
+    useEffect(() => {
+        setPaymentMethod(payment);
+    },[payment, setPaymentMethod])
 
     return (
         <div className="font-inter flex flex-col gap-6 size-fit rounded-3xl bg-color-2 bg-opacity-50 p-8">
