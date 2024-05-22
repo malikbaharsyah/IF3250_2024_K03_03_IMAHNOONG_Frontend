@@ -73,11 +73,11 @@ const LandingPage = () => {
                 <div>
                     <Navbar/>
                 </div>
-                <div className="mt-[28vw] ml-20">
-                    <h1 className="font-inter text-white text-left text-4xl font-bold py-1">
+                <div className="mt-[24vw] ml-20">
+                    <h1 className="font-inter text-white text-left text-3xl font-bold py-1">
                         Observatorium dan Planetarium
                     </h1>
-                    <p className="font-inter text-white text-left text-2xl font-medium py-1">
+                    <p className="font-inter text-white text-left text-xl font-medium py-1">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     </p>
                     <div className="flex flex-row gap-8 pt-4">

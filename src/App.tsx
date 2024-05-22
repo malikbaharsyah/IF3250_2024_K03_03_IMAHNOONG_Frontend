@@ -27,6 +27,7 @@ function App() {
         <Routes>
           <Route path='/' element={<LandingPage />} />
           <Route path='catalog' element={<Catalog />} />
+          <Route path='bantuan' element={<HelpPage />} />
           <Route path='ticketreservation' element={<TicketReservation />} />
           <Route path='ticketrequest' element={<TicketRequest />} />
           <Route path='helppage' element={<HelpPage />} />
