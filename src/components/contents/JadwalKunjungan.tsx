@@ -1,18 +1,19 @@
 import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { JadwalAdmin } from "../../interfaces/JadwalAdmin";
+import api from "../../services/api";
 
 const JadwalKunjungan = () => {
   const [jadwalData, setJadwalData] = useState<JadwalAdmin[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:9000/api/jadwalAdmin/Kunjungan/1")
-      .then((response) => response.json())
-      .then((data) => {
-        setJadwalData(data);
+    api.get(`/api/jadwalAdmin/Kunjungan/${localStorage.getItem("idPlanetarium")}`)
+      .then((response) => {
+        setJadwalData(response.data);
       })
-
-      .catch((error) => console.error("Error fetching jadwal data:", error));
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
 
   return (
@@ -27,7 +28,7 @@ const JadwalKunjungan = () => {
               Nama Show
             </th>
             <th scope="col" className="px-4 py-3">
-              Tanggal
+              Hari
             </th>
             <th scope="col" className="px-4 py-3">
               Pukul
@@ -63,10 +64,10 @@ const JadwalKunjungan = () => {
                   {item.namaJadwal}
                 </p>
               </td>
-              <td className="px-4 py-4">{item.tanggal}</td>
+              <td className="px-4 py-4">{item.hari}</td>
               <td className="px-4 py-4">{item.waktu}</td>
               <td className="px-4 py-4">{item.kapasitas}</td>
-              <td className="px-4 py-4">Rp20.000</td>
+              <td className="px-4 py-4">Rp{item.hargaTiket}</td>
               <td className="px-4 py-4">
                 <NavLink
                   to="/editkunjungan"

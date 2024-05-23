@@ -1,4 +1,4 @@
-export type JadwalAdmin = {
+export interface JadwalAdmin {
     id: number | String;
     jenis: String;
     imagePath: String[];
@@ -7,4 +7,7 @@ export type JadwalAdmin = {
     tanggal: String;
     waktu: String;
     kapasitas: number;
+    durasi: number;
+    hargaTiket: true;
+    hari: string;
 }

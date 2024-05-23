@@ -1,25 +1,26 @@
 import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { JadwalAdmin } from "../../interfaces/JadwalAdmin";
-import axios from 'axios';
+import axios from "axios";
+import api from "../../services/api";
 
 const JadwalAcara = () => {
   const [jadwalData, setJadwalData] = useState<JadwalAdmin[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:9000/api/jadwalAdmin/Acara/1")
-      .then((response) => response.json())
-      .then((data) => {
-        setJadwalData(data);
+    api.get(`/api/jadwalAdmin/Acara/${localStorage.getItem("idPlanetarium")}`)
+      .then((response) => {
+        setJadwalData(response.data);
       })
-
-      .catch((error) => console.error("Error fetching jadwal data:", error));
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
 
   const handleDeleteClick = async (id: string) => {
   
     try {
-        const response = await axios.post('http://localhost:9000/api/jadwal/deleteJadwal', {
+        const response = await api.post('/api/jadwal/deleteJadwal', {
             jadwalId : parseInt(id),
         });
         console.log('jadwal delete successfully:', response.data);
@@ -94,11 +95,11 @@ const JadwalAcara = () => {
                   {item.deskripsiJadwal}
                 </p>
               </td>
-              <td className="px-4 py-4">Rp20.000</td>
+              <td className="px-4 py-4">Rp{item.hargaTiket}</td>
               <td className="px-4 py-4">{item.kapasitas}</td>
               <td className="px-4 py-4">{item.tanggal}</td>
               <td className="px-4 py-4">{item.waktu}</td>
-              <td className="px-4 py-4">2 jam</td>
+              <td className="px-4 py-4">{item.durasi} menit</td>
               <td className="px-4 py-4">
                 <NavLink
                   to={"/editAcara/" + item.id.toString()}

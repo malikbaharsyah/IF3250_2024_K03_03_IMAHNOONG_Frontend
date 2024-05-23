@@ -1,18 +1,19 @@
 import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Pesanan } from "../../interfaces/Pesanan";
+import api from "../../services/api";
 
 const PemesananReguler = () => {
   const [pesananData, setPesananData] = useState<Pesanan[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:9000/api/pesanan/listPesanan/1/reguler")
-      .then((response) => response.json())
-      .then((data) => {
-        setPesananData(data);
+    api.get(`/api/pesanan/listPesanan/${localStorage.getItem("idPlanetarium")}/reguler`)
+      .then((response) => {
+        setPesananData(response.data);
       })
-
-      .catch((error) => console.error("Error fetching jadwal data:", error));
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
 
   function getStatusDiv(status: string) {
@@ -91,7 +92,7 @@ const PemesananReguler = () => {
               Status
             </th>
             <th scope="col" className="px-4 py-3">
-              Lihat Pemesanan
+              Lihat Detail
             </th>
           </tr>
         </thead>
@@ -107,7 +108,7 @@ const PemesananReguler = () => {
               </th>
               <td className="px-4 py-4">{item.id}</td>
               <td className="px-4 py-4">{item.jenis === "Request" ? item.jenis : "Reguler"}</td>
-              <td className="px-4 py-4">{item.waktuDipesan[1]}</td>
+              <td className="px-4 py-4">{item.waktuDipesan[2] + " " + item.waktuDipesan[1]}</td>
               <td className="px-4 py-4">{item.namaPemesan}</td>
               <td className="px-4 py-4">{item.email}</td>
               <td className="px-4 py-4">{item.jenis}</td>
@@ -120,7 +121,7 @@ const PemesananReguler = () => {
               </td>
               <td className="px-4 py-4">
                 <a
-                  href="/detailpemesanan"
+                  href={"/detailpemesanan?id="+item.id}
                   className="font-medium text-blue-600 dark:text-green-500 hover:underline"
                 >
                   Lihat
