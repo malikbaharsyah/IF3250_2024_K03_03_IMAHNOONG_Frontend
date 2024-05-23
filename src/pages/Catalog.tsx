@@ -22,7 +22,7 @@ const Catalog = () => {
                 <Navbar/>
             </div>
             <div className="my-8">
-                <h1 className="font-inter text-white text-center text-5xl font-bold py-5">
+                <h1 className="font-inter text-white text-center text-2xl sm:text-3xl font-bold py-5">
                     Observatorium and Planetarium
                 </h1>
             </div>
