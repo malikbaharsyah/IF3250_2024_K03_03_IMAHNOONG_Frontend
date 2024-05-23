@@ -19,7 +19,8 @@ import EditKunjungan from './pages/EditKunjungan';
 import TicketRequest from './pages/TicketRequest';
 import EditProfil from './pages/EditProfil';
 import { Navigate } from 'react-router-dom';
-import RatingUser from './pages/RatingUser'
+import RatingUser from './pages/RatingUser';
+import RegisterSuperAdmin from './pages/RegisterSuperAdmin';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path='login' element={<LoginAdmin />} />
           <Route path='ratinguser' element={<RatingUser />} />
           <Route path='*' element={<AdminRoutes />} />
+          <Route path='registersuperadmin' element={<RegisterSuperAdmin />} />
         </Routes>
       </BrowserRouter>
     </div>
