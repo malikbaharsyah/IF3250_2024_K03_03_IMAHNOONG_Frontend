@@ -1,17 +1,20 @@
+import React from 'react';
 import { Sidebar, Flowbite } from "flowbite-react";
 import { FiEdit } from "react-icons/fi";
 import { LuStar } from "react-icons/lu";
 import { IoPersonOutline } from "react-icons/io5";
+import { useLocation, Link } from 'react-router-dom';
 import type { CustomFlowbiteTheme } from "flowbite-react";
 import JOPI from '../../../public/JOPI.svg';
 
 const customTheme: CustomFlowbiteTheme = {
     sidebar: {
         root: {
-            inner : "bg-[url('../../../public/Bg_Sidebar_SuperAdmin.svg')] h-full overflow-y-auto overflow-x-hidden rounded py-16 gap-10"
+            inner : "bg-[url('../../../public/Bg_Sidebar_SuperAdmin.svg')] h-screen overflow-y-auto overflow-x-hidden py-16 gap-10"
         },
         item: {
             base: "flex items-center justify-center py-4 px-5 text-white text-xl cursor-pointer hover:bg-gradient-to-r from-transparent to-[#77688E] hover:border-r-8",
+            active: "bg-gradient-to-r from-transparent to-[#4F1395] border-r-8 border-[#4F1395]", // Custom active class
             icon: {
                 base: "text-white text-3xl",
             }
@@ -45,6 +48,9 @@ const customTheme: CustomFlowbiteTheme = {
   };
 
 export default function SidebarSuperAdmin() {
+  const location = useLocation();
+  const activePath = location.pathname;
+
   return (
     <Flowbite theme={{ theme: customTheme }}>
         <Sidebar aria-label="Default sidebar example" className="border-2 border-black bg-black">
@@ -52,15 +58,30 @@ export default function SidebarSuperAdmin() {
             </Sidebar.Logo>
             <Sidebar.Items>
                 <Sidebar.ItemGroup>
-                    <Sidebar.Item href="#" icon={IoPersonOutline}>
-                        Buat Akun
-                    </Sidebar.Item>
-                    <Sidebar.Item href="#" icon={FiEdit}>
-                        Buat Planetarium
-                    </Sidebar.Item>
-                    <Sidebar.Item href="#" icon={LuStar}>
-                        Pilih Planetarium
-                    </Sidebar.Item>
+                    <Link to="/registersuperadmin">
+                        <Sidebar.Item
+                            icon={IoPersonOutline}
+                            className={activePath === '/registersuperadmin' ? 'bg-gradient-to-r from-transparent to-[#77688E] border-r-8' : ''}
+                        >
+                            Buat Akun
+                        </Sidebar.Item>
+                    </Link>
+                    <Link to="/buatplanetarium">
+                        <Sidebar.Item
+                            icon={FiEdit}
+                            className={activePath === '/buatplanetarium' ? 'bg-gradient-to-r from-transparent to-[#77688E] border-r-8' : ''}
+                        >
+                            Buat Planetarium
+                        </Sidebar.Item>
+                    </Link>
+                    <Link to="/pilihadmin">
+                        <Sidebar.Item
+                            icon={LuStar}
+                            className={activePath === '/pilihadmin' ? 'bg-gradient-to-r from-transparent to-[#77688E] border-r-8' : ''}
+                        >
+                            Pilih Admin
+                        </Sidebar.Item>
+                    </Link>
                 </Sidebar.ItemGroup>
             </Sidebar.Items>
         </Sidebar>
