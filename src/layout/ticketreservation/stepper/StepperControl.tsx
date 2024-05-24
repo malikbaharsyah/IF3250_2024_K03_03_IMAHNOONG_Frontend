@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { StepperControlProps } from "../../../interfaces/TicketReservation";
 
-const StepperControl: React.FC<StepperControlProps> = ({handleClick, currentStep, steps, type, condition}) => {
+const StepperControl: React.FC<StepperControlProps> = ({handleClick, currentStep, steps, type, finalDataReg, finalDataReq, condition}) => {
 
     const navigate = useNavigate(); 
     const routeChange = () =>{ 
@@ -11,7 +11,7 @@ const StepperControl: React.FC<StepperControlProps> = ({handleClick, currentStep
 
     return (
         <div className="flex justify-around my-2 gap-4 transition">
-            {currentStep === steps.length ? <></> : <button onClick={() => handleClick("")}
+            {currentStep === steps.length /*|| currentStep === steps.length-1*/ ? <></> : <button onClick={() => handleClick("")}
             className={`transition duration-200 ease-in-out w-[202px] h-[69px] rounded-full bg-gradient-to-b bg-opacity-40 hover:from-red-600 hover:to-red-400 hover:transition bg-color-4
                             font-inter font-medium text-[24px] ${currentStep === steps.length ? "w-0" : ""}`}>
                 Batal
@@ -25,12 +25,18 @@ const StepperControl: React.FC<StepperControlProps> = ({handleClick, currentStep
                         else { alert("Tolong isi semua formulir terlebih dahulu" ); }
                         break;
                     case 2:
-                        handleClick("next");
+                        if (condition.paymentMethod) { handleClick("next"); }
+                        else { alert("Pilih metode pembayaran!") }
                         break;
                     case 3:
                         handleClick("next");
                         break;
                     case steps.length:
+                        if (type === 0){
+                            console.log(finalDataReq)
+                        } else {
+                            console.log(finalDataReg)
+                        }
                         routeChange();
                         break;
                     default:
@@ -38,7 +44,9 @@ const StepperControl: React.FC<StepperControlProps> = ({handleClick, currentStep
             }}
             className={`transition duration-200 ease-in-out w-[202px] h-[69px] rounded-full bg-gradient-to-b hover:from-green-600 hover:to-blue-600 hover:transition from-color-2 to-color-3
                             font-inter font-medium text-[24px]`}>
-                {currentStep !== steps.length ? (type === 0 ? "Kirim Permintaan" : "Lanjut Bayar") : "Selesai"}
+                {
+                    currentStep !== steps.length ? (type === 0 ? "Kirim Permintaan" : "Lanjut Bayar") : "Selesai"
+                }
             </button>
         </div>
     );

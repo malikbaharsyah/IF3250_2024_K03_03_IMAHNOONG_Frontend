@@ -13,7 +13,7 @@ const TicketReservationContent = () => {
 
     const [currentStep, setCurrentStep] = useState(1);
     const [userData, setUserData] = useState('');
-    const [finalData, setFinalData] = useState([]);
+    const [finalData, setFinalData] = useState<[string, string, string | undefined, number, string]>(['', '', '', 0, '']);
     const [isFormValid, setIsFormValid] = useState(false);
     const [payment, setPayment] = useState("");
     const steps = [
@@ -33,6 +33,8 @@ const TicketReservationContent = () => {
         switch (currentStep) {
             case 1:
                 return <RegistrationPage
+                    finalData={finalData}
+                    setFinalData={setFinalData}
                     setIsFormValid = {setIsFormValid}
                 />
             case 2:
@@ -65,7 +67,7 @@ const TicketReservationContent = () => {
                 <NavbarReservation currentStep={currentStep}
                                    steps={steps}/>
             </header>
-            <body className="mt-8">
+            <div className="mt-8">
                 <div className="relative flex flex-col justify-center">
                     <AnimatePresence>
                         {currentStep === 1 && (
@@ -95,12 +97,14 @@ const TicketReservationContent = () => {
                                 currentStep={currentStep}
                                 steps={steps}
                                 type={1}
+                                finalDataReg={finalData}
+                                finalDataReq={['','','','','','',0,'']}
                                 condition={condition}
                             />
                         </div>
                     </div>
                 </div>
-            </body>
+            </div>
         </>
     );
 }

@@ -12,6 +12,8 @@ export interface StepperControlProps {
     currentStep: number;
     steps: string[];
     type: number;
+    finalDataReg: [string, string, string | undefined, number, string];
+    finalDataReq: [string, string, string, string, string, string | undefined, number, string]
     condition: {
         isFormValid: boolean,
         paymentMethod: string,
@@ -19,9 +21,17 @@ export interface StepperControlProps {
 }
 
 export interface RegistrationProps {
+    finalData: [string, string, string | undefined, number, string];
+    setFinalData: (finalData: [string, string, string | undefined, number, string]) => void;
+    setIsFormValid: (isValid: boolean) => void;
+}
+
+export interface RequestProps {
+    finalData: [string, string, string, string, string, string | undefined, number, string];
+    setFinalData: (finalData: [string, string, string, string, string, string | undefined, number, string]) => void;
     setIsFormValid: (isValid: boolean) => void;
 }
 
 export interface PaymentProps {
-    setPaymentMethod: (isValid: string) => void;
+    setPaymentMethod: (payment: string) => void;
 }
