@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ConfirmPage from "../../layout/ticketreservation/subcontents/ConfirmPage";
 import PaymentPage from "../../layout/ticketreservation/subcontents/PaymentPage";
 import RegistrationPage from "../../layout/ticketreservation/subcontents/RegistrationPage";
@@ -13,7 +13,9 @@ const TicketReservationContent = () => {
 
     const [currentStep, setCurrentStep] = useState(1);
     const [userData, setUserData] = useState('');
-    const [finalData, setFinalData] = useState([]);
+    const [finalData, setFinalData] = useState<[string, string, string | undefined, number, string]>(['', '', '', 0, '']);
+    const [isFormValid, setIsFormValid] = useState(false);
+    const [payment, setPayment] = useState("");
     const steps = [
         "Data Pesanan",
         "Metode Pembayaran",
@@ -30,9 +32,15 @@ const TicketReservationContent = () => {
     function setComponent(currentStep: number){
         switch (currentStep) {
             case 1:
-                return <RegistrationPage/>
+                return <RegistrationPage
+                    finalData={finalData}
+                    setFinalData={setFinalData}
+                    setIsFormValid = {setIsFormValid}
+                />
             case 2:
-                return <PaymentMethod/>
+                return <PaymentMethod
+                    setPaymentMethod = {setPayment}
+                />
             case 3:
                 return <PaymentPage/>
             case 4:
@@ -41,13 +49,25 @@ const TicketReservationContent = () => {
         }
     }
 
+    const condition = useMemo(() => {
+        return {
+            isFormValid: isFormValid,
+            paymentMethod: payment,
+        }
+    }, [isFormValid, payment]);
+
+    useEffect(() => {
+        condition.isFormValid = isFormValid;
+        condition.paymentMethod = payment;
+    },[condition, payment, isFormValid]);
+
     return (
         <>
             <header>
                 <NavbarReservation currentStep={currentStep}
                                    steps={steps}/>
             </header>
-            <body className="mt-8">
+            <div className="mt-8">
                 <div className="relative flex flex-col justify-center">
                     <AnimatePresence>
                         {currentStep === 1 && (
@@ -77,11 +97,14 @@ const TicketReservationContent = () => {
                                 currentStep={currentStep}
                                 steps={steps}
                                 type={1}
+                                finalDataReg={finalData}
+                                finalDataReq={['','','','','','',0,'']}
+                                condition={condition}
                             />
                         </div>
                     </div>
                 </div>
-            </body>
+            </div>
         </>
     );
 }
