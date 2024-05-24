@@ -73,26 +73,26 @@ const LandingPage = () => {
                 <div>
                     <Navbar/>
                 </div>
-                <div className="mt-[28vw] ml-20">
-                    <h1 className="font-inter text-white text-left text-4xl font-bold py-1">
+                <div className="mt-[24vw] mx-auto sm:ml-20">
+                    <h1 className="font-inter text-white text-left text-xl sm:text-3xl font-bold py-1">
                         Observatorium dan Planetarium
                     </h1>
-                    <p className="font-inter text-white text-left text-2xl font-medium py-1">
+                    <p className="font-inter text-white text-left text-sm sm:text-xl font-medium py-1">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     </p>
-                    <div className="flex flex-row gap-8 pt-4">
-                        <button className="bg-gradient-to-b from-color-2 to-color-3 text-white font-inter font-bold text-lg py-3 px-12 rounded-3xl hover:from-color-2 hover:to-color-3 transition duration-300 transform hover:scale-105" 
+                    <div className="flex flex-row gap-4 md:gap-8 pt-4">
+                        <button className="w-fit bg-gradient-to-b from-color-2 to-color-3 text-white font-inter font-bold text-xs md:text-lg py-2 px-6 sm:py-3 sm:px-12 rounded-3xl hover:from-color-2 hover:to-color-3 transition duration-300 transform hover:scale-105" 
                             onClick={() => OnPRef.current?.scrollIntoView({ behavior: "smooth" })}>
                             Observatorium dan Planetarium
                         </button>
-                        <button className="bg-gradient-to-b from-color-2 to-color-3 text-white font-inter font-bold text-lg py-3 px-12 rounded-3xl hover:from-color-2 hover:to-color-3 transition duration-300 transform hover:scale-105"
+                        <button className="w-fit bg-gradient-to-b from-color-2 to-color-3 text-white font-inter font-bold text-xs md:text-lg py-2 px-6 sm:py-3 sm:px-12 rounded-3xl hover:from-color-2 hover:to-color-3 transition duration-300 transform hover:scale-105"
                             onClick={() => AcaraRef.current?.scrollIntoView({ behavior: "smooth"})}>
                             Acara Terdekat
                         </button>
                     </div>
                 </div>
                 <div ref= {OnPRef} className="mt-[20vw] ml-20 pt-12 ">
-                    <h1 className="font-inter text-white text-left text-4xl font-bold py-1">
+                    <h1 className="font-inter text-white text-left text-3xl font-bold py-1">
                         Buka hari ini
                     </h1>
                     <div className="mt-16 w-[92%] mx-auto pr-16">
@@ -136,7 +136,6 @@ const LandingPage = () => {
                     </h1>
                     <div className="flex flex-row flex-wrap justify-center gap-12 size-fit my-16">
                         {eventData.map((eventItem) => (
-                            
                             <EventContent
                                 key={eventItem.id}
                                 eventName={eventItem.namaJadwal}

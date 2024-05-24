@@ -23,6 +23,8 @@ import EditProfil from './pages/EditProfil';
 import { Navigate } from 'react-router-dom';
 import Notification from './pages/Notification';
 import RatingUser from './pages/RatingUser';
+
+import SuperAdminLayout from './components/base/SuperAdminLayout';
 import RegisterSuperAdmin from './pages/RegisterSuperAdmin';;
 import BuatPlanetarium from './pages/BuatPlanetarium';
 import PilihAdmin from './pages/PilihAdmin';
@@ -44,9 +46,9 @@ function App() {
           <Route path='notification' element={<Notification/>} />
           <Route path='ratinguser' element={<RatingUser />} />
           <Route path='*' element={<ProtectedRoute><AdminRoutes /></ProtectedRoute>}/>
-          <Route path='buatplanetarium' element={<BuatPlanetarium />} />
-          <Route path='pilihadmin' element={<PilihAdmin />} />
-          <Route path='registersuperadmin' element={<RegisterSuperAdmin />} />
+          <Route path='buatplanetarium' element={<SuperAdminLayout><BuatPlanetarium /></SuperAdminLayout>} />
+          <Route path='pilihadmin' element={<SuperAdminLayout><PilihAdmin /></SuperAdminLayout>} />
+          <Route path='registersuperadmin' element={<SuperAdminLayout><RegisterSuperAdmin /></SuperAdminLayout>} />
         </Routes>
       </BrowserRouter>
     </div>
