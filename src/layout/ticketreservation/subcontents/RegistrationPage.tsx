@@ -10,7 +10,7 @@ const RegistrationPage: React.FC<RegistrationProps> = ({finalData, setFinalData,
     const [notes, setNotes] = useState<string>('');
     useEffect(() => {
         // Check form validity and update parent component
-        if (fullname && email && phoneNumber && numberOfTickets)
+        if (fullname && email && phoneNumber && numberOfTickets > 0)
             { setIsFormValid(true); }
         else
             { setIsFormValid(false); }

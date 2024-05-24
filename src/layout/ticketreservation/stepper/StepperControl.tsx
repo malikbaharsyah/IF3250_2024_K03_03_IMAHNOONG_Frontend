@@ -18,24 +18,36 @@ const StepperControl: React.FC<StepperControlProps> = ({handleClick, currentStep
             </button>}
             <button onClick={() => {
                 console.log("number" + currentStep);
+                console.log(type)
                 switch(currentStep){
                     case 1:
                         //fill out all form before continue;
                         if (condition.isFormValid) { handleClick("next"); }
-                        else { alert("Tolong isi semua formulir terlebih dahulu" ); }
+                        else { alert("Tolong isi semua formulir terlebih dahulu dengan benar" ); }
                         break;
                     case 2:
-                        if (condition.paymentMethod) { handleClick("next"); }
-                        else { alert("Pilih metode pembayaran!") }
+                        if (condition.paymentMethod || type === 0) {
+                            handleClick("next"); 
+                        }
+                        else { 
+                            alert("Pilih metode pembayaran!") 
+                        }
                         break;
                     case 3:
-                        handleClick("next");
+                        if (condition.paymentMethod || type === 1) {
+                            handleClick("next"); 
+                        }
+                        else { 
+                            alert("Pilih metode pembayaran!") 
+                        }
                         break;
                     case steps.length:
                         if (type === 0){
                             console.log(finalDataReq)
+                            //TODO: Integrasi request
                         } else {
                             console.log(finalDataReg)
+                            //TODO: Integrasi registrasi
                         }
                         routeChange();
                         break;
@@ -43,9 +55,9 @@ const StepperControl: React.FC<StepperControlProps> = ({handleClick, currentStep
                 }
             }}
             className={`transition duration-200 ease-in-out w-[202px] h-[69px] rounded-full bg-gradient-to-b hover:from-green-600 hover:to-blue-600 hover:transition from-color-2 to-color-3
-                            font-inter font-medium text-[24px]`}>
+                            font-inter font-medium text-[24px] ${currentStep === 2 && type === 0 ? "hidden" : ""}`}>
                 {
-                    currentStep !== steps.length ? (type === 0 ? "Kirim Permintaan" : "Lanjut Bayar") : "Selesai"
+                    currentStep !== steps.length ? (type === 0 && currentStep < 2 ? "Kirim Permintaan" : "Lanjut Bayar") : "Selesai"
                 }
             </button>
         </div>

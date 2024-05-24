@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import ConfirmPage from "../../layout/ticketreservation/subcontents/ConfirmPage";
 import PaymentPage from "../../layout/ticketreservation/subcontents/PaymentPage";
-import { StepperContext } from "../../context/StepperContext";
+import { StepperContextReq } from "../../context/StepperContext";
 import TicketInformation from "../../layout/ticketreservation/ticketinformation/TicketInformation";
 import Stepper from "../../layout/ticketreservation/stepper/Stepper";
 import StepperControl from "../../layout/ticketreservation/stepper/StepperControl";
@@ -14,7 +14,9 @@ const TicketRequestContent = () => {
 
     const [currentStep, setCurrentStep] = useState(1);
     const [userData, setUserData] = useState('');
-    const [finalData, setFinalData] = useState([]);
+    const [finalData, setFinalData] = useState<[string, string, string, string, string, string | undefined, number, string]>(['', '', '', '', '', '', 0, '']);
+    const [isFormValid, setIsFormValid] = useState(false);
+    const [payment, setPayment] = useState("");
     const steps = [
         "Data Pesanan",
         "Tunggu Konfirmasi",
@@ -29,14 +31,26 @@ const TicketRequestContent = () => {
         newStep > 0 && newStep <= steps.length && setCurrentStep(newStep);
     }
 
+    const condition = useMemo(() => {
+        return {
+            isFormValid: isFormValid,
+            paymentMethod: payment,
+        }
+    }, [isFormValid, payment]);
+
     function setComponent(currentStep: number){
         switch (currentStep) {
             case 1:
-                return <RequestPage/>
+                return <RequestPage
+                    finalData={finalData}
+                    setFinalData={setFinalData}
+                    setIsFormValid={setIsFormValid}
+                />
             case 2:
                 return <ConfirmationPending/>
             case 3:
-                return <PaymentMethod/>
+                return <PaymentMethod 
+                    setPaymentMethod={setPayment}/>
             case 4:
                 return <PaymentPage/>
             case 5:
@@ -66,14 +80,14 @@ const TicketRequestContent = () => {
                         )}
                     </AnimatePresence>
                     <div className="relative flex flex-row justify-center gap-4 transition mt-6">
-                        <StepperContext.Provider value={{
+                        <StepperContextReq.Provider value={{
                             userData,
                             setUserData,
                             finalData,
                             setFinalData
                         }}>
                         {setComponent(currentStep)}
-                        </StepperContext.Provider>
+                        </StepperContextReq.Provider>
                         <div className="flex flex-col justify-start size-fit bg-color-4 bg-opacity-20 rounded-[20px] p-8 text-color-4 font-inter gap-4">
                             <TicketInformation/>
                             <StepperControl
@@ -81,6 +95,9 @@ const TicketRequestContent = () => {
                                 currentStep={currentStep}
                                 steps={steps}
                                 type={0}
+                                finalDataReg={['','','',0,'']}
+                                finalDataReq={finalData}
+                                condition={condition}
                             />
                         </div>
                     </div>
