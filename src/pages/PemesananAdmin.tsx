@@ -1,16 +1,13 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import Sidebar from "../components/base/Sidebar";
-import SideNavBar from "../components/base/SideNavBar";
-import JadwalAcara from "../components/contents/JadwalAcara";
-import JadwalKunjungan from "../components/contents/JadwalKunjungan";
+import PemesananAll from "../components/contents/PemesananAll";
+import PemesananReguler from "../components/contents/PemesananReguler";
+import PemesananRequest from "../components/contents/PemesananRequest";
 import DatePicker from "react-datepicker";
-import { MdAdd } from "react-icons/md";
 import "react-datepicker/dist/react-datepicker.css";
 import NavbarAdmin from "../components/base/Navbar_Admin";
 
-const Jadwal = () => {
-    const [activeTab, setActiveTab] = useState('jadwal-kunjungan');
+const PemesananAdmin = () => {
+    const [activeTab, setActiveTab] = useState('pemesanan-all');
     const [searchText, setSearchText] = useState('');
     const [selectedDate, setSelectedDate] = useState(null);
     const [showOptions, setShowOptions] = useState(false);
@@ -64,28 +61,21 @@ const Jadwal = () => {
                 </div>
                 <ul className="flex flex-wrap text-sm font-medium text-center text-gray-500 pl-2">
                     <li className="me-2">
-                        <a href="#" onClick={() => changeTab('jadwal-kunjungan')} className={`inline-block px-4 py-2 rounded-t-lg ${activeTab === 'jadwal-kunjungan' ? 'text-color-2 bg-white shadow-xl font-bold' : 'hover:text-gray-600 hover:bg-gray-50 '}`}>Jadwal Kunjungan</a>
+                        <a href="#" onClick={() => changeTab('pemesanan-all')} className={`inline-block px-4 py-2 rounded-t-lg ${activeTab === 'pemesanan-all' ? 'text-color-2 bg-white font-bold' : 'hover:text-gray-600 hover:bg-gray-50 '}`}>Semua</a>
                     </li>
                     <li className="me-2">
-                        <a href="#" onClick={() => changeTab('jadwal-acara')} className={`inline-block px-4 py-2 rounded-t-lg ${activeTab === 'jadwal-acara' ? 'text-color-2 bg-white shadow-xl font-bold' : 'hover:text-gray-600 hover:bg-gray-50 '}`}>Jadwal Acara</a>
+                        <a href="#" onClick={() => changeTab('pemesanan-reguler')} className={`inline-block px-4 py-2 rounded-t-lg ${activeTab === 'pemesanan-reguler' ? 'text-color-2 bg-white font-bold' : 'hover:text-gray-600 hover:bg-gray-50 '}`}>Reguler</a>
+                    </li>
+                    <li className="me-2">
+                        <a href="#" onClick={() => changeTab('pemesanan-request')} className={`inline-block px-4 py-2 rounded-t-lg ${activeTab === 'pemesanan-request' ? 'text-color-2 bg-white font-bold' : 'hover:text-gray-600 hover:bg-gray-50 '}`}>Request</a>
                     </li>
                 </ul>
-                {activeTab === 'jadwal-kunjungan' && <JadwalKunjungan />}
-                {activeTab === 'jadwal-acara' && <JadwalAcara />}
-            </div>
-            <div className="fixed bottom-8 right-8 z-50">
-                <button onClick={handleToggleOptions} className="bg-color-2 text-white p-2 rounded-full shadow-lg hover:bg-opacity-80">
-                    <MdAdd size={32} />
-                </button>
-                {showOptions && (
-                    <div className="absolute bottom-8 right-12 bg-white p-2 rounded-lg shadow-lg w-[200px]">
-                        <NavLink to="/addkunjungan" className="block w-full py-2 text-left hover:bg-gray-100 focus:outline-none">Tambah Kunjungan Baru</NavLink>
-                        <NavLink to="/addacara" className="block w-full py-2 text-left hover:bg-gray-100 focus:outline-none">Tambah Acara Baru</NavLink>
-                    </div>
-                )}
+                {activeTab === 'pemesanan-all' && <PemesananAll />}
+                {activeTab === 'pemesanan-reguler' && <PemesananReguler />}
+                {activeTab === 'pemesanan-request' && <PemesananRequest />}
             </div>
         </section>
     );
 }
 
-export default Jadwal;
+export default PemesananAdmin;

@@ -9,8 +9,8 @@ interface RatingProps {
 
 const ReviewCard: React.FC<RatingProps> = ({ username, rating, review }) => {
   return (
-    <div className="rounded-[2vw] border-2 border-gray-400 p-4 flex">
-      <div className="mr-5 flex flex-col justify-center items-center">
+    <div className="flex flex-col sm:flex-row rounded-2xl border-2 border-gray-400 p-4">
+      <div className="flex flex-col sm:mr-5 justify-center items-center">
         <div>{username}</div>
         <div style={{ fontSize: '40px' }}>{rating}</div>
         <div>
