@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Label, TextInput, Checkbox } from "flowbite-react";
 import { RedNotification, GreenNotification } from '../components/base/Notification';
-import SidebarSuperAdmin from "../components/base/Sidebar_SuperAdmin";
 import api from '../services/api';
 
 

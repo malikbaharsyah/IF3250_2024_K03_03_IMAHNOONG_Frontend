@@ -3,7 +3,7 @@ import SidebarSuperAdmin from './Sidebar_SuperAdmin';
 import NavbarAdmin from './Navbar_Admin';
 
 const SuperAdminLayout = ({ children }: { children: React.ReactNode }) => {
-    const [isOpen] = useState(false); // Define the state for isOpen
+    const [isOpen] = useState(false);
 
     return (
         <div className="flex">

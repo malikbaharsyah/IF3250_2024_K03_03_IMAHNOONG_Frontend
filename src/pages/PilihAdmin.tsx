@@ -1,25 +1,33 @@
 import { useState, useEffect } from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import {Button} from 'flowbite-react';
 import TextField from '@material-ui/core/TextField';
 import { RedNotification, GreenNotification } from '../components/base/Notification';
-
-const dummyDataAdmin = ['Aa1', 'aaa2', 'ab3', 'a3'];
-const dummyDataPlanetarium = ['Planetarium1', 'Planetarium2', 'Planetarium3'];
+import api from '../services/api';
 
 const PilihAdmin = () => {
     const [adminName, setAdminName] = useState('');
-    const [planetariumName, setPlanetariumName] = useState('');
+    const [planetariumId, setPlanetariumId] = useState(0);
     const [isRed, setIsRed] = useState(false);
     const [isGreen, setIsGreen] = useState(false);
     const [message, setMessage] = useState("");
     const [admins, setAdmins] = useState([]);
     const [planetariums, setPlanetariums] = useState([]);
 
-    const handleSubmit = () => {
-        console.log(adminName);
-        console.log(planetariumName);
-    }
+    useEffect(() => {
+        api.get('/api/assignadmin').then((response) => {
+            setAdmins(response.data);
+        }).catch((error) => {
+            console.error(error);
+        });
+        api.get('/api/catalog').then((response) => {
+            // map response.data to get only {id:id, namaPlanetarium:namaPlanetarium}
+           const pDatas = response.data.map((planetarium) => {
+            return `${planetarium.id}. ${planetarium.namaPlanetarium}`});
+            setPlanetariums(pDatas);
+        }).catch((error) => {
+            console.error(error);
+        });
+    }, []);
 
     const showRedNotif = (message: string) => {
         setMessage(message);
@@ -47,10 +55,26 @@ const PilihAdmin = () => {
         transition: 'opacity 0.5s ease-out',
     }
 
-    const handleSubmitButtonClick = () => {
-        console.log(planetariumName);
-        console.log(adminName);
-
+    const handleSubmit = () => {
+        const body = {
+            username: adminName,
+            idPlanetarium: planetariumId
+        }
+        api.post('/api/assignadmin', body,
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+        ).then((response) => {
+            if (response.status === 200) {
+                showGreenNotif('Berhasil assign admin');
+            } else {
+                showRedNotif('Gagal assign admin');
+            }
+        }).catch((error) => {
+            showRedNotif('Gagal assign admin');
+        });
     };
     return (
         <div className='flex flex-col items-center h-full bg-[#E9EAF6]'>
@@ -73,18 +97,20 @@ const PilihAdmin = () => {
                     />
                     <Autocomplete
                         className='mt-4'
-                        options={dummyDataPlanetarium}
+                        // show options to `{id}. {namaPlanetarium}`
+                        
+                        options={planetariums}
                         getOptionLabel={(option) => option}
                         onInputChange={(event, newInputValue) => {
-                        setPlanetariumName(newInputValue);
+                        setPlanetariumId(parseInt(newInputValue.split('.')[0]));
                         }}
                         renderInput={(params) => <TextField {...params} label="Nama Planetarium" variant="outlined" />}
                     />
                     <div className="flex justify-center px-8">
                         <button
-                            className={`w-fit h-10 px-8 bg-gradient-to-r from-[#4F1395] to-[#2224A1] text-white rounded-full my-8 ${!planetariumName ? 'opacity-50 cursor-not-allowed' : ''}`}
+                            className={`w-fit h-10 px-8 bg-gradient-to-r from-[#4F1395] to-[#2224A1] text-white rounded-full my-8 ${!planetariumId ? 'opacity-50 cursor-not-allowed' : ''}`}
                             onClick={handleSubmit}
-                            disabled={!planetariumName}
+                            disabled={!planetariumId}
                             type="submit"
                           >
                             Submit
