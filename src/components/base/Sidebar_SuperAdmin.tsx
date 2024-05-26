@@ -58,15 +58,15 @@ export default function SidebarSuperAdmin() {
             </Sidebar.Logo>
             <Sidebar.Items>
                 <Sidebar.ItemGroup>
-                    <Link to="/registersuperadmin">
+                    <Link to="/superadmin/registeradmin">
                         <Sidebar.Item
                             icon={IoPersonOutline}
-                            className={activePath === '/registersuperadmin' ? 'bg-gradient-to-r from-transparent to-[#77688E] border-r-8' : ''}
+                            className={activePath === '/registeradmin' ? 'bg-gradient-to-r from-transparent to-[#77688E] border-r-8' : ''}
                         >
-                            Buat Akun
+                            Buat Admin
                         </Sidebar.Item>
                     </Link>
-                    <Link to="/buatplanetarium">
+                    <Link to="/superadmin/buatplanetarium">
                         <Sidebar.Item
                             icon={FiEdit}
                             className={activePath === '/buatplanetarium' ? 'bg-gradient-to-r from-transparent to-[#77688E] border-r-8' : ''}
@@ -74,12 +74,12 @@ export default function SidebarSuperAdmin() {
                             Buat Planetarium
                         </Sidebar.Item>
                     </Link>
-                    <Link to="/pilihadmin">
+                    <Link to="/superadmin/assignadmin">
                         <Sidebar.Item
                             icon={LuStar}
-                            className={activePath === '/pilihadmin' ? 'bg-gradient-to-r from-transparent to-[#77688E] border-r-8' : ''}
+                            className={activePath === '/assignadmin' ? 'bg-gradient-to-r from-transparent to-[#77688E] border-r-8' : ''}
                         >
-                            Pilih Admin
+                            Assign Admin
                         </Sidebar.Item>
                     </Link>
                 </Sidebar.ItemGroup>

@@ -1,11 +1,80 @@
 import React, { useState } from 'react';
 import { Button, Label, TextInput, Checkbox } from "flowbite-react";
-import SidebarSuperAdmin from "../components/base/Sidebar_SuperAdmin";
+import { RedNotification, GreenNotification } from '../components/base/Notification';
+import api from '../services/api';
 
 
 export default function RegisterSuperAdmin() {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [isRed, setIsRed] = useState(false);
+    const [isGreen, setIsGreen] = useState(false);
+    const [message, setMessage] = useState("");
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        const form = event.currentTarget;
+        const email = form.email.value;
+        const username = form.username.value;
+        const password = form.password.value;
+
+        if (!email || !username || !password) {
+            showRedNotif('Email, Username, and Password are required');
+            return;
+        }
+
+        const body = JSON.stringify({
+            email: email,
+            username: username,
+            password: password,
+        });
+
+        api.post('/api/registeradmin', 
+        body, 
+        {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }
+        ).then((response) => {
+            if (response.status === 200) {
+                showGreenNotif('Admin account created successfully');
+            } else if (response.status === 400) {
+                showRedNotif('Invalid username or password');
+            } else if (response.status == 500) {
+                showRedNotif('Internal server error');
+            }
+        }).catch((error) => {
+            alert(error);
+        });
+    }
+
+    const showRedNotif = (message: string) => {
+        setMessage(message);
+        setIsRed(true);
+        setTimeout(() => {
+            setIsRed(false);
+        }, 1000);
+    }
+
+    const showGreenNotif = (message: string) => {
+        setMessage(message);
+        setIsGreen(true);
+        setTimeout(() => {
+            setIsGreen(false);
+        }, 1000);
+    }
+
+    const redNotifStyle: React.CSSProperties = {
+        opacity: isRed ? 1 : 0,
+        transition: 'opacity 0.5s ease-out',
+      };
+
+    const greenNotifStyle: React.CSSProperties = {
+        opacity: isGreen ? 1 : 0,
+        transition: 'opacity 0.5s ease-out',
+    }
 
     const togglePasswordVisibility = () => {
         setShowPassword((prevState) => !prevState);
@@ -15,12 +84,20 @@ export default function RegisterSuperAdmin() {
         setShowConfirmPassword((prevState) => !prevState);
     };
 
+
+
     return(
         <>
+        <div className="red-notif-container absolute top-10 right-0 md:right-10" style={redNotifStyle}> 
+            <RedNotification title="Gagal" description={message}/>
+        </div>
+        <div className="green-notif-container absolute top-10 right-0 md:right-10" style={greenNotifStyle}>
+            <GreenNotification title="Berhasil" description={message}/>
+        </div>
             <div className='flex flex-col items-center h-full bg-[#E9EAF6]'>
                 <div className="flex w-full h-full items-center justify-center">
                     <section className="bg-white rounded-2xl">
-                        <form className="flex min-w-[35vw] px-12 py-5 flex-col gap-2">
+                        <form onSubmit={handleSubmit} className="flex min-w-[35vw] px-12 py-5 flex-col gap-2">
                             <h1 className="mx-auto font-bold text-xl">
                             Buat Akun Admin
                             </h1>
@@ -32,15 +109,9 @@ export default function RegisterSuperAdmin() {
                             </div>
                             <div>
                                 <div className="mb-2 block">
-                                <Label htmlFor="telp" value="Nomor Telepon" />
+                                <Label htmlFor="username" value="Username" />
                                 </div>
-                                <TextInput id="telp" type="text" placeholder="Masukkan Nomor Telepon Anda" required shadow />
-                            </div>
-                            <div>
-                                <div className="mb-2 block">
-                                <Label htmlFor="planetarium" value="Nama Planetarium" />
-                                </div>
-                                <TextInput id="planetarium" type="text" placeholder="Masukkan Nama Planetarium Anda" required shadow />
+                                <TextInput id="username" type="text" placeholder="Masukkan Username Anda" required shadow />
                             </div>
                             <div>
                                 <div className="mb-2 block">
