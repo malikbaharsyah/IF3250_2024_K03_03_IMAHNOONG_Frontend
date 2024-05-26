@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import ConfirmPage from "../../layout/ticketreservation/subcontents/ConfirmPage";
 import PaymentPage from "../../layout/ticketreservation/subcontents/PaymentPage";
 import RegistrationPage from "../../layout/ticketreservation/subcontents/RegistrationPage";
@@ -9,11 +9,58 @@ import StepperControl from "../../layout/ticketreservation/stepper/StepperContro
 import NavbarReservation from "../../layout/ticketreservation/base/NavbarReservation";
 import { motion, AnimatePresence } from "framer-motion"
 import PaymentMethod from "../../layout/ticketreservation/subcontents/PaymentMethod";
-const TicketReservationContent = () => {
+import { Jadwal } from "../../interfaces/detailsData";
+import { useParams } from "react-router-dom";
+import TicketReservation from '../../pages/TicketReservation';
+import { Planetarium } from '../../interfaces/Planetarium';
+
+
+interface TicketReservationProps extends React.HTMLProps<HTMLDivElement>{
+    planetariumId: string;
+    id: string;
+    selectedDate: string;
+}
+
+const TicketReservationContent: React.FC<TicketReservationProps> = ({planetariumId, id, selectedDate}) => {
+
+    if (planetariumId === null || id === null) {
+        return
+    }
+    const [ticketData, setTicketData] = useState<Jadwal>();
+    const [planetariumData, setPlanetarium] = useState<Planetarium>();
+    const [jumlahTiket, setJumlahTiket] = useState(1);
+    const [idTiket, setIdTiket] = useState('');
+    
+
+    console.log(planetariumId, id)
+    useEffect(() => {
+        fetch("http://localhost:9000/api/pesanTiket/"+planetariumId+"/"+id)
+            .then((response) => response.json())
+            .then((data) => {
+                setTicketData(data);
+            })
+        
+            .catch((error) => console.error("Error fetching review data:", error));
+    }, []);
+
+    console.log(ticketData)
+
+    useEffect(() => {
+        fetch("http://localhost:9000/api/details/"+planetariumId)
+            .then((response) => response.json())
+            .then((data) => {
+                setPlanetarium(data);
+            })
+        
+            .catch((error) => console.error("Error fetching review data:", error));
+    }, []);
+
+    const [jadwalInfo, setJadwalInfo] = useState<[number, number, Date, string]>([parseInt(id), parseInt(planetariumId), new Date(), selectedDate]);
 
     const [currentStep, setCurrentStep] = useState(1);
     const [userData, setUserData] = useState('');
-    const [finalData, setFinalData] = useState<[string, string, string | undefined, number, string]>(['', '', '', 0, '']);
+    // const [finalData, setFinalData] = useState<[string, string, string | undefined, number, string, number, number, ]>(['', '', '', 1, '']);
+    const [finalData, setFinalData] = useState<[string, string, string | undefined, number, string]>(['', '', '', 1, '']);
     const [isFormValid, setIsFormValid] = useState(false);
     const [payment, setPayment] = useState("");
     const steps = [
@@ -36,15 +83,16 @@ const TicketReservationContent = () => {
                     finalData={finalData}
                     setFinalData={setFinalData}
                     setIsFormValid = {setIsFormValid}
+                    setJumlahTiket= {setJumlahTiket}
                 />
             case 2:
                 return <PaymentMethod
                     setPaymentMethod = {setPayment}
                 />
             case 3:
-                return <PaymentPage/>
+                return <PaymentPage totalPembayaran={finalData[3]*ticketData?.hargaTiket!!}/>
             case 4:
-                return <ConfirmPage/>
+                return <ConfirmPage idTiket={idTiket} totalPembayaran={finalData[3]*ticketData?.hargaTiket!!}/>
             default:
         }
     }
@@ -91,7 +139,8 @@ const TicketReservationContent = () => {
                         {setComponent(currentStep)}
                         </StepperContext.Provider>
                         <div className="flex flex-col justify-start size-fit bg-color-4 bg-opacity-20 rounded-[20px] p-8 text-color-4 font-inter gap-4">
-                            <TicketInformation/>
+                            <TicketInformation namaPlanetarium={planetariumData?.namaPlanetarium!!} namaShow={ticketData?.namaJadwal!!} tanggal={selectedDate} waktu={ticketData?.waktuKunjungan[0]!!} jumlahTiket={jumlahTiket} hargaTiket={ticketData?.hargaTiket!!}/>
+                            {/* <TicketInformation/> */}
                             <StepperControl
                                 handleClick={handleClick}
                                 currentStep={currentStep}
@@ -100,6 +149,9 @@ const TicketReservationContent = () => {
                                 finalDataReg={finalData}
                                 finalDataReq={['','','','','','',0,'']}
                                 condition={condition}
+                                idTiket={idTiket}
+                                setIdTiket={setIdTiket}
+                                jadwalInfo={jadwalInfo}
                             />
                         </div>
                     </div>

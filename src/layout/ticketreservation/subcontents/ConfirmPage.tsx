@@ -1,6 +1,13 @@
+interface ConfirmProps extends React.HTMLProps<HTMLDivElement>{
+    idTiket?: string;
+    totalPembayaran: number;
+  }
+  
+  // const TicketReservationContent: React.FC<TicketReservationProps> = ({planetariumId, id}) => {
+  
+//   const PaymentPage: React.FC<PaymentProps> = ({totalPembayaran, nomorVirtualAccount}) => {
 
-
-const ConfirmPage = () => {
+const ConfirmPage: React.FC<ConfirmProps> = ({idTiket, totalPembayaran}) => {
     return (
         <div className="font-inter text-color-4 flex flex-col justify-start items-center gap-4">
             <h1 className="font-medium text-[24px]">Terima Kasih!</h1>
@@ -13,7 +20,7 @@ const ConfirmPage = () => {
                         ID Pemesanan
                     </h4>
                     <p className="text-[20px] font-bold">
-                        1239e0w32i
+                        {idTiket}
                     </p>
                     <h4>
                         Status Transaksi
@@ -28,7 +35,7 @@ const ConfirmPage = () => {
                     </h4>
                     <div className="rounded-[8px] bg-color-7 w-min">
                         <p className="px-11 py-2 font-regular text-[24px]">
-                            Paid
+                            Menunggu Konfirmasi
                         </p>
                     </div>
                     <h4>
@@ -49,7 +56,7 @@ const ConfirmPage = () => {
                         Total Pembayaran
                     </h4>
                     <div className="flex items-center justify-between rounded-[8px] bg-color-4 bg-opacity-20 px-4 py-4">
-                        <p className="px-2 font-medium text-2xl">Rp1.000.000,00.-</p>
+                        <p className="px-2 font-medium text-2xl">Rp {totalPembayaran}.-</p>
                     </div>
                 </div>
             </div>

@@ -26,6 +26,7 @@ import SuperAdminLayout from './components/base/SuperAdminLayout';
 import RegisterSuperAdmin from './pages/RegisterSuperAdmin';
 import BuatPlanetarium from './pages/BuatPlanetarium';
 import PilihAdmin from './pages/PilihAdmin';
+import TicketRequestPayment from './pages/TicketRequestPayment';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route path='bantuan' element={<HelpPage />} />
           <Route path='ticketreservation' element={<TicketReservation />} />
           <Route path='ticketrequest' element={<TicketRequest />} />
+          <Route path='ticketrequestpayment' element={<TicketRequestPayment />} />
           <Route path='helppage' element={<HelpPage />} />
           <Route path='listtiket' element={<ListTiket />} />
           <Route path='details' element={<Details />} />

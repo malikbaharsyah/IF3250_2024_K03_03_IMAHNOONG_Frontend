@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import PhoneInput from "react-phone-number-input/input";
 import { RegistrationProps } from "../../../interfaces/TicketReservation";
 
-const RegistrationPage: React.FC<RegistrationProps> = ({finalData, setFinalData, setIsFormValid}) => {
+const RegistrationPage: React.FC<RegistrationProps> = ({finalData, setFinalData, setIsFormValid, setJumlahTiket}) => {
     const [fullname, setFullname] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [phoneNumber, setPhoneNumber] = useState<string>();
-    const [numberOfTickets, setNumberOfTickets] = useState<number>(0);
+    const [numberOfTickets, setNumberOfTickets] = useState<number>(1);
     const [notes, setNotes] = useState<string>('');
     useEffect(() => {
         // Check form validity and update parent component
-        if (fullname && email && phoneNumber && numberOfTickets)
+        if (fullname && email && phoneNumber && numberOfTickets > 0)
             { setIsFormValid(true); }
         else
             { setIsFormValid(false); }
@@ -72,6 +72,7 @@ const RegistrationPage: React.FC<RegistrationProps> = ({finalData, setFinalData,
                                     onChange={(e) => {
                                         setNumberOfTickets(e.target.valueAsNumber)
                                         setFinalData([fullname,email,phoneNumber,e.target.valueAsNumber,notes])
+                                        setJumlahTiket(e.target.valueAsNumber)
                                     }}/>
                                 </label>
                             </div>
