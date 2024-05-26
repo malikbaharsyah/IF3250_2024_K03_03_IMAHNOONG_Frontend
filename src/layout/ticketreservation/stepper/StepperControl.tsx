@@ -13,7 +13,7 @@ const StepperControl: React.FC<StepperControlProps> = ({handleClick, currentStep
         <div className="flex justify-around my-2 gap-4 transition">
             {currentStep === steps.length /*|| currentStep === steps.length-1*/ ? <></> : <button onClick={() => handleClick("")}
             className={`transition duration-200 ease-in-out w-[202px] h-[69px] rounded-full bg-gradient-to-b bg-opacity-40 hover:from-red-600 hover:to-red-400 hover:transition bg-color-4
-                            font-inter font-medium text-[24px] ${currentStep === steps.length ? "w-0" : ""}`}>
+                            font-inter font-medium text-[24px] ${currentStep === steps.length || (currentStep === 2 && type === 0) ? "hidden" : ""}`}>
                 Batal
             </button>}
             <button onClick={() => {
@@ -22,14 +22,22 @@ const StepperControl: React.FC<StepperControlProps> = ({handleClick, currentStep
                 switch(currentStep){
                     case 1:
                         //fill out all form before continue;
-                        if (condition.isFormValid) { handleClick("next"); }
-                        else { alert("Tolong isi semua formulir terlebih dahulu dengan benar" ); }
-                        break;
-                    case 2:
-                        if (condition.paymentMethod || type === 0) {
+                        if (condition.isFormValid) { 
+                            if (type === 0){
+                                //TODO: integrasi kirim ke backend permintaan jadwalnya
+                            }
                             handleClick("next"); 
                         }
                         else { 
+                            alert("Tolong isi semua formulir terlebih dahulu dengan benar" ); 
+                        }
+                        break;
+                    case 2:
+                        if (type === 0){
+                            routeChange();
+                        } else if (condition.paymentMethod) {
+                            handleClick("next");
+                        } else {
                             alert("Pilih metode pembayaran!") 
                         }
                         break;
@@ -37,7 +45,6 @@ const StepperControl: React.FC<StepperControlProps> = ({handleClick, currentStep
                         if (condition.paymentMethod || type === 1) {
                             handleClick("next");
                             // bikin tiket
-                            setIdTiket("asi9od89usahf9")
                         }
                         else { 
                             alert("Pilih metode pembayaran!") 
@@ -59,7 +66,7 @@ const StepperControl: React.FC<StepperControlProps> = ({handleClick, currentStep
             className={`transition duration-200 ease-in-out w-[202px] h-[69px] rounded-full bg-gradient-to-b hover:from-green-600 hover:to-blue-600 hover:transition from-color-2 to-color-3
                             font-inter font-medium text-[24px] ${currentStep === 2 && type === 0 ? "" : ""}`}>
                 {
-                    currentStep !== steps.length ? (type === 0 && currentStep < 2 ? "Kirim Permintaan" : "Selanjutnya") : "Selesai"
+                    currentStep !== steps.length ? (type === 0 && currentStep === 1 ? "Kirim Permintaan" : (currentStep === 2 ? "Halaman Utama" : "Selanjutnya")) : "Selesai"
                 }
             </button>
         </div>
