@@ -4,15 +4,20 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { FaChevronDown } from 'react-icons/fa';
 
 interface DatePickerProps extends React.HTMLProps<HTMLDivElement>{
+  selectedDate?: Date | null;
+  onDateChange?: (date: Date | null) => void;
   month? : boolean | undefined;
   integrated? : boolean | undefined;
 }
 
-const DatePickerComponent: React.FC<DatePickerProps> = ({month, integrated}) => {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+const DatePickerComponent: React.FC<DatePickerProps> = ({selectedDate, onDateChange, month, integrated}) => {
+  const [internalDate, setInternalDate] = useState<Date | null>(selectedDate ?? null);
 
   const handleDateChange = (date: Date | null) => {
-    setSelectedDate(date);
+    setInternalDate(date);
+    if (onDateChange) {
+      onDateChange(date);
+    }
   };
   if (month) {
     return (

@@ -1,4 +1,4 @@
-export type ListTicket = {
+export interface ListTicket {
     id: number;
     namaJadwal: string;
     waktuKunjungan: string[];

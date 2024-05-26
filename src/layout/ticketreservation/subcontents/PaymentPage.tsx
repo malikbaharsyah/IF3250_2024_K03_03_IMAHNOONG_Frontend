@@ -29,14 +29,22 @@ const useClipboard = (props: { duration: number; }) => {
     return { copied, ref, onCopy };
   };
 
-const PaymentPage = () => {
+
+interface PaymentProps extends React.HTMLProps<HTMLDivElement>{
+  totalPembayaran: number;
+  nomorVirtualAccount?: string;
+}
+
+// const TicketReservationContent: React.FC<TicketReservationProps> = ({planetariumId, id}) => {
+
+const PaymentPage: React.FC<PaymentProps> = ({totalPembayaran, nomorVirtualAccount}) => {
 
     
   const { ref, copied, onCopy } = useClipboard({ duration: 4000 });
     
     return (
         <div className="flex flex-col font-inter text-color-4 gap-4">
-            <div className="rounded-[20px] items-center size-fit bg-color-2 justify-between bg-opacity-50 p-6 flex w-full">
+            {/* <div className="rounded-[20px] items-center size-fit bg-color-2 justify-between bg-opacity-50 p-6 flex w-full">
                 <h2 className="font-medium text-[24px]">Selesaikan Dalam</h2>
                 <div className="text-center flex ml-20 items-center gap-2 font-medium text-2xl">
                     <p className="bg-color-4 bg-opacity-20 rounded-[12px] size-12 p-2">00</p>
@@ -45,7 +53,7 @@ const PaymentPage = () => {
                     <p>:</p>
                     <p className="bg-color-4 bg-opacity-20 rounded-[12px] size-12 p-2">00</p>
                 </div>                
-            </div>
+            </div> */}
             <div className="rounded-[20px] items-center gap-6 size-fit bg-color-2 bg-opacity-50 p-6 flex flex-col">
                 <div className="flex gap-5 items-center">
                     <h2 className="font-medium text-[28px] justify-between">Instruksi Pembayaran</h2>
@@ -62,7 +70,7 @@ const PaymentPage = () => {
                         <p className="font-medium text-[20px]">Mandiri Virtual Account</p>
                     </div>
                     <div className="flex items-center justify-between rounded-[8px] bg-color-4 bg-opacity-20 px-4 py-4">
-                        <p className="px-2 font-medium text-2xl" ref={ref} id="virtualacc">7001 4545 0808 2727</p>
+                        <p className="px-2 font-medium text-2xl" ref={ref} id="virtualacc">{nomorVirtualAccount}</p>
                         <button
                             onClick={onCopy}>
                                 <svg className={`${copied ? `animate-ping` : `animate-none`}`} width="27" height="30" viewBox="0 0 27 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -81,7 +89,7 @@ const PaymentPage = () => {
                     <div>
                       <h2 className="font-medium text-[24px]">Total Pembayaran</h2>
                       <div className="flex items-center justify-between rounded-[8px] bg-color-4 bg-opacity-20 px-4 py-4">
-                        <p className="px-2 font-medium text-2xl">Rp1.000.000,00.-</p>
+                        <p className="px-2 font-medium text-2xl">Rp{totalPembayaran}.-</p>
                       </div>
                     </div>
                     <div className="gap-2 flex flex-col">
