@@ -7,10 +7,11 @@ const TicketReservation = () => {
 
     const id = urlParams.get('id');
     const pid = urlParams.get('pid');
+    const tanggal = urlParams.get('tanggal');
 
     return (
         <div className='h-screen bg-stars bg-no-repeat bg-cover bg-local overflow-x-hidden'>
-            <TicketReservationContent planetariumId={pid!!} id={id!!}/>
+            <TicketReservationContent planetariumId={pid!!} id={id!!} selectedDate={tanggal!!}/>
             {/* <TicketReservationContent/> */}
         </div>
     )

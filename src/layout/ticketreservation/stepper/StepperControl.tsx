@@ -1,9 +1,53 @@
+import React, { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { StepperControlProps } from "../../../interfaces/TicketReservation";
 
-const StepperControl: React.FC<StepperControlProps> = ({handleClick, currentStep, steps, type, finalDataReg, finalDataReq, condition, idTiket, setIdTiket}) => {
+const StepperControl: React.FC<StepperControlProps> = ({
+    handleClick,
+    currentStep,
+    steps,
+    type,
+    finalDataReg,
+    finalDataReq,
+    condition,
+    idTiket,
+    setIdTiket,
+    jadwalInfo,
+  }) => {
+    const navigate = useNavigate();
 
-    const navigate = useNavigate(); 
+    const handleFetch = () => {
+        var id = '';
+        const requestData = {
+          namaPemesan: finalDataReg[0],
+          jumlahTiket: finalDataReg[3],
+          noTelepon: finalDataReg[2],
+          email: finalDataReg[1],
+          idJadwal: jadwalInfo[0],
+          idPlanetarium: jadwalInfo[1],
+          note: finalDataReg[4],
+        //   waktuDibayar: new Date(),
+        //   tanggalTiket: jadwalInfo[3],
+        };
+    
+        fetch("http://localhost:9000/api/pesanTiket/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestData),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            id = data;
+          })
+          .catch((error) => console.error("Error fetching jadwal data:", error));
+        
+        setIdTiket(id);
+      }
+    
+
     const routeChange = () =>{ 
         const path = `/`; 
         navigate(path);
@@ -37,7 +81,7 @@ const StepperControl: React.FC<StepperControlProps> = ({handleClick, currentStep
                         if (condition.paymentMethod || type === 1) {
                             handleClick("next");
                             // bikin tiket
-                            setIdTiket("asi9od89usahf9")
+                            handleFetch();
                         }
                         else { 
                             alert("Pilih metode pembayaran!") 

@@ -20,6 +20,7 @@ export interface StepperControlProps {
     }
     idTiket: string;
     setIdTiket: (idTiket: string) => void;
+    jadwalInfo: [number, number, Date, string]
 }
 
 export interface RegistrationProps {
