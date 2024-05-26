@@ -18,12 +18,15 @@ export interface StepperControlProps {
         isFormValid: boolean,
         paymentMethod: string,
     }
+    idTiket: string;
+    setIdTiket: (idTiket: string) => void;
 }
 
 export interface RegistrationProps {
     finalData: [string, string, string | undefined, number, string];
     setFinalData: (finalData: [string, string, string | undefined, number, string]) => void;
     setIsFormValid: (isValid: boolean) => void;
+    setJumlahTiket: (jumlahTiket: number) => void;
 }
 
 export interface RequestProps {
