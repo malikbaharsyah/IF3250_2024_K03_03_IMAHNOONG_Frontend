@@ -30,11 +30,11 @@ const RequestPage: React.FC<RequestProps> = ({finalData, setFinalData, setIsForm
     return (
         <div className="flex flex-col items-center">
             <div className="flex justify-center gap-4">
-                <div className="size-fit rounded-3xl bg-color-2 bg-opacity-50 p-8 h-fit w-[733px]">
+                <div className="h-fit w-[733px]">
                     <h2 className="text-color-4 font-inter font-semibold text-2xl">
                         Data Permintaan Pesanan
                     </h2>
-                    <form className="grid grid-flow-row grid-rows-2 justify-stretch place-content-start text-opacity-60 text-color-4 gap-4 w-full mt-3 h-fit">
+                    <form className="grid grid-flow-row grid-rows-1 justify-stretch place-content-start text-opacity-60 text-color-4 gap-4 w-full mt-3 h-fit">
                         <div className="flex mt-2 gap-7 h-full">
                             <div className="flex flex-col justify-end gap-3 w-full">
                                 <label className="grid grid-flow-row  font-inter font-medium text-base">
@@ -114,10 +114,9 @@ const RequestPage: React.FC<RequestProps> = ({finalData, setFinalData, setIsForm
                                 </label>
                             </div>
                         </div>
-                        
-                        <div className="flex flex-col h-full gap-3 row-span-2">
+                        <div className="flex flex-col h-fit gap-3 row-span-1">
                             Catatan
-                            <textarea className="w-full h-full bg-[#0A061D] bg-opacity-20 border-color-4 border-[1px] rounded-xl p-3"
+                            <textarea className="w-full h-fit bg-[#0A061D] bg-opacity-20 border-color-4 border-[1px] rounded-xl p-3"
                             value={notes}
                             onChange={(e) => {
                                 setNotes(e.target.value)
@@ -125,6 +124,7 @@ const RequestPage: React.FC<RequestProps> = ({finalData, setFinalData, setIsForm
                             }}
                             />
                         </div>
+                        
                     </form>
                 </div>
             </div>
