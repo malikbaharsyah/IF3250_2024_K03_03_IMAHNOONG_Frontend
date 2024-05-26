@@ -10,6 +10,7 @@ const EventContent: React.FC<EventContentProps> = ({
     eventLocation,
     eventTime,
     eventDate,
+    eventDuration,
   }) => {
     return (
         <div className="flex flex-row w-auto pr-20">
@@ -47,7 +48,7 @@ const EventContent: React.FC<EventContentProps> = ({
                     {eventDate}
                 </div>
                 <div className="font-inter text-white text-center text-xl font-semibold py-2">
-                    1 jam
+                    {eventDuration} Jam
                 </div>
             </div>
             <div className="pt-4 mt-auto">

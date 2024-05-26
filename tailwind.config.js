@@ -1,3 +1,4 @@
+const flowbite = require("flowbite-react/tailwind");
 /** @type {import('tailwindcss').Config} */
 export default {
   content: 
@@ -8,6 +9,7 @@ export default {
       './node_modules/react-tailwindcss-datepicker/dist/index.esm.js',
       '.{html,js,jsx,tsx}',
       './index.html',
+      flowbite.content(),
     ],
   },
   theme: {
@@ -34,6 +36,8 @@ export default {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    flowbite.plugin(),
+  ],
 }
 

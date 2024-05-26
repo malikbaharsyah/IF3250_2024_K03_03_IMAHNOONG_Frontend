@@ -16,12 +16,12 @@ const DatePickerComponent: React.FC<DatePickerProps> = ({month, integrated}) => 
   };
   if (month) {
     return (
-      <div className="w-64">
+      <div className="w-fit">
         <DatePicker
           selected={selectedDate}
           onChange={handleDateChange}
           dateFormat="MMMM YYYY"
-          className="border-2 p-2 rounded-full text-center outline-gradient-to-r from-[#4F1395] to-[#2224A1] cursor-pointer"
+          className="w-44 border-2 text-sm rounded-full text-center outline-gradient-to-r from-[#4F1395] to-[#2224A1] cursor-pointer"
           showMonthYearPicker
           placeholderText='Pick Month'
           showIcon
@@ -31,7 +31,7 @@ const DatePickerComponent: React.FC<DatePickerProps> = ({month, integrated}) => 
   }
   if (integrated){
     return (
-      <div className="w-64">
+      <div className="w-fit">
         <DatePicker
           selected={selectedDate}
           onChange={handleDateChange}
@@ -44,7 +44,7 @@ const DatePickerComponent: React.FC<DatePickerProps> = ({month, integrated}) => 
     )
   }
   return (
-    <div className="w-64">
+    <div className="w-fit">
       <DatePicker
         selected={selectedDate}
         onChange={handleDateChange}

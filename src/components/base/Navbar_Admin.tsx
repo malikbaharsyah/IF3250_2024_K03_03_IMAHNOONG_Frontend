@@ -6,6 +6,7 @@ import notifOff from "../../../public/Notification_off.svg"
 import notifOn from "../../../public/notification_on.svg"
 import profile from "../../../public/Profile.svg";
 import logout from "../../../public/Logout.svg";
+import { useNavigate } from 'react-router-dom';
 
 
 function classNames(...classes: any[]) {
@@ -13,21 +14,28 @@ function classNames(...classes: any[]) {
   }
 
 const Navbar = () => {
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('username');
+        localStorage.removeItem('idPlanetarium');
+        navigate('/login'); 
+    };
 
     return (
         <nav>
-            <div className="h-[5vw] flex justify-end z-50 bg-white text-black">
-                <div className="flex items-center justify-end font-inter px-[5vw]">
+            <div className="h-fit flex justify-end z-50 bg-white text-black border-b-4 border-black-900">
+                <div className="flex items-center justify-end font-inter px-8 py-4">
                     <div className="flex-10 font-semibold">
-                        <Menu as="div" className="">
-                            <ul className="flex gap-[2vw] mr-1">
+                        <Menu as="div">
+                            <ul className="flex space-x-6 mr-1">
                                 <Link spy={true} smooth={true} to="/" className="cursor-pointer">
                                     <img src={notifOff} alt="notif" />
                                 </Link>
                                 <Link spy={true} smooth={true} to="Catalog">
-                                    <Menu.Button className="flex cursor-pointer gap-[0.5vw]">
+                                    <Menu.Button className="flex items-center justify-center cursor-pointer gap-[0.5vw]">
                                     <img src={profile} alt="profile" />
-                                        <li className="text-black text-[1.2vw]">Admin</li>
+                                        <li className="text-black text-sm">{localStorage.getItem("username")}</li>
 
                                     </Menu.Button>
                                 </Link>
@@ -45,8 +53,8 @@ const Navbar = () => {
                                     <div className="py-2">
                                         <Menu.Item>
                                         {({ active }) => (
-                                            <a
-                                            href="#"
+                                            <button
+                                            onClick={handleLogout}
                                             className={classNames(
                                                 active ? 'bg-gray-100 text-gray-900 flex gap-5' : 'text-gray-700',
                                                 'block px-4 py-2 text-sm flex gap-5'
@@ -54,7 +62,7 @@ const Navbar = () => {
                                             >
                                             <img src={logout} alt="logout" />
                                             Keluar Akun
-                                            </a>
+                                            </button>
                                         )}
                                         </Menu.Item>
                                     </div>
