@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { RedNotification, GreenNotification } from '../components/base/Notification';
 import { useNavigate } from 'react-router-dom';
 import { isLoggedIn } from '../utils/ProtectedRoute';
+import api from '../services/api';
 
 const LoginAdmin = () => {
     const navigate = useNavigate();
@@ -9,7 +10,11 @@ const LoginAdmin = () => {
         const checkAuth = async () => {
             const authStatus = await isLoggedIn();
             if (authStatus) {
-                navigate('/dashboard');
+                if (!authStatus.isSuperAdmin) {
+                    navigate('/dashboard');
+                } else {
+                    navigate('/superadmin/registeradmin');
+                }
             }
         };
 
@@ -35,7 +40,7 @@ const LoginAdmin = () => {
         fetch('http://localhost:9000/api/login', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json', // Set Content-Type header for JSON
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify({
             username: username,
@@ -47,7 +52,18 @@ const LoginAdmin = () => {
                     // set token di local storage
                     localStorage.setItem('token', data.token);
                     showGreenNotif('Login successful');
-                    navigate('/dashboard');
+                    api.get('/api/auth').then((response) => {
+                        if (response.status === 200) {
+                            const data = response.data;
+                            localStorage.setItem('username', data.username);
+                            localStorage.setItem('idPlanetarium', data.idPlanetarium);
+                            if (data.isSuperAdmin) {
+                                navigate('/superadmin/registeradmin');
+                            } else {
+                                navigate('/dashboard');
+                            }
+                        }
+                    })
                 })
             }
             else if (response.status === 400) {

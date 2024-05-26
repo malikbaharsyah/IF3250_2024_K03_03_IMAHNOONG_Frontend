@@ -1,18 +1,18 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import Catalog from './pages/Catalog';
 import LoginAdmin from './pages/LoginAdmin';
 import LandingPage from './pages/LandingPage';
 import TicketReservation from './pages/TicketReservation';
 import HelpPage from './pages/help';
-import ListTiket from './pages/view_ticket'
+import ListTiket from './pages/view_ticket';
 import Details from './pages/Details';
 import DetailPemesanan from './pages/DetailPemesanan';
 import Sidebar from './components/base/Sidebar';
 import Jadwal from './pages/Jadwal';
 import { DashboardAdmin } from './pages/DashboardAdmin';
-import RatingPage from './pages/Rating'
-import { ProtectedRoute } from './utils/ProtectedRoute'
-
+import RatingPage from './pages/Rating';
+import { ProtectedRoute, SuperProtectedRoute } from './utils/ProtectedRoute';
 import PemesananAdmin from './pages/PemesananAdmin';
 import AddAcara from './pages/AddAcara';
 import AddKunjungan from './pages/AddKunjungan';
@@ -20,10 +20,8 @@ import EditAcara from './pages/EditAcara';
 import EditKunjungan from './pages/EditKunjungan';
 import TicketRequest from './pages/TicketRequest';
 import EditProfil from './pages/EditProfil';
-import { Navigate } from 'react-router-dom';
 import Notification from './pages/Notification';
 import RatingUser from './pages/RatingUser';
-
 import SuperAdminLayout from './components/base/SuperAdminLayout';
 import RegisterSuperAdmin from './pages/RegisterSuperAdmin';
 import BuatPlanetarium from './pages/BuatPlanetarium';
@@ -44,13 +42,31 @@ function App() {
           <Route path='helppage' element={<HelpPage />} />
           <Route path='listtiket' element={<ListTiket />} />
           <Route path='details' element={<Details />} />
-          <Route path='login' element={<LoginAdmin />} />          
-          <Route path='notification' element={<Notification/>} />
+          <Route path='login' element={<LoginAdmin />} />
+          <Route path='notification' element={<Notification />} />
           <Route path='ratinguser' element={<RatingUser />} />
-          <Route path='*' element={<ProtectedRoute><AdminRoutes /></ProtectedRoute>}/>
-          <Route path='buatplanetarium' element={<SuperAdminLayout><BuatPlanetarium /></SuperAdminLayout>} />
-          <Route path='pilihadmin' element={<SuperAdminLayout><PilihAdmin /></SuperAdminLayout>} />
-          <Route path='registersuperadmin' element={<SuperAdminLayout><RegisterSuperAdmin /></SuperAdminLayout>} />
+
+          {/* Protected Routes */}
+          <Route
+            path='*'
+            element={
+              <ProtectedRoute>
+                <AdminRoutes />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Super Protected Routes */}
+          <Route
+            path='superadmin/*'
+            element={
+              <SuperProtectedRoute>
+                <SuperAdminRoutes />
+              </SuperProtectedRoute>
+            }
+          />
+
+          <Route path='*' element={<Navigate to='/' />} />
         </Routes>
       </BrowserRouter>
     </div>
@@ -62,7 +78,6 @@ const AdminRoutes = () => (
     <Routes>
       <Route path='dashboard' element={<DashboardAdmin />} />
       <Route path='pemesanan' element={<PemesananAdmin />} />
-      {/* <Route path='detailpemesanan/:id' element={<DetailPemesanan />} /> */}
       <Route path='detailpemesanan' element={<DetailPemesanan />} />
       <Route path='jadwal' element={<Jadwal />} />
       <Route path='addacara' element={<AddAcara />} />
@@ -74,6 +89,17 @@ const AdminRoutes = () => (
       <Route path='*' element={<Navigate to='dashboard' />} />
     </Routes>
   </Sidebar>
+);
+
+const SuperAdminRoutes = () => (
+  <SuperAdminLayout>
+    <Routes>
+      <Route path='buatplanetarium' element={<BuatPlanetarium />} />
+      <Route path='registeradmin' element={<RegisterSuperAdmin />} />
+      <Route path='assignadmin' element={<PilihAdmin />} />
+      <Route path='*' element={<Navigate to='registeradmin' />} />
+    </Routes>
+  </SuperAdminLayout>
 );
 
 export default App;

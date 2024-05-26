@@ -61,12 +61,12 @@ const Sidebar = ({children}: {children: React.ReactNode}) => {
                 ))
             }
             </div>
-            <div className="w-full">
-                <NavbarAdmin/>
-                <div className={`pl-[200px] transition-all duration-500 ${isOpen ? 'pl-[200px]' : 'pl-[70px]'}`}>
-                {children}
+                <div className="w-full">
+                    <NavbarAdmin/>
+                    <div className={`pl-[200px] transition-all duration-500 ${isOpen ? 'pl-[200px]' : 'pl-[70px]'}`}>
+                    {children}
+                    </div>
                 </div>
-            </div>
         </div>
     );
 };
