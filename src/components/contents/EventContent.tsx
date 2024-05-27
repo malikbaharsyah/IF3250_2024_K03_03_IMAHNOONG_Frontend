@@ -14,13 +14,16 @@ const EventContent: React.FC<EventContentProps> = ({
     eventTime,
     eventDate,
     eventDuration,
+    date,
   }) => {
+    let selectedDate = new Date(date!!).toISOString().split('T')[0]
+
     return (
         <div className="font-inter flex flex-row w-full gap-5">
             <div className="flex flex-row w-full rounded-xl p-5 lg:p-8 gap-x-5 bg-color-2 bg-opacity-50 justify-self-center">
                 <div className="w-1/2">
                     <img
-                        src={eventImage}
+                        src={`data:image/jpeg;base64,${eventImage}`}
                         alt="Foto Acara"
                         className="w-full h-auto max-h-full object-cover rounded-xl"
                         style={{ aspectRatio: '1 / 1' }}
@@ -67,7 +70,7 @@ const EventContent: React.FC<EventContentProps> = ({
                         {eventDuration} Jam
                     </div>
                 </div>
-                <Link className="w-full" to={"ticketreservation?pid="+planetariumId+"&&id="+eventId}>
+                <Link className="w-full" to={"../ticketreservation?pid="+planetariumId+"&&id="+eventId+"&&date="+selectedDate}>
                     <button className="w-full bg-gradient-to-b from-color-3 to-color-2 text-white font-inter font-bold text-xs lg:text-xl py-3 rounded-3xl hover:from-color-3 hover:to-color-2 transition duration-300 transform hover:scale-110">
                         Beli Tiket
                     </button>

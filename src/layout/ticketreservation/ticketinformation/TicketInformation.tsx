@@ -9,7 +9,7 @@ interface TicketInformationProps extends React.HTMLProps<HTMLDivElement>{
 
 const TicketInformation: React.FC<TicketInformationProps> = ({namaPlanetarium, namaShow, tanggal, waktu, jumlahTiket, hargaTiket}) =>{
     console.log(namaPlanetarium, namaShow, tanggal, waktu, jumlahTiket, hargaTiket)
-    const date = new Date().toLocaleDateString('id-ID', {
+    const date = new Date(tanggal).toLocaleDateString('id-ID', {
         weekday: 'long',
         day: 'numeric',
         month: 'long',

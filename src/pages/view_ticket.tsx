@@ -21,25 +21,28 @@ const ViewTicket: React.FC = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const id = urlParams.get("id");
 
+  const tanggal = urlParams.get("tanggal");
+  const newDate = new Date(tanggal!);
+  newDate.setHours(newDate.getHours() + 7);
   const navigate = useNavigate();
 
   if (id === null) {
     return <div></div>;
   }
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date | null>(newDate);
   const [filteredDates, setFilteredDates] = useState<DateItem[]>([]);
   const [tickets, setTickets] = useState<DateItem[]>([]);
 
   const handleBeliItemClicked = () => {
     if (selectedDate) {
       const formattedDate = selectedDate.toISOString().split('T')[0];
-      navigate(`/ticketreservation?pid=1&id=${id}&date=${formattedDate}`);
+      navigate(`/ticketreservation?pid=${pid}&id=${id}&date=${formattedDate}`);
     }
   }
 
   useEffect(() => {
-    handleDateChange(new Date());
-  }, []);
+    handleDateChange(newDate);
+  }, [newDate]);
 
   const handleDateChange = (date: Date | null) => {
     setSelectedDate(date);
@@ -69,7 +72,7 @@ const ViewTicket: React.FC = () => {
 
   const handleRequest = () => {
     console.log("Request a booking");
-    // Perform request a booking
+    navigate(`/ticketrequest?pid=${id}`)
   };
 
   const handleDateItemClick = (date: Date) => {

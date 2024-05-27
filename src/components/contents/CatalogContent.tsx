@@ -1,7 +1,6 @@
 import { FaLocationDot } from "react-icons/fa6";
 import { Link } from "react-router-dom"
 import { CatalogContentProps } from "../../interfaces/Planetarium";
-// import "../../styles/style.css";
 
   const CatalogContent: React.FC<CatalogContentProps> = ({
     planetariumId,
@@ -16,7 +15,7 @@ import { CatalogContentProps } from "../../interfaces/Planetarium";
             <div className="relative w-[305px] pb-[75%] overflow-hidden border-color-4 border-2 rounded-2xl">
         <img
           className="absolute top-0 left-0 w-full h-full object-cover"
-          src={imageSrc[0]}
+          src={`data:image/jpeg;base64,${imageSrc[0]}`}
           alt="Catalog Item"
         />
       </div>

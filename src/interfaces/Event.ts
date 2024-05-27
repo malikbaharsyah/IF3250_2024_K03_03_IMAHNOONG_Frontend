@@ -10,6 +10,7 @@ export interface Event {
     imagePath: string[];
     durasi: number;
     lokasi: string;
+    date?: Date;
   }
 
 export interface EventContentProps {
@@ -22,6 +23,7 @@ export interface EventContentProps {
     eventTime: string;
     eventDate: string;
     eventDuration: string;
+    date?: Date;
 }
 
 export interface editEvent{

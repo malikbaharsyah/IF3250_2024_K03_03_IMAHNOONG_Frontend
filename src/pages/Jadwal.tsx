@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Sidebar from "../components/base/Sidebar";
-import SideNavBar from "../components/base/SideNavBar";
 import JadwalAcara from "../components/contents/JadwalAcara";
 import JadwalKunjungan from "../components/contents/JadwalKunjungan";
 import DatePicker from "react-datepicker";
@@ -15,15 +14,15 @@ const Jadwal = () => {
     const [selectedDate, setSelectedDate] = useState(null);
     const [showOptions, setShowOptions] = useState(false);
 
-    const changeTab = (tab) => {
+    const changeTab = (tab: any) => {
         setActiveTab(tab);
     };
 
-    const handleSearchTextChange = (e) => {
+    const handleSearchTextChange = (e: any) => {
         setSearchText(e.target.value);
     };
 
-    const handleDateChange = (date) => {
+    const handleDateChange = (date: any) => {
         setSelectedDate(date);
     };
 
