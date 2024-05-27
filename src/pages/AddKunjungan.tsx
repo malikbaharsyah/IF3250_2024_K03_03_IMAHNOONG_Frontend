@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Button, Modal } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import axios from "axios";
+import api from "../services/api";
 
 const AddKunjungan = () => {
     const [namaAcara, setNamaAcara] = useState('');
@@ -50,13 +51,13 @@ const AddKunjungan = () => {
             else if (waktuZone === 'WIT') combined.setHours(combined.getHours() - 2);
             
             const isoString = combined.toISOString();
-
-            const response = await axios.post('http://localhost:9000/api/jadwal/addJadwal', {
+            
+            const response = await api.post('/api/jadwal/addJadwal', {
                 title : namaAcara,
                 date: isoString,
                 kapasitas: Number(jumlahTiket),
                 hargaTiket: Number(hargaTiket),
-                planetariumId : 1,
+                planetariumId : localStorage.getItem('idPlanetarium'),
                 deskripsiJadwal : "",
                 imagePath : "",
                 isKunjungan: true,

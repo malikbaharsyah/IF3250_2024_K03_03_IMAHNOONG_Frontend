@@ -23,7 +23,7 @@ const EventContent: React.FC<EventContentProps> = ({
             <div className="flex flex-row w-full rounded-xl p-5 lg:p-8 gap-x-5 bg-color-2 bg-opacity-50 justify-self-center">
                 <div className="w-1/2">
                     <img
-                        src={eventImage}
+                        src={`data:image/jpeg;base64,${eventImage}`}
                         alt="Foto Acara"
                         className="w-full h-auto max-h-full object-cover rounded-xl"
                         style={{ aspectRatio: '1 / 1' }}
