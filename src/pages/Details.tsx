@@ -47,7 +47,7 @@ const Details = () => {
                 <Navbar/>
             </div>
             <div className="bg-cover bg-center h-screen" style={{
-                backgroundImage: 'url("'+detailsData?.imagePath[0]+'")', 
+                backgroundImage: `url(data:image/jpeg;base64,${detailsData?.imagePath[0]})`, 
                 boxShadow: '0 10vw 10vw rgba(0, 0, 0, 1) inset, 0 -10vw 10vw rgba(0, 0, 0, 1) inset'}}>
                 <div className="w-[50vw] bg-black bg-opacity-50 h-screen flex flex-col items-center justify-center gap-4">
                     <h1 className="font-inter text-white text-center text-5xl font-bold uppercase">
@@ -76,11 +76,11 @@ const Details = () => {
                 </div>
                 <div className="w-[50vw] self-stretch relative">
                     <div className="rounded-5xl absolute bottom-1/3 left-1/3 z-1 size-80">
-                        <img src={detailsData?.imagePath[1 % (detailsData?.imagePath.length ?? 0)]}/>
+                        <img src={`data:image/jpeg;base64,${detailsData?.imagePath[0]}`}/>
                     </div>
                     {(detailsData?.imagePath?.length ?? 0 > 2) &&
                         <div className="rounded-5xl absolute bottom-1/3 right-1/3 z-1 size-80">
-                            <img src={detailsData?.imagePath[2 % (detailsData?.imagePath.length ?? 0)]}/>
+                            <img src={`data:image/jpeg;base64,${detailsData?.imagePath[0]}`}/>
                         </div>
                     }
                 </div>
