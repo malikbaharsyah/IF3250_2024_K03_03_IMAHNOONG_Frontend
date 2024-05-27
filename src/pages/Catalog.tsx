@@ -29,6 +29,7 @@ const Catalog = () => {
             <div className="flex flex-row flex-wrap px-28 gap-[32px] size-fit justify-center">
             {catalogData.map((catalogItem) => (
                     <CatalogContent
+                        planetariumId={catalogItem.id}
                         key={catalogItem.id} 
                         imageSrc={catalogItem.imagePath} 
                         title={catalogItem.namaPlanetarium}

@@ -1,9 +1,11 @@
 import { FaLocationDot } from "react-icons/fa6";
 import {EventContentProps} from "../../interfaces/Event";
-
+import { Link } from "react-router-dom"
 
 
 const EventContent: React.FC<EventContentProps> = ({
+    eventId,
+    planetariumId,
     eventImage,
     eventName,
     eventDescription,
@@ -52,9 +54,11 @@ const EventContent: React.FC<EventContentProps> = ({
                 </div>
             </div>
             <div className="pt-4 mt-auto">
-                <button className="bg-gradient-to-b from-color-3 to-color-2 text-white font-inter font-bold text-lg py-3 px-12 rounded-3xl hover:from-color-3 hover:to-color-2 transition duration-300 transform hover:scale-110">
-                    Beli Tiket
-                </button>
+                <Link to={"ticketreservation?pid="+planetariumId+"&&id="+eventId}>
+                    <button className="bg-gradient-to-b from-color-3 to-color-2 text-white font-inter font-bold text-lg py-3 px-12 rounded-3xl hover:from-color-3 hover:to-color-2 transition duration-300 transform hover:scale-110">
+                        Beli Tiket
+                    </button>
+                </Link>
             </div>
         </div>
     </div>
