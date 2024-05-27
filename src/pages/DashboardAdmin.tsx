@@ -92,7 +92,7 @@ const TodayOrdersTable = () => {
         </thead>
         <tbody className="max-h-full overflow-scroll">
           {pesananData.map((item, index) => {
-            const isLast = index === tableRows.length - 1;
+            const isLast = index === pesananData.length - 1;
             const classes = isLast ? "p-4" : "p-4";
             const data_style =
               "[font-family:'Inter-Medium',Helvetica] font-medium text-[#94959a] text-[14px] tracking-[0] leading-[normal]";

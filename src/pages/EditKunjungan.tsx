@@ -12,12 +12,12 @@ const EditKunjungan = () => {
     const [namaAcara, setNamaAcara] = useState('');
     const [hargaTiket, setHargaTiket] = useState('');
     const [jumlahTiket, setJumlahTiket] = useState('');
-    const [tanggal, setTanggal] = useState('');
+    const [tanggal, setTanggal] = useState(new Date());
     const [waktu, setWaktu] = useState('');
     const [waktuZone, setWaktuZone] = useState('WIB');
     const [isNamaAcaraUpdated, setIsNamaAcaraUpdated] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: any) => {
         e.preventDefault();
         setOpenModal(true);
     };
@@ -91,13 +91,12 @@ const EditKunjungan = () => {
             setHargaTiket(eventData.hargaTiket.toString());
             setJumlahTiket(eventData.kapasitas.toString());
             var dateKunjungan = new Date(eventData.waktuKunjungan);
-            const tanggalKunjungan = dateKunjungan.toLocaleString('id-ID', {
-                day: 'numeric',
-                month: 'numeric',
-                year: 'numeric',
-            });
-            
-            setTanggal(tanggalKunjungan);
+            // const tanggalKunjungan = dateKunjungan.toLocaleString('id-ID', {
+            //     day: 'numeric',
+            //     month: 'numeric',
+            //     year: 'numeric',
+            // });
+            setTanggal(dateKunjungan);
 
             const hour = String(dateKunjungan.getHours()).padStart(2, '0'); 
             const minute = String(dateKunjungan.getMinutes()).padStart(2, '0'); 
@@ -162,7 +161,7 @@ const EditKunjungan = () => {
                                 <label htmlFor="tanggal" className="block text-sm font-medium text-gray-700">Tanggal</label>
                                 <DatePicker 
                                     selected={tanggal} 
-                                    onChange={(date) => setTanggal(date)} 
+                                    onChange={(date) => setTanggal(date!!)} 
                                     placeholderText="Pilih Tanggal"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2" />
                             </div>
