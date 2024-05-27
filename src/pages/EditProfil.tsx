@@ -7,6 +7,7 @@ import { HiOutlineExclamationCircle } from "react-icons/hi";
 import axios from "axios";
 import {EditPlanetarium} from "../interfaces/Planetarium";
 import api from "../services/api";
+import { compressBase64, compressBase64InChunks } from "../utils/ImageCompressor";
 
 
 const EditProfil = () => {
@@ -18,6 +19,7 @@ const EditProfil = () => {
     const [gambarFiles, setGambarFiles] = useState([]);
     const [gambarUrls, setGambarUrls] = useState([]);
     const [isNamaPlanetariumUpdated, setIsNamaPlanetariumUpdated] = useState(false);
+    const [lokasi, setLokasi] = useState('');
 
     const handleSlideshowChange = (e) => {
         const files = e.target.files;
@@ -83,12 +85,22 @@ const EditProfil = () => {
 
     const handleConfirm = async () => {
         try {
+            // check file size of each image
+            // if file size > 1MB, alert user
+            for (let i = 0; i < gambarFiles.length; i++) {
+                const file = gambarFiles[i];
+                if (file.size > 1024 * 1024) {
+                    alert("Ukuran gambar terlalu besar!");
+                    return;
+                }
+            }
+            console.log(gambarFiles);
+            console.log(gambarUrls);
             setOpenModal(false);
             console.log('Submit');
             // if(!tanggal) return alert('Tanggal belum diisi');
             // if(!waktu) return alert('Waktu belum diisi');
             if(!namaPlanetarium) return alert('Nama planetarium belum diisi');
-
 
             const response = await api.post('/api/details/editPlanetarium', {
             id : planetariumId,
@@ -97,8 +109,10 @@ const EditProfil = () => {
             prosedurPendaftaran: prosedurPendaftaran,
             tataTertib: tataTertib,
             noTelepon: noTelp,
-            imagePath: [""], // TODO
-            lokasi: "",
+            // imagePath: gambarUrls.map((url) => url.split(',')[1]),
+            
+            imagePath: [gambarUrls[0].split(',')[1]],
+            lokasi: lokasi,
             });
             console.log('Planetarium edit successfully:', response.data);
         } catch (error) {
@@ -109,10 +123,10 @@ const EditProfil = () => {
 
     const [eventData, setEventData] = useState<EditPlanetarium>();
 
-    const planetariumId = 1; //TODO
+    const planetariumId = parseInt(localStorage.getItem('idPlanetarium'));
 
     useEffect(() => {
-    fetch('http://localhost:9000/api/details/' + planetariumId)
+    fetch(`http://localhost:9000/api/details/${planetariumId}`)
         .then(response => response.json())
         .then(data => {setEventData(data);})
         .catch(error => console.error('Error fetching catalog data:', error));
@@ -126,6 +140,7 @@ const EditProfil = () => {
             setProsedurPendaftaran(eventData.prosedurPendaftaran);
             setTataTertib(eventData.tataTertib);
             setNoTelp(eventData.noTelepon);
+            setLokasi(eventData.lokasi);
             
             // imageRef.current = eventData.imagePath[0];
             // console.log(image);
@@ -196,6 +211,16 @@ const EditProfil = () => {
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-fit p-2" 
                                 value={noTelp} 
                                 onChange={(e) => setNoTelp(e.target.value)} />
+                        </div>
+                        <div className="mt-4">
+                            <label htmlFor="lokasi" className="block pb-2 text-sm font-medium text-gray-700">Lokasi</label>
+                            <input 
+                                type="text" 
+                                id="lokasi" 
+                                placeholder="Masukkan Lokasi"
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" 
+                                value={lokasi} 
+                                onChange={(e) => setLokasi(e.target.value)} />
                         </div>
                         <div className="font-medium text-lg pt-4">
                             Galeri Planetarium

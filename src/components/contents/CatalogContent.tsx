@@ -13,7 +13,7 @@ import { CatalogContentProps } from "../../interfaces/Planetarium";
     return (
         <div className="grid justify-center grid-flow-row auto-rows-max">
             <div>
-                <img className="border-color-4 border-2 rounded-2xl w-[405px]" src={imageSrc[0]} alt="Catalog Item"/>
+                <img className="border-color-4 border-2 rounded-2xl w-[405px]" src={`data:image/jpeg;base64,${imageSrc[0]}`} alt="Catalog Item"/>
             </div>
             
             <div className="mt-4 bg-color-2 h-fit bg-opacity-50 rounded-2xl w-[405px] justify-self-center font-inter text-white px-11 p-8">
