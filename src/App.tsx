@@ -39,7 +39,6 @@ function App() {
           <Route path='ticketreservation' element={<TicketReservation />} />
           <Route path='ticketrequest' element={<TicketRequest />} />
           <Route path='ticketrequestpayment' element={<TicketRequestPayment />} />
-          <Route path='helppage' element={<HelpPage />} />
           <Route path='listtiket' element={<ListTiket />} />
           <Route path='details' element={<Details />} />
           <Route path='login' element={<LoginAdmin />} />

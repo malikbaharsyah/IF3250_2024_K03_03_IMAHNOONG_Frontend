@@ -13,6 +13,8 @@ export interface Event {
   }
 
 export interface EventContentProps {
+    eventId: number;
+    planetariumId: number;
     eventImage: string;
     eventName: string;
     eventDescription: string;
