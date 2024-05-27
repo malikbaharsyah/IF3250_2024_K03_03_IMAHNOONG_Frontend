@@ -20,6 +20,7 @@ interface DateItem {
 const ViewTicket: React.FC = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const id = urlParams.get("id");
+  const pid = urlParams.get("pid");
 
   const navigate = useNavigate();
 
@@ -33,7 +34,7 @@ const ViewTicket: React.FC = () => {
   const handleBeliItemClicked = () => {
     if (selectedDate) {
       const formattedDate = selectedDate.toISOString().split('T')[0];
-      navigate(`/ticketreservation?pid=1&id=${id}&date=${formattedDate}`);
+      navigate(`/ticketreservation?pid=${pid}&id=${id}&date=${formattedDate}`);
     }
   }
 
@@ -69,7 +70,7 @@ const ViewTicket: React.FC = () => {
 
   const handleRequest = () => {
     console.log("Request a booking");
-    // Perform request a booking
+    navigate(`/ticketrequest?pid=${pid}`)
   };
 
   const handleDateItemClick = (date: Date) => {
