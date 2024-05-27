@@ -53,9 +53,10 @@ const StepperControl: React.FC<StepperControlProps> = ({
           idJadwal: jadwalInfo[0],
           idPlanetarium: jadwalInfo[1],
           note: finalDataReg[4],
-        //   waktuDibayar: new Date(),
-        //   tanggalTiket: jadwalInfo[3],
+          tanggalTiket: new Date(jadwalInfo[3]),
         };
+
+        console.log(requestData)
     
         fetch("http://localhost:9000/api/pesanTiket/", {
           method: "POST",
@@ -66,8 +67,7 @@ const StepperControl: React.FC<StepperControlProps> = ({
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
-            id = data;
+            setIdTiket(data);
           })
           .catch((error) => console.error("Error fetching jadwal data:", error));
         
@@ -111,7 +111,13 @@ const StepperControl: React.FC<StepperControlProps> = ({
 
     return (
         <div className="flex justify-around my-2 gap-4 transition">
-            {currentStep === steps.length /*|| currentStep === steps.length-1*/ ? <></> : <button onClick={() => handleClick("")}
+            {currentStep === steps.length /*|| currentStep === steps.length-1*/ ? <></> : <button onClick={() => {
+                if (currentStep === 1){
+                    routeChange()
+                }
+                
+                handleClick("")
+            }}
             className={`transition duration-200 ease-in-out w-[202px] h-[69px] rounded-full bg-gradient-to-b bg-opacity-40 hover:from-red-600 hover:to-red-400 hover:transition bg-color-4
                             font-inter font-medium text-[24px] ${currentStep === steps.length || (currentStep === 2 && type === 0) ? "hidden" : ""}`}>
                 Batal
@@ -145,7 +151,9 @@ const StepperControl: React.FC<StepperControlProps> = ({
                         if (condition.paymentMethod || type === 1) {
                             handleClick("next");
                             // bikin tiket
+                            console.log("BIKIN ITKET")
                             handleFetch();
+                            console.log(idTiket)
                         }
                         else { 
                             alert("Pilih metode pembayaran!") 
