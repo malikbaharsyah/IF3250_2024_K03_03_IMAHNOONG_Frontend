@@ -20,7 +20,8 @@ export interface StepperControlProps {
     }
     idTiket: string;
     setIdTiket: (idTiket: string) => void;
-    jadwalInfo: [number, number, Date, string]
+    jadwalInfo: [number, number, Date, string];
+    planetariumId: string;
 }
 
 export interface RegistrationProps {
@@ -34,6 +35,10 @@ export interface RequestProps {
     finalData: [string, string, string, string, string, string | undefined, number, string];
     setFinalData: (finalData: [string, string, string, string, string, string | undefined, number, string]) => void;
     setIsFormValid: (isValid: boolean) => void;
+}
+
+export interface ConfirmationProps {
+    finalData: [string, string, string, string, string, string | undefined, number, string];
 }
 
 export interface PaymentProps {

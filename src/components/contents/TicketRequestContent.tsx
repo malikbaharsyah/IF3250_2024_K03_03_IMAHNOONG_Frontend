@@ -6,11 +6,18 @@ import NavbarReservation from "../../layout/ticketreservation/base/NavbarReserva
 import { motion, AnimatePresence } from "framer-motion"
 import RequestPage from "../../layout/ticketreservation/subcontents/RequestPage";
 import ConfirmationPending from "../../layout/ticketreservation/subcontents/ConfirmationPending";
-const TicketRequestContent = () => {
+
+interface TicketRequestContentProps extends React.HTMLProps<HTMLDivElement> {
+    planetariumId: string;
+}
+
+
+const TicketRequestContent: React.FC<TicketRequestContentProps> = ({planetariumId}) => {
 
     const [currentStep, setCurrentStep] = useState(1);
     const [userData, setUserData] = useState('');
     const [finalData, setFinalData] = useState<[string, string, string, string, string, string | undefined, number, string]>(['', '', '', '', '', '', 0, '']);
+    const [jadwalInfo, setJadwalInfo] = useState<[number, number, Date, string]>([0, 0, new Date(), '']);
     const [isFormValid, setIsFormValid] = useState(false);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [payment, setPayment] = useState("");
@@ -45,7 +52,9 @@ const TicketRequestContent = () => {
                     setIsFormValid={setIsFormValid}
                 />
             case 2:
-                return <ConfirmationPending/>
+                return <ConfirmationPending
+                    finalData={finalData}
+                />
         }
     }
 
@@ -80,16 +89,17 @@ const TicketRequestContent = () => {
                             {setComponent(currentStep)}
                             <div className="justify-center size-fit rounded-[20px] text-color-4 font-inter">
                                 <StepperControl
-                                    handleClick={handleClick}
-                                    currentStep={currentStep}
-                                    steps={steps}
-                                    type={0}
-                                    finalDataReg={['','','',0,'']}
-                                    finalDataReq={finalData}
-                                    condition={condition}
-                                    idTiket={idTiket}
-                                    setIdTiket={setIdTiket}
-                                />
+                                        handleClick={handleClick}
+                                        currentStep={currentStep}
+                                        steps={steps}
+                                        type={0}
+                                        finalDataReg={['', '', '', 0, '']}
+                                        finalDataReq={finalData}
+                                        condition={condition}
+                                        idTiket={idTiket}
+                                        setIdTiket={setIdTiket}
+                                        jadwalInfo={jadwalInfo}
+                                        planetariumId={planetariumId}                                />
                             </div>
                             </StepperContextReq.Provider>
                         </div>

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, useMemo, useState } from "react";
 import ConfirmPage from "../../layout/ticketreservation/subcontents/ConfirmPage";
 import PaymentPage from "../../layout/ticketreservation/subcontents/PaymentPage";
@@ -10,8 +11,6 @@ import NavbarReservation from "../../layout/ticketreservation/base/NavbarReserva
 import { motion, AnimatePresence } from "framer-motion"
 import PaymentMethod from "../../layout/ticketreservation/subcontents/PaymentMethod";
 import { Jadwal } from "../../interfaces/detailsData";
-import { useParams } from "react-router-dom";
-import TicketReservation from '../../pages/TicketReservation';
 import { Planetarium } from '../../interfaces/Planetarium';
 
 
@@ -147,12 +146,12 @@ const TicketReservationContent: React.FC<TicketReservationProps> = ({planetarium
                                 steps={steps}
                                 type={1}
                                 finalDataReg={finalData}
-                                finalDataReq={['','','','','','',0,'']}
+                                finalDataReq={['', '', '', '', '', '', 0, '']}
                                 condition={condition}
                                 idTiket={idTiket}
                                 setIdTiket={setIdTiket}
-                                jadwalInfo={jadwalInfo}
-                            />
+                                jadwalInfo={jadwalInfo} 
+                                planetariumId={planetariumId}                            />
                         </div>
                     </div>
                 </div>
