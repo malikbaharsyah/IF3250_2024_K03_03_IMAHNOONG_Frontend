@@ -10,6 +10,8 @@ import {
   ArrowBackIosRounded,
 } from "@mui/icons-material";
 import { Jadwal } from "../interfaces/detailsData";
+import { useNavigate } from 'react-router-dom';
+
 
 interface DateItem {
   date: Date;
@@ -19,12 +21,25 @@ const ViewTicket: React.FC = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const id = urlParams.get("id");
 
+  const navigate = useNavigate();
+
   if (id === null) {
     return <div></div>;
   }
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [filteredDates, setFilteredDates] = useState<DateItem[]>([]);
   const [tickets, setTickets] = useState<DateItem[]>([]);
+
+  const handleBeliItemClicked = () => {
+    if (selectedDate) {
+      const formattedDate = selectedDate.toISOString().split('T')[0];
+      navigate(`/ticketreservation?pid=1&id=${id}&date=${formattedDate}`);
+    }
+  }
+
+  useEffect(() => {
+    handleDateChange(new Date());
+  }, []);
 
   const handleDateChange = (date: Date | null) => {
     setSelectedDate(date);
@@ -112,7 +127,7 @@ const ViewTicket: React.FC = () => {
               <p className="text-white text-[1vw] font-medium">Tersedia</p>
             </div>
             <div className="beli-tiket">
-              <button className="text-white bg-gradient-to-r from-[#4F1395] to-[#2224A1] w-[10vw] rounded-full h-[3vw]">
+              <button onClick={handleBeliItemClicked} className="text-white bg-gradient-to-r from-[#4F1395] to-[#2224A1] w-[10vw] rounded-full h-[3vw]">
                 Beli Tiket
               </button>
             </div>
