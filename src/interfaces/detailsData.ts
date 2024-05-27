@@ -19,4 +19,5 @@ export interface Jadwal {
     deskripsiJadwal: string; 
     imagePath: string[];
     durasi: number;
+    date?: Date;
 }

@@ -20,14 +20,16 @@ interface DateItem {
 const ViewTicket: React.FC = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const id = urlParams.get("id");
-  const pid = urlParams.get("pid");
 
+  const tanggal = urlParams.get("tanggal");
+  const newDate = new Date(tanggal!);
+  newDate.setHours(newDate.getHours() + 7);
   const navigate = useNavigate();
 
   if (id === null) {
     return <div></div>;
   }
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date | null>(newDate);
   const [filteredDates, setFilteredDates] = useState<DateItem[]>([]);
   const [tickets, setTickets] = useState<DateItem[]>([]);
 
@@ -39,8 +41,8 @@ const ViewTicket: React.FC = () => {
   }
 
   useEffect(() => {
-    handleDateChange(new Date());
-  }, []);
+    handleDateChange(newDate);
+  }, [newDate]);
 
   const handleDateChange = (date: Date | null) => {
     setSelectedDate(date);
@@ -70,7 +72,7 @@ const ViewTicket: React.FC = () => {
 
   const handleRequest = () => {
     console.log("Request a booking");
-    navigate(`/ticketrequest?pid=${pid}`)
+    navigate(`/ticketrequest?pid=${id}`)
   };
 
   const handleDateItemClick = (date: Date) => {

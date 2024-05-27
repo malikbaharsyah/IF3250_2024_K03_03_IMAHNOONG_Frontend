@@ -31,6 +31,7 @@ const Details = () => {
         fetch("http://localhost:9000/api/jadwal/closestJadwal/"+id)
             .then((response) => response.json())
             .then((data) => {
+                console.log(data)
                 setEventData(data);
             })
         
@@ -38,7 +39,16 @@ const Details = () => {
     }, []);
 
     const handleButtonClick = () => {
-        // console.log(selectedDate);
+        let date = new Date();
+        let dateString = date.toISOString().split('T')[0];
+        if (selectedDate !== undefined && selectedDate !== null) {
+            console.log(selectedDate)
+            selectedDate.setDate(selectedDate.getDate() + 1);
+            console.log(selectedDate)
+            dateString = selectedDate.toISOString().split('T')[0]
+        }
+        console.log(dateString)
+        window.location.href = `/listtiket?id=${id}&&tanggal=${dateString}`;
     }
 
     return (
@@ -59,7 +69,7 @@ const Details = () => {
                 <div className="relative -top-[25%]">
                     <div className="flex items-center justify-center absolute left-1/2 transform -translate-x-1/2">
                         <DatePickerComponent selectedDate={selectedDate} onDateChange={setSelectedDate}/>
-                        <PrimaryButton text="Pilih" onClick={handleButtonClick} />
+                        <PrimaryButton text="Cari Tiket" onClick={handleButtonClick} />
                     </div>
                 </div>
             </div>
@@ -93,6 +103,9 @@ const Details = () => {
                 <div className="flex flex-col gap-4">
                     {eventData.map((event) => (
                         <EventContent
+                            key={event.id}
+                            eventId={event.id}
+                            planetariumId={event.planetariumId}
                             eventName={event.namaJadwal}
                             eventDescription={event.deskripsiJadwal}
                             eventLocation={detailsData?.lokasi ?? ""}
@@ -100,6 +113,7 @@ const Details = () => {
                             eventDate={event.waktuKunjungan[2]}
                             eventImage={event.imagePath[0]}
                             eventDuration={event.durasi.toString()}
+                            date={event.date}
                         />
                     ))}
                 </div>
