@@ -1,4 +1,5 @@
 import { FaLocationDot } from "react-icons/fa6";
+import { FaTicket } from "react-icons/fa6";
 import {EventContentProps} from "../../interfaces/Event";
 import { Link } from "react-router-dom"
 
@@ -34,13 +35,23 @@ const EventContent: React.FC<EventContentProps> = ({
                             {eventDescription}
                         </div>
                     </div>
-                    <div className="flex flex-row pt-2 lg:pt-4">
-                        <div className="text-xl text-white">
-                            <FaLocationDot/>
+                    <div className="flex flex-col pt-2 lg:pt-4 gap-2">
+                        <div className="flex flex-row items-center">
+                            <div className="text-xl text-white">
+                                <FaTicket/>
+                            </div>
+                            <p className="font-inter text-white text-sm lg:text-lg xl:text-xl font-medium ml-2">
+                                Rp. 100.000
+                            </p>
                         </div>
-                        <p className="font-inter text-white text-sm lg:text-lg xl:text-xl font-medium ml-2">
-                            {eventLocation}
-                        </p>
+                        <div className="flex flex-row items-center">
+                            <div className="text-xl text-white">
+                                <FaLocationDot/>
+                            </div>
+                            <p className="font-inter text-white text-sm lg:text-lg xl:text-xl font-medium ml-2">
+                                {eventLocation}
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
