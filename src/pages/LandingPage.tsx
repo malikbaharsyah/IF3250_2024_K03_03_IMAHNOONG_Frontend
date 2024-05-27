@@ -73,12 +73,12 @@ const LandingPage = () => {
                 <div>
                     <Navbar/>
                 </div>
-                <div className="mt-[24vw] mx-auto sm:ml-20">
+                <div className="mt-[24vw] mx-10 sm:mx-20">
                     <h1 className="font-inter text-white text-left text-xl sm:text-3xl font-bold py-1">
                         Observatorium dan Planetarium
                     </h1>
                     <p className="font-inter text-white text-left text-sm sm:text-xl font-medium py-1">
-                        {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit. */}
+                        Tiket Observatorium & Planetarium: Jelajahi Keindahan Alam Semesta. Pesan Sekarang!
                     </p>
                     <div className="flex flex-row gap-4 md:gap-8 pt-4">
                         <button className="w-fit bg-gradient-to-b from-color-2 to-color-3 text-white font-inter font-bold text-xs md:text-lg py-2 px-6 sm:py-3 sm:px-12 rounded-3xl hover:from-color-2 hover:to-color-3 transition duration-300 transform hover:scale-105" 
@@ -91,7 +91,7 @@ const LandingPage = () => {
                         </button>
                     </div>
                 </div>
-                <div ref= {OnPRef} className="mt-[20vw] ml-20 pt-12 ">
+                <div ref= {OnPRef} className="mt-[20vw] pt-12 px-10 md:px-20">
                     <h1 className="font-inter text-white text-left text-3xl font-bold py-1">
                         Buka hari ini
                     </h1>
@@ -131,7 +131,7 @@ const LandingPage = () => {
                         </div>
                     </div>
                 </div>
-                <div ref={AcaraRef} className="mt-20 ml-20 pt-12">
+                <div ref={AcaraRef} className="mt-20 pt-12 px-10 md:px-20">
                     <h1 className="font-inter text-white text-left text-3xl font-bold py-1">
                         Acara Terdekat
                     </h1>
