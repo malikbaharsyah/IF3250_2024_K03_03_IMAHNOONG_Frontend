@@ -67,6 +67,11 @@ const ViewTicket: React.FC = () => {
     }
   };
 
+  const handleRequest = () => {
+    console.log("Request a booking");
+    // Perform request a booking
+  };
+
   const handleDateItemClick = (date: Date) => {
     setSelectedDate(date);
     handleDateChange(date);
@@ -210,7 +215,7 @@ const ViewTicket: React.FC = () => {
   return (
     <div className="flex flex-col">
       <Navbar />
-      <div className="flex flex-col items-center h-screen bg-stars bg-no-repeat bg-cover bg-local overflow-auto">
+      <div className="flex flex-col items-center h-full bg-stars bg-no-repeat bg-cover bg-local pb-10">
         <p className="text-white font-bold mt-8 text-2xl">Nama Planetarium</p>
         <div className="my-8">
           <form className="flex flex-row py-4 px-6 space-x-4 bg-white bg-opacity-50 rounded-full items-center">
@@ -260,6 +265,18 @@ const ViewTicket: React.FC = () => {
             </div>
           ))}
         </Slider>
+        <div className="my-8 w-full px-20">
+          <div className="flex flex-row justify-between py-5 px-10 bg-[#4F1395] bg-opacity-50 rounded-full items-center">
+            <p className="text-white text-lg font-medium "> Ingin melakukan pemesanan by request. </p>
+            <button
+              type="button"
+              onClick={handleRequest}
+              className="text-white rounded-full py-2 px-6 bg-gradient-to-r from-[#4F1395] to-[#2224A1] font-medium"
+            >
+              Request a Booking
+            </button>
+          </div>
+        </div>
         <div className="flex flex-col items-center mt-8">
           <p className="text-white font-semibold text-xl my-4">
             Daftar Tiket Tersedia
