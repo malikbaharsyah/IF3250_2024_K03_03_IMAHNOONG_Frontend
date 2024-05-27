@@ -18,10 +18,10 @@ import { Planetarium } from '../../interfaces/Planetarium';
 interface TicketReservationProps extends React.HTMLProps<HTMLDivElement>{
     planetariumId: string;
     id: string;
-    selectedDate: string;
+    date: string;
 }
 
-const TicketReservationContent: React.FC<TicketReservationProps> = ({planetariumId, id, selectedDate}) => {
+const TicketReservationContent: React.FC<TicketReservationProps> = ({planetariumId, id, date}) => {
 
     if (planetariumId === null || id === null) {
         return
@@ -55,7 +55,7 @@ const TicketReservationContent: React.FC<TicketReservationProps> = ({planetarium
             .catch((error) => console.error("Error fetching review data:", error));
     }, []);
 
-    const [jadwalInfo, setJadwalInfo] = useState<[number, number, Date, string]>([parseInt(id), parseInt(planetariumId), new Date(), selectedDate]);
+    const [jadwalInfo, setJadwalInfo] = useState<[number, number, Date, string]>([parseInt(id), parseInt(planetariumId), new Date(), date]);
 
     const [currentStep, setCurrentStep] = useState(1);
     const [userData, setUserData] = useState('');
@@ -139,7 +139,7 @@ const TicketReservationContent: React.FC<TicketReservationProps> = ({planetarium
                         {setComponent(currentStep)}
                         </StepperContext.Provider>
                         <div className="flex flex-col justify-start size-fit bg-color-4 bg-opacity-20 rounded-[20px] p-8 text-color-4 font-inter gap-4">
-                            <TicketInformation namaPlanetarium={planetariumData?.namaPlanetarium!!} namaShow={ticketData?.namaJadwal!!} tanggal={selectedDate} waktu={ticketData?.waktuKunjungan[0]!!} jumlahTiket={jumlahTiket} hargaTiket={ticketData?.hargaTiket!!}/>
+                            <TicketInformation namaPlanetarium={planetariumData?.namaPlanetarium!!} namaShow={ticketData?.namaJadwal!!} tanggal={date} waktu={ticketData?.waktuKunjungan[0]!!} jumlahTiket={jumlahTiket} hargaTiket={ticketData?.hargaTiket!!}/>
                             {/* <TicketInformation/> */}
                             <StepperControl
                                 handleClick={handleClick}

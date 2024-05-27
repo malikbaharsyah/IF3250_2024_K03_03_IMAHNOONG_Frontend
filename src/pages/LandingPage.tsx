@@ -148,6 +148,7 @@ const LandingPage = () => {
                                 eventDate={eventItem.waktuKunjungan[0]}
                                 eventImage={eventItem.imagePath[0]}
                                 eventDuration={(eventItem.durasi / 60).toString() + "." + (eventItem.durasi % 60).toString()}
+                                date={eventItem.date}
                             />
                         ))}
                         {/* <EventContent/>

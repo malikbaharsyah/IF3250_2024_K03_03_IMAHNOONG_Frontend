@@ -26,9 +26,10 @@ const StepperControl: React.FC<StepperControlProps> = ({
           idJadwal: jadwalInfo[0],
           idPlanetarium: jadwalInfo[1],
           note: finalDataReg[4],
-        //   waktuDibayar: new Date(),
-        //   tanggalTiket: jadwalInfo[3],
+          tanggalTiket: new Date(jadwalInfo[3]),
         };
+
+        console.log(requestData)
     
         fetch("http://localhost:9000/api/pesanTiket/", {
           method: "POST",
@@ -39,12 +40,9 @@ const StepperControl: React.FC<StepperControlProps> = ({
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
-            id = data;
+            setIdTiket(data);
           })
           .catch((error) => console.error("Error fetching jadwal data:", error));
-        
-        setIdTiket(id);
       }
     
 
@@ -89,7 +87,9 @@ const StepperControl: React.FC<StepperControlProps> = ({
                         if (condition.paymentMethod || type === 1) {
                             handleClick("next");
                             // bikin tiket
+                            console.log("BIKIN ITKET")
                             handleFetch();
+                            console.log(idTiket)
                         }
                         else { 
                             alert("Pilih metode pembayaran!") 
