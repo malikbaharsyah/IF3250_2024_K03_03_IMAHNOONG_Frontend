@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { StepperControlProps } from "../../../interfaces/TicketReservation";
 
 const StepperControl: React.FC<StepperControlProps> = ({
@@ -13,11 +13,38 @@ const StepperControl: React.FC<StepperControlProps> = ({
     idTiket,
     setIdTiket,
     jadwalInfo,
+    planetariumId
   }) => {
     const navigate = useNavigate();
+    
+    function timeStringToMinutes(time: string): number {
+        const [hours, minutes] = time.split(':').map(Number);
+        return hours * 60 + minutes;
+    }
+    
+    function getDurationInMinutes(start: string, end: string): number {
+        const startMinutes = timeStringToMinutes(start);
+        const endMinutes = timeStringToMinutes(end);
+        return endMinutes - startMinutes;
+    }
 
+    function parseDateTime(dateString: string, timeString: string): Date {
+        // Combine the date and time strings
+        const combinedString = `${dateString}T${timeString}:00`;
+    
+        // Create and return a new Date object
+        const date = new Date(combinedString);
+        
+        // Check if the date is valid
+        if (isNaN(date.getTime())) {
+            throw new Error("Invalid date or time format");
+        }
+        
+        return date;
+    }
+    
     const handleFetch = () => {
-        var id = '';
+        let id = '';
         const requestData = {
           namaPemesan: finalDataReg[0],
           jumlahTiket: finalDataReg[3],
@@ -43,7 +70,38 @@ const StepperControl: React.FC<StepperControlProps> = ({
             setIdTiket(data);
           })
           .catch((error) => console.error("Error fetching jadwal data:", error));
-      }
+        
+        setIdTiket(id);
+    }
+
+    const handleRequest = () => {
+        const requestData = {
+            planetariumId: parseInt(planetariumId),
+            namaPemesan: finalDataReq[0],
+            jumlahTiket: finalDataReq[6],
+            email: finalDataReq[4],
+            note: finalDataReq[7],
+            konfirmasi: false,
+            noTelepon: finalDataReq[5],
+            waktuKunjungan: parseDateTime(finalDataReq[1], finalDataReq[2]),
+            durasi: getDurationInMinutes(finalDataReq[2], finalDataReq[3]), 
+        }
+        fetch("http://localhost:9000/api/requestTiket/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(requestData),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+        })
+        .catch((error) => console.error("Error:", error))
+
+    }
+
+    
     
 
     const routeChange = () =>{ 
@@ -66,7 +124,7 @@ const StepperControl: React.FC<StepperControlProps> = ({
                         //fill out all form before continue;
                         if (condition.isFormValid) { 
                             if (type === 0){
-                                //TODO: integrasi kirim ke backend permintaan jadwalnya
+                                handleRequest();
                             }
                             handleClick("next"); 
                         }
