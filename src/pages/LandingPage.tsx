@@ -38,7 +38,7 @@ const LandingPage = () => {
         const { onClick } = props;
         return (
             <div
-                className="custom-arrow-next text-white z-10 absolute w-5 h-5 flex items-center justify-center rounded-full top-1/2 transform -translate-y-1/2 right-0 cursor-pointer"
+                className="pl-12 text-white absolute w-10 h-10 flex items-center justify-center top-1/2 transform -translate-y-1/2 right-0 cursor-pointer"
                 onClick={onClick}>
                 <ArrowForwardIosRounded fontSize="large"/>
             </div>
@@ -49,7 +49,7 @@ const LandingPage = () => {
         const { onClick } = props;
         return (
             <div
-                className="custom-arrow-prev text-white z-10 absolute w-5 h-5 flex items-center justify-center rounded-full top-1/2 transform -translate-y-1/2 left-0 cursor-pointer"
+                className="pr-12 custom-arrow-prev text-white z-10 absolute w-5 h-5 flex items-center justify-center rounded-full top-1/2 transform -translate-y-1/2 left-0 cursor-pointer"
                 onClick={onClick}>
                 <ArrowBackIosRounded fontSize="large"/>
             </div>
@@ -111,7 +111,7 @@ const LandingPage = () => {
                     </div>
                 </div>
                 <div ref= {OnPRef} className="mt-[20vw] pt-12 px-10 md:px-20">
-                    <h1 className="font-inter text-white text-left text-3xl font-bold py-1">
+                    <h1 className="font-inter text-white text-left text-xl sm:text-3xl font-bold py-1">
                         Buka hari ini
                     </h1>
                     <div className="mt-16 w-full">
@@ -148,10 +148,10 @@ const LandingPage = () => {
                     </div>
                 </div>
                 <div ref={AcaraRef} className="mt-20 pt-12 px-10 md:px-20">
-                    <h1 className="font-inter text-white text-left text-3xl font-bold py-1">
+                    <h1 className="font-inter text-white text-left text-xl sm:text-3xl font-bold py-1">
                         Acara Terdekat
                     </h1>
-                    <div className="flex flex-row flex-wrap justify-center gap-12 size-fit my-16">
+                    <div className="flex flex-col justify-center gap-12 w-full my-16">
                         {eventData.map((eventItem) => (
                             <EventContent
                                 key={eventItem.id}
