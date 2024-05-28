@@ -64,9 +64,28 @@ const LandingPage = () => {
         slidesToShow: 3,
         slidesToScroll: 1,
         nextArrow: <NextArrow />,
-        prevArrow: <PrevArrow /> 
-
-      };
+        prevArrow: <PrevArrow />,
+        responsive: [
+            {
+              breakpoint: 1280,
+              settings: {
+                slidesToShow: 3
+              }
+            },
+            {
+              breakpoint: 1100,
+              settings: {
+                slidesToShow: 2
+              }
+            },
+            {
+              breakpoint: 810,
+              settings: {
+                slidesToShow: 1
+              }
+            }
+          ]
+        };
     return (
         <div className="h-screen bg-stars bg-no-repeat bg-cover bg-local overflow-auto" >
             <div className="flex flex-col bg-[url('../../public/bgLandingPage.svg')] min-h-[100vh] bg-no-repeat bg-[length:100vw] gap-y-10">
@@ -95,40 +114,37 @@ const LandingPage = () => {
                     <h1 className="font-inter text-white text-left text-3xl font-bold py-1">
                         Buka hari ini
                     </h1>
-                    <div className="mt-16 w-[92%] mx-auto pr-16">
-                        <div className="px-8">
-                            <Slider {...settings}>
-                                {/* <div> */}
-                                    {/* <CatalogContent/> */}
-                                    {catalogData.map((catalogItem) => (
-                                        <CatalogContent
-                                            key={catalogItem.id}
-                                            planetariumId={catalogItem.id} 
-                                            imageSrc={catalogItem.imagePath} 
-                                            title={catalogItem.namaPlanetarium}
-                                            description={catalogItem.deskripsi}
-                                            location={catalogItem.lokasi}
-                                            
-                                        />
-                                    ))}
-                                {/* </div> */}
-                                {/* <div>
-                                    <CatalogContent/>
-                                </div>
-                                <div>
-                                    <CatalogContent/>
-                                </div>
-                                <div>
-                                    <CatalogContent/>
-                                </div>
-                                <div>
-                                    <CatalogContent/>
-                                </div>
-                                <div>
-                                    <CatalogContent/>
-                                </div> */}
-                            </Slider>
-                        </div>
+                    <div className="mt-16 w-full">
+                        <Slider {...settings}>
+                            {/* <div> */}
+                                {/* <CatalogContent/> */}
+                                {catalogData.map((catalogItem) => (
+                                    <CatalogContent
+                                    key={catalogItem.id}
+                                    planetariumId={catalogItem.id} 
+                                    imageSrc={catalogItem.imagePath} 
+                                    title={catalogItem.namaPlanetarium}
+                                    description={catalogItem.deskripsi}
+                                    location={catalogItem.lokasi}
+                                    /> 
+                                ))}
+                            {/* </div> */}
+                            {/* <div>
+                                <CatalogContent/>
+                            </div>
+                            <div>
+                                <CatalogContent/>
+                            </div>
+                            <div>
+                                <CatalogContent/>
+                            </div>
+                            <div>
+                                <CatalogContent/>
+                            </div>
+                            <div>
+                                <CatalogContent/>
+                            </div> */}
+                        </Slider>
                     </div>
                 </div>
                 <div ref={AcaraRef} className="mt-20 pt-12 px-10 md:px-20">
