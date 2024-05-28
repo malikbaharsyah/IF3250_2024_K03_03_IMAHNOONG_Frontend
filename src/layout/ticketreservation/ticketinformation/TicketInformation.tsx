@@ -4,11 +4,19 @@ interface TicketInformationProps extends React.HTMLProps<HTMLDivElement>{
     tanggal: string;
     waktu: string;
     jumlahTiket: number;
-    hargaTiket: number;
+    hargaTiket: number | string;
 }
 
 const TicketInformation: React.FC<TicketInformationProps> = ({namaPlanetarium, namaShow, tanggal, waktu, jumlahTiket, hargaTiket}) =>{
     console.log(namaPlanetarium, namaShow, tanggal, waktu, jumlahTiket, hargaTiket)
+    const date = new Date(tanggal).toLocaleDateString('id-ID', {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+    });;
+    console.log(date)
+    
     return (
         <div className="transition flex flex-col gap-2">
             <h2 className="font-semibold text-2xl font-inter">Ringkasan Pesanan</h2>
@@ -18,7 +26,7 @@ const TicketInformation: React.FC<TicketInformationProps> = ({namaPlanetarium, n
                 <div className="grid grid-flow-col gap-5">
                     <div className="flex flex-col gap-1">
                         <h2 className="font-semibold text-xs">Tanggal</h2>
-                        <p className="font-bold text-base">{tanggal}</p>
+                        <p className="font-bold text-base">{date}</p>
                     </div>
                     <div className="border-color-4 max-h-full w-[1px] border-[1px]"/>
                     <div className="grid flex-col gap-1 place-content-end">

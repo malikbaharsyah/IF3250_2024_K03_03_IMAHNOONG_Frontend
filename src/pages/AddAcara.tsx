@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Button, Modal } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import axios from 'axios';
+import api from "../services/api";
 
 const AddAcara = () => {
     const [namaAcara, setNamaAcara] = useState('');
@@ -90,16 +91,16 @@ const AddAcara = () => {
             // });
             // console.log(formattedDateWithDay);
             // console.log(gambar.name);
-            const response = await axios.post('http://localhost:9000/api/jadwal/addJadwal', {
+            const response = await api.post('/api/jadwal/addJadwal', {
                 title : namaAcara,
                 date: isoString,
                 kapasitas: Number(jumlahTiket),
                 hargaTiket: Number(hargaTiket),
-                planetariumId : 1,
+                planetariumId : localStorage.getItem('idPlanetarium'),
                 deskripsiJadwal : deskripsiAcara,
                 isKunjungan: false,
                 durasi: 60,
-                imagePath : gambar ? "../../../" + gambar.name : "",
+                imagePath : gambarUrl ? gambarUrl.split(',')[1] : null,
             });
             console.log('Jadwal added successfully:', response.data);
         } catch (error) {

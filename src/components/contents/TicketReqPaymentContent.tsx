@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import ConfirmPage from "../../layout/ticketreservation/subcontents/ConfirmPage";
 import PaymentPage from "../../layout/ticketreservation/subcontents/PaymentPage";
 import { StepperContextReq } from "../../context/StepperContext";
@@ -8,7 +8,17 @@ import StepperControl from "../../layout/ticketreservation/stepper/StepperContro
 import NavbarReservation from "../../layout/ticketreservation/base/NavbarReservation";
 import { motion, AnimatePresence } from "framer-motion"
 import PaymentMethod from "../../layout/ticketreservation/subcontents/PaymentMethod";
-const TicketReqPaymentContent = () => {
+import { Tiket } from "../../interfaces/Tiket";
+import { Planetarium } from "../../interfaces/Planetarium";
+import { Jadwal } from "../../interfaces/detailsData";
+import api from "../../services/api";
+
+
+interface TicketReqPaymentProps {
+    id: string;
+}
+
+const TicketReqPaymentContent: React.FC<TicketReqPaymentProps> = ({id}) => {
 
     const [currentStep, setCurrentStep] = useState(3);
     const [userData, setUserData] = useState('');
@@ -17,6 +27,10 @@ const TicketReqPaymentContent = () => {
     const [isFormValid, setIsFormValid] = useState(false);
     const [idTiket, setIdTiket] = useState('');
     const [payment, setPayment] = useState("");
+    const [planetariumData, setPlanetariumData] = useState<Planetarium>();
+    const [ticketInfo, setTicketInfo] = useState<Tiket>()
+    
+
     const steps = [
         "Data Pesanan",
         "Tunggu Konfirmasi",
@@ -24,6 +38,29 @@ const TicketReqPaymentContent = () => {
         "Pembayaran",
         "Konfirmasi"
     ]
+
+    useEffect(() => {
+        api.get(`/api/pesanTiket/tiket/${id}`)
+        .then(response => {
+            // console.log(response.data)
+            setTicketInfo(response.data);
+        })
+        .catch(error => console.error('Error fetching catalog data:', error));
+    }, []);
+
+    useEffect(() => {
+        api.get("/api/details/"+ticketInfo?.idPlanetarium)
+            .then((response) => {
+                setPlanetariumData(response.data);
+            })
+        
+            .catch((error) => console.error("Error fetching review data:", error));
+    }, []);
+
+
+
+
+    console.log(ticketInfo)
 
     const handleClick = (direction: string) => {
         let newStep = currentStep;
@@ -81,7 +118,7 @@ const TicketReqPaymentContent = () => {
                         {setComponent(currentStep)}
                         </StepperContextReq.Provider>
                         <div className="flex flex-col justify-start size-fit bg-color-4 bg-opacity-20 rounded-[20px] p-8 text-color-4 font-inter gap-4">
-                            <TicketInformation namaPlanetarium={""} namaShow={""} tanggal={""} waktu={""} jumlahTiket={0} hargaTiket={0}/>
+                            <TicketInformation namaPlanetarium={planetariumData?.namaPlanetarium!!} namaShow={ticketInfo?.namaJadwal!!} tanggal={new Date(ticketInfo?.waktuKunjungan[2]!!).toISOString().split('T')[0]} waktu={ticketInfo?.waktuKunjungan[1]!!} jumlahTiket={ticketInfo?.jumlahTiket!!} hargaTiket={ticketInfo?.harga!!}/>
                             <StepperControl
                                 handleClick={handleClick}
                                 currentStep={currentStep}

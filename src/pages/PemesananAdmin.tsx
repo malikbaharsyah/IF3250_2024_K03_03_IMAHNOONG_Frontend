@@ -12,15 +12,15 @@ const PemesananAdmin = () => {
     const [selectedDate, setSelectedDate] = useState(null);
     const [showOptions, setShowOptions] = useState(false);
 
-    const changeTab = (tab) => {
+    const changeTab = (tab: any) => {
         setActiveTab(tab);
     };
 
-    const handleSearchTextChange = (e) => {
+    const handleSearchTextChange = (e: any) => {
         setSearchText(e.target.value);
     };
 
-    const handleDateChange = (date) => {
+    const handleDateChange = (date: any) => {
         setSelectedDate(date);
     };
 

@@ -37,20 +37,19 @@ const LoginAdmin = () => {
             return;
         }
 
-        fetch('http://localhost:9000/api/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            username: username,
-            password: password,
-        }),
+        api.post('/api/login', {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password,
+            })
+
         }).then((response) => {
             if (response.status === 200) {
-                response.json().then((data) => {
                     // set token di local storage
-                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('token', response.data.token);
                     showGreenNotif('Login successful');
                     api.get('/api/auth').then((response) => {
                         if (response.status === 200) {
@@ -64,8 +63,7 @@ const LoginAdmin = () => {
                             }
                         }
                     })
-                })
-            }
+                }
             else if (response.status === 400) {
                 showRedNotif('Invalid username or password');
             }

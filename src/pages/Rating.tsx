@@ -6,15 +6,15 @@ import CircularProgress from "../components/base/CircleProgressBar";
 import DatePickerComponent from "../components/base/datepicker";
 import ReviewCard from "../components/contents/RatingContent";
 import { Review } from "../interfaces/review";
+import api from "../services/api";
 
 function Rating() {
   const [reviewData, setReviewData] = useState<Review[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:9000/api/review/1")
-      .then((response) => response.json())
-      .then((data) => {
-        setReviewData(data);
+    api.get(`/api/review/${localStorage.getItem('idPlanetarium')}`)
+      .then((response) => {
+        setReviewData(response.data);
       })
 
       .catch((error) => console.error("Error fetching review data:", error));

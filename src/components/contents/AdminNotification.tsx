@@ -5,7 +5,7 @@ const AdminNotification: React.FC = () => {
     const [messages, setMessages] = useState<string[]>([]);
 
     useEffect(() => {
-        const eventSource = new EventSource('http://localhost:9000/api/adminnotifs');
+        const eventSource = new EventSource('https://jopibe-image-mxr5n7vreq-et.a.run.app/api/adminnotifs');
 
         eventSource.onmessage = (event) => {
             console.log("Message received");

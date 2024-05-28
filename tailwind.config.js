@@ -33,6 +33,10 @@ export default {
         'color-9': '#CE1F1F',
         'color-10': '#95959A',
         'color-11': '#0C8CE9',
+      },
+      aspectRatio: {
+        '4/3': '4 / 3',
+        '1/1': '1 / 1',
       }
     },
   },

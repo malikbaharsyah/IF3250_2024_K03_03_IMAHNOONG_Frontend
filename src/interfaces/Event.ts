@@ -10,9 +10,12 @@ export interface Event {
     imagePath: string[];
     durasi: number;
     lokasi: string;
+    date?: Date;
   }
 
 export interface EventContentProps {
+    eventId: number;
+    planetariumId: number;
     eventImage: string;
     eventName: string;
     eventDescription: string;
@@ -20,6 +23,8 @@ export interface EventContentProps {
     eventTime: string;
     eventDate: string;
     eventDuration: string;
+    date?: Date;
+    price: number;
 }
 
 export interface editEvent{

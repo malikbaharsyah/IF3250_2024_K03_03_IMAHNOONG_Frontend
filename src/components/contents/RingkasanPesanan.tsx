@@ -1,7 +1,8 @@
 import Reschedule from "./Reschedule";
 import { useState, useEffect } from "react";
 import { DetailPesanan } from "../../interfaces/DetailPesanan";
-import axios from 'axios';
+import axios from "axios";
+import api from "../../services/api";
 
 const RingkasanPesanan = ({ id }: { id: string }) => {
   const [isChecked, setIsChecked] = useState(false);
@@ -13,15 +14,21 @@ const RingkasanPesanan = ({ id }: { id: string }) => {
   };
 
   const [pesananData, setPesananData] = useState<DetailPesanan>();
+  const [statusPesanan, setStatusPesanan] = useState<string>("");
+  const fetchPesananData = async () => {
+    try {
+      const response = await api.get("/api/pesanan/detailPesanan/" + id.toString());
+      const data = await response.data;
+      setPesananData(data);
+      setStatusPesanan(data.statusTiket);
+      console.log(statusPesanan)
+    } catch (error) {
+      console.error("Error fetching pesanan data:", error);
+    }
+  };
 
   useEffect(() => {
-    fetch("http://localhost:9000/api/pesanan/detailPesanan/" + id.toString())
-      .then((response) => response.json())
-      .then((data) => {
-        setPesananData(data);
-      })
-
-      .catch((error) => console.error("Error fetching pesanan data:", error));
+    fetchPesananData();
   }, []);
 
   function getStatusDiv(status: string) {
@@ -74,53 +81,63 @@ const RingkasanPesanan = ({ id }: { id: string }) => {
     statusDiv: getStatusDiv(pesananData?.statusTiket || ""),
   };
 
-//   let rescheduleDiv = null;
-//   if (pesananData != null) {
-//     rescheduleDiv = (
-//       <div className="mt-8">
-//         <Reschedule {...rescheduleProp} />
-//       </div>
-//     );
-//   }
-const Tolak = async () => {
-  console.log("tolak");
-  console.log(pesananData?.email);
-      try {
-        const response = await axios.post('http://localhost:9000/api/email/sendMail', {
-            isTerima: false,
-            email: pesananData?.email,
-        });
-        console.log('Email sent successfully:', response.data);
-    } catch (error) {
-        console.error('Error sent email :', error);
-    }
-};
+  let rescheduleDiv = null;
+  if (pesananData != null) {
+    rescheduleDiv = (
+      <div className="mt-8">
+        <Reschedule {...rescheduleProp} />
+      </div>
+    );
+  }
 
-const Terima = async () => {
-  console.log("terima");
+  const Tolak = async () => {
+    fetchPesananData();
+    console.log(pesananData?.email);
     try {
-      const response = await axios.post('http://localhost:9000/api/email/terima', {
-          id : parseInt(id),
-      });
-      console.log('Pesanan diterima:', response.data);
+      const response = await api.post(
+        "/api/email/sendMail",
+        {
+          isTerima: false,
+          email: pesananData?.email,
+        }
+      );
+      console.log("Email sent successfully:", response.data);
     } catch (error) {
-      console.error('Error terima pesanan:', error);
+      console.error("Error sent email :", error);
+    }
+    window.location.reload();
+  };
+
+  const Terima = async () => {
+    fetchPesananData();
+    console.log(statusPesanan)
+    try {
+      const response = await api.post(
+        "/api/email/terima",
+        {
+          id: parseInt(id),
+        }
+      );
+      console.log("Pesanan diterima:", response.data);
+    } catch (error) {
+      console.error("Error terima pesanan:", error);
     }
 
     try {
-      const response = await axios.post('http://localhost:9000/api/email/sendMail', {
+      const response = await api.post(
+        "/api/email/sendMail",
+        {
           isTerima: true,
           email: pesananData?.email,
-          // id : id,
-          
-      });
-      console.log('Email sent successfully:', response.data);
-  } catch (error) {
-      console.error('Error sent email :', error);
-  }
-  
-};
-
+          idTiket : pesananData?.id,
+        }
+      );
+      console.log("Email sent successfully:", response.data);
+    } catch (error) {
+      console.error("Error sent email :", error);
+    }
+    window.location.reload();
+  };
 
   return (
     <div className="flex flex-col w-full h-fit rounded-3xl font-inter">
@@ -287,16 +304,20 @@ const Terima = async () => {
         </div>
 
         {/* button konfirmasi request */}
-        <div className="flex flex-row justify-end">
-          <button className="bg-color-9 w-fit text-white font-inter font-medium text-xl py-2 px-8 mx-4 rounded-3xl hover:scale-105"
-          onClick={Tolak}>
+        {statusPesanan !== "Lunas" && (<div className="flex flex-row justify-end">
+          <button
+            className="bg-color-9 w-fit text-white font-inter font-medium text-xl py-2 px-8 mx-4 rounded-3xl hover:scale-105"
+            onClick={Tolak}
+          >
             Tolak
           </button>
-          <button className="bg-color-7 w-fit text-white font-inter font-regular text-xl py-2 px-8 rounded-3xl hover:scale-105"
-          onClick={Terima}>
+          <button
+            className="bg-color-7 w-fit text-white font-inter font-regular text-xl py-2 px-8 rounded-3xl hover:scale-105"
+            onClick={Terima}
+          >
             Terima
           </button>
-        </div>
+        </div>)}
       </div>
       {isChecked && rescheduleDiv}
     </div>

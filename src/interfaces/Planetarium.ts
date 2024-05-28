@@ -8,6 +8,7 @@ export interface Planetarium {
 }
 
 export interface CatalogContentProps {
+    planetariumId: number;
     imageSrc: string[];
     title: string;
     description: string;

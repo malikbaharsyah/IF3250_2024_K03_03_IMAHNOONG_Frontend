@@ -98,7 +98,8 @@ const PemesananAll = () => {
         </thead>
         <tbody>
         {pesananData.map((item, index) => (
-            <tr className="odd:bg-white even:bg-gray-50 border-b">
+            
+            <tr key={item.id} className="odd:bg-white even:bg-gray-50 border-b">
               <th
                 scope="row"
                 className="px-4 py-4 font-medium text-gray-900 whitespace-nowrap"

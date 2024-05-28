@@ -10,6 +10,9 @@ import {
   ArrowBackIosRounded,
 } from "@mui/icons-material";
 import { Jadwal } from "../interfaces/detailsData";
+import { useNavigate } from 'react-router-dom';
+import api from "../services/api";
+
 
 interface DateItem {
   date: Date;
@@ -19,20 +22,42 @@ const ViewTicket: React.FC = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const id = urlParams.get("id");
 
+  const tanggal = urlParams.get("tanggal");
+  const newDate = new Date(tanggal!);
+  newDate.setHours(newDate.getHours() + 7);
+  const navigate = useNavigate();
+
   if (id === null) {
     return <div></div>;
   }
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(newDate);
   const [filteredDates, setFilteredDates] = useState<DateItem[]>([]);
   const [tickets, setTickets] = useState<DateItem[]>([]);
+
+  const handleBeliItemClicked = (ticketId: number) => {
+    if (selectedDate) {
+      const formattedDate = selectedDate.toISOString().split('T')[0];
+      navigate(`/ticketreservation?pid=${id}&id=${ticketId}&date=${formattedDate}`);
+    }
+  }
+
+  useEffect(() => {
+    handleDateChange(newDate);
+  }, []);
 
   const handleDateChange = (date: Date | null) => {
     setSelectedDate(date);
     if (date) {
       const newDates = [];
+      var bias = 0;
+      console.log(date.getHours())
+      if (date.getHours() >= 7) {
+        bias = 1;
+      }
+
       for (let i = -3; i <= 3; i++) {
         const newDate = new Date(date);
-        newDate.setDate(newDate.getDate() + i);
+        newDate.setDate(newDate.getDate() + i + bias);
         newDates.push({ date: newDate });
       }
       setFilteredDates(newDates);
@@ -52,6 +77,11 @@ const ViewTicket: React.FC = () => {
     }
   };
 
+  const handleRequest = () => {
+    console.log("Request a booking");
+    navigate(`/ticketrequest?pid=${id}`)
+  };
+
   const handleDateItemClick = (date: Date) => {
     setSelectedDate(date);
     handleDateChange(date);
@@ -61,10 +91,9 @@ const ViewTicket: React.FC = () => {
     const [jadwalDefault, setJadwalDefault] = useState<Jadwal[]>([]);
     console.log(date.toString())
     useEffect(() => {
-      fetch("http://localhost:9000/api/jadwalDefault/listjadwal/"+id+"/"+date.toISOString().split('T')[0])
-        .then((response) => response.json())
-        .then((data) => {
-          setJadwalDefault(data);
+      api.get(`/api/jadwalDefault/listjadwal/${id}/${date.toISOString().split('T')[0]}`)
+        .then((response) => {
+          setJadwalDefault(response.data);
         })
 
         .catch((error) =>
@@ -112,7 +141,7 @@ const ViewTicket: React.FC = () => {
               <p className="text-white text-[1vw] font-medium">Tersedia</p>
             </div>
             <div className="beli-tiket">
-              <button className="text-white bg-gradient-to-r from-[#4F1395] to-[#2224A1] w-[10vw] rounded-full h-[3vw]">
+              <button onClick={() => handleBeliItemClicked(item.id)} className="text-white bg-gradient-to-r from-[#4F1395] to-[#2224A1] w-[10vw] rounded-full h-[3vw]">
                 Beli Tiket
               </button>
             </div>
@@ -195,7 +224,7 @@ const ViewTicket: React.FC = () => {
   return (
     <div className="flex flex-col">
       <Navbar />
-      <div className="flex flex-col items-center h-screen bg-stars bg-no-repeat bg-cover bg-local overflow-auto">
+      <div className="flex flex-col items-center min-h-screen bg-stars bg-no-repeat bg-cover bg-local pb-10">
         <p className="text-white font-bold mt-8 text-2xl">Nama Planetarium</p>
         <div className="my-8">
           <form className="flex flex-row py-4 px-6 space-x-4 bg-white bg-opacity-50 rounded-full items-center">
@@ -245,6 +274,18 @@ const ViewTicket: React.FC = () => {
             </div>
           ))}
         </Slider>
+        <div className="my-8 w-full px-20">
+          <div className="flex flex-row justify-between py-5 px-10 bg-[#4F1395] bg-opacity-50 rounded-full items-center">
+            <p className="text-white text-lg font-medium "> Ingin melakukan pemesanan by request. </p>
+            <button
+              type="button"
+              onClick={handleRequest}
+              className="text-white rounded-full py-2 px-6 bg-gradient-to-r from-[#4F1395] to-[#2224A1] font-medium"
+            >
+              Request a Booking
+            </button>
+          </div>
+        </div>
         <div className="flex flex-col items-center mt-8">
           <p className="text-white font-semibold text-xl my-4">
             Daftar Tiket Tersedia

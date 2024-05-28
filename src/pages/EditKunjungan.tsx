@@ -7,17 +7,18 @@ import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { editEvent } from "../interfaces/Event";
 import { useParams } from 'react-router-dom';
 import axios from "axios";
+import api from "../services/api";
 
 const EditKunjungan = () => {
     const [namaAcara, setNamaAcara] = useState('');
     const [hargaTiket, setHargaTiket] = useState('');
     const [jumlahTiket, setJumlahTiket] = useState('');
-    const [tanggal, setTanggal] = useState('');
+    const [tanggal, setTanggal] = useState(new Date());
     const [waktu, setWaktu] = useState('');
     const [waktuZone, setWaktuZone] = useState('WIB');
     const [isNamaAcaraUpdated, setIsNamaAcaraUpdated] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: any) => {
         e.preventDefault();
         setOpenModal(true);
     };
@@ -53,13 +54,13 @@ const EditKunjungan = () => {
             // console.log(image);
             const isoString = combined.toISOString();
 
-            const response = await axios.post('http://localhost:9000/api/jadwal/editJadwal', {
+            const response = await api.post('/api/jadwal/editJadwal', {
             id : Number(jadwalId),
             title : namaAcara,
             date: isoString,
             kapasitas: Number(jumlahTiket),
             hargaTiket: Number(hargaTiket),
-            planetariumId : 1, // TODO
+            planetariumId : localStorage.getItem('idPlanetarium'),
             deskripsiJadwal : "",
             imagePath : "",
             isKunjungan: false,
@@ -78,7 +79,7 @@ const EditKunjungan = () => {
     const { jadwalId } = useParams();
 
     useEffect(() => {
-      fetch('http://localhost:9000/api/jadwal/viewJadwal/' + jadwalId)
+      fetch('https://jopibe-image-mxr5n7vreq-et.a.run.app/api/jadwal/viewJadwal/' + jadwalId)
         .then(response => response.json())
         .then(data => {setEventData(data);})
         .catch(error => console.error('Error fetching catalog data:', error));
@@ -91,13 +92,12 @@ const EditKunjungan = () => {
             setHargaTiket(eventData.hargaTiket.toString());
             setJumlahTiket(eventData.kapasitas.toString());
             var dateKunjungan = new Date(eventData.waktuKunjungan);
-            const tanggalKunjungan = dateKunjungan.toLocaleString('id-ID', {
-                day: 'numeric',
-                month: 'numeric',
-                year: 'numeric',
-            });
-            
-            setTanggal(tanggalKunjungan);
+            // const tanggalKunjungan = dateKunjungan.toLocaleString('id-ID', {
+            //     day: 'numeric',
+            //     month: 'numeric',
+            //     year: 'numeric',
+            // });
+            setTanggal(dateKunjungan);
 
             const hour = String(dateKunjungan.getHours()).padStart(2, '0'); 
             const minute = String(dateKunjungan.getMinutes()).padStart(2, '0'); 
@@ -162,7 +162,7 @@ const EditKunjungan = () => {
                                 <label htmlFor="tanggal" className="block text-sm font-medium text-gray-700">Tanggal</label>
                                 <DatePicker 
                                     selected={tanggal} 
-                                    onChange={(date) => setTanggal(date)} 
+                                    onChange={(date) => setTanggal(date!!)} 
                                     placeholderText="Pilih Tanggal"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2" />
                             </div>
