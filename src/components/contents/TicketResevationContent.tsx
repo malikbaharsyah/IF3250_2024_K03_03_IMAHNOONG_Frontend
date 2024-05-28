@@ -12,6 +12,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import PaymentMethod from "../../layout/ticketreservation/subcontents/PaymentMethod";
 import { Jadwal } from "../../interfaces/detailsData";
 import { Planetarium } from '../../interfaces/Planetarium';
+import api from "../../services/api";
 
 
 interface TicketReservationProps extends React.HTMLProps<HTMLDivElement>{
@@ -33,10 +34,9 @@ const TicketReservationContent: React.FC<TicketReservationProps> = ({planetarium
 
     console.log(planetariumId, id)
     useEffect(() => {
-        fetch("http://localhost:9000/api/pesanTiket/jadwal/"+planetariumId+"/"+id)
-            .then((response) => response.json())
-            .then((data) => {
-                setJadwalData(data);
+        api.get(`/api/pesanTiket/jadwal/${planetariumId}/${id}`)
+            .then((response) => {
+                setJadwalData(response.data);
             })
         
             .catch((error) => console.error("Error fetching review data:", error));
@@ -44,10 +44,9 @@ const TicketReservationContent: React.FC<TicketReservationProps> = ({planetarium
 
 
     useEffect(() => {
-        fetch("http://localhost:9000/api/details/"+planetariumId)
-            .then((response) => response.json())
-            .then((data) => {
-                setPlanetarium(data);
+        api.get(`/api/planetarium/${planetariumId}`)
+            .then((response) => {
+                setPlanetarium(response.data);
             })
         
             .catch((error) => console.error("Error fetching review data:", error));

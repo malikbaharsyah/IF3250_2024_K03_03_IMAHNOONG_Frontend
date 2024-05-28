@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import { StepperControlProps } from "../../../interfaces/TicketReservation";
+import api from '../../../services/api';
 
 const StepperControl: React.FC<StepperControlProps> = ({
     handleClick,
@@ -57,17 +58,15 @@ const StepperControl: React.FC<StepperControlProps> = ({
         };
 
         console.log(requestData)
-    
-        fetch("http://localhost:9000/api/pesanTiket/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(requestData),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            setIdTiket(data);
+        api.post('/api/pesanTiket/', {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData),
+        }
+        )
+          .then((response) => {
+            setIdTiket(response.data);
           })
           .catch((error) => console.error("Error fetching jadwal data:", error));
         
@@ -86,16 +85,14 @@ const StepperControl: React.FC<StepperControlProps> = ({
             waktuKunjungan: parseDateTime(finalDataReq[1], finalDataReq[2]),
             durasi: getDurationInMinutes(finalDataReq[2], finalDataReq[3]), 
         }
-        fetch("http://localhost:9000/api/requestTiket/", {
-            method: "POST",
+        api.post("/api/requestTiket/", {
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(requestData),
         })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data);
+        .then((response) => {
+            console.log(response.data);
         })
         .catch((error) => console.error("Error:", error))
 

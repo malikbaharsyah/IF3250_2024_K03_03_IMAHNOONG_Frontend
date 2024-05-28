@@ -2,16 +2,15 @@ import { useState, useEffect } from 'react';
 import Navbar from "../components/base/Navbar";
 import CatalogContent from "../components/contents/CatalogContent";
 import { Planetarium } from '../interfaces/Planetarium';
+import api from '../services/api';
 
 const Catalog = () => {
 
     const [catalogData, setCatalogData] = useState<Planetarium[]>([]);
 
     useEffect(() => {
-      fetch('http://localhost:9000/api/catalog')
-        .then(response => response.json())
-        .then(data => {setCatalogData(data);})
-            
+        api.get('/api/catalog')
+        .then(response => {setCatalogData(response.data);})
         .catch(error => console.error('Error fetching catalog data:', error));
     }, []);
 

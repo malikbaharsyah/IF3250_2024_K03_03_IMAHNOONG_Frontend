@@ -130,10 +130,9 @@ const DashboardGraph = () => {
   const [penjualanPerHari, setPenjualanPerHari] = useState<number[]>([]);
   const [date, setDate] = useState(new Date());
   const fetchData = (month: number, year: number) => {
-    fetch(`http://localhost:9000/api/dashboard/statistik/${localStorage.getItem("idPlanetarium")}/${month}/${year}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setPenjualanPerHari(data);
+    api.get(`api/dashboard/statistik/${localStorage.getItem("idPlanetarium")}/${month}/${year}`)
+      .then((response) => {
+        setPenjualanPerHari(response.data);
       })
       .catch((error) => console.error("Error fetching statistic data:", error));
   };

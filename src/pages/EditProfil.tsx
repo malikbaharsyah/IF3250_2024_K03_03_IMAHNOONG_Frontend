@@ -123,12 +123,11 @@ const EditProfil = () => {
 
     const [eventData, setEventData] = useState<EditPlanetarium>();
 
-    const planetariumId = parseInt(localStorage.getItem('idPlanetarium'));
+    const planetariumId = parseInt(localStorage.getItem('idPlanetarium')!);
 
     useEffect(() => {
-    fetch(`https://jopibe-image-mxr5n7vreq-et.a.run.app/api/details/${planetariumId}`)
-        .then(response => response.json())
-        .then(data => {setEventData(data);})
+        api.get(`/api/details/${planetariumId}`)
+        .then(response => {setEventData(response.data);})
         .catch(error => console.error('Error fetching catalog data:', error));
     }, []);
 

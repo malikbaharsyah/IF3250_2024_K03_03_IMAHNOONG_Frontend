@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { PlanetariumLandingPage } from "../interfaces/Planetarium";
 import { ArrowForwardIosRounded, ArrowBackIosRounded } from '@mui/icons-material';
+import api from "../services/api";
 
 const LandingPage = () => {
     const OnPRef = useRef<HTMLDivElement | null>(null);
@@ -17,16 +18,15 @@ const LandingPage = () => {
     const [eventData, setEventData] = useState<Event[]>([]);
 
     useEffect(() => {
-      fetch('http://localhost:9000/api/jadwal/landingPage/event')
-        .then(response => response.json())
-        .then(data => {setEventData(data);})
+        api.get('/api/jadwal/landingPage/event')
+        .then(response => {setEventData(response.data);})
         .catch(error => console.error('Error fetching catalog data:', error));
     }, []);
 
     const [catalogData, setCatalogData] = useState<PlanetariumLandingPage[]>([]);
 
     useEffect(() => {
-      fetch('http://localhost:9000/api/jadwalDefault/landingPage/catalog')
+      fetch('https://jopibe-image-mxr5n7vreq-et.a.run.app/api/jadwalDefault/landingPage/catalog')
         .then(response => response.json())
         .then(data => {setCatalogData(data);})
             

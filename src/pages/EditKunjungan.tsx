@@ -7,6 +7,7 @@ import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { editEvent } from "../interfaces/Event";
 import { useParams } from 'react-router-dom';
 import axios from "axios";
+import api from "../services/api";
 
 const EditKunjungan = () => {
     const [namaAcara, setNamaAcara] = useState('');
@@ -53,13 +54,13 @@ const EditKunjungan = () => {
             // console.log(image);
             const isoString = combined.toISOString();
 
-            const response = await axios.post('http://localhost:9000/api/jadwal/editJadwal', {
+            const response = await api.post('/api/jadwal/editJadwal', {
             id : Number(jadwalId),
             title : namaAcara,
             date: isoString,
             kapasitas: Number(jumlahTiket),
             hargaTiket: Number(hargaTiket),
-            planetariumId : 1, // TODO
+            planetariumId : localStorage.getItem('idPlanetarium'),
             deskripsiJadwal : "",
             imagePath : "",
             isKunjungan: false,
@@ -78,7 +79,7 @@ const EditKunjungan = () => {
     const { jadwalId } = useParams();
 
     useEffect(() => {
-      fetch('http://localhost:9000/api/jadwal/viewJadwal/' + jadwalId)
+      fetch('https://jopibe-image-mxr5n7vreq-et.a.run.app/api/jadwal/viewJadwal/' + jadwalId)
         .then(response => response.json())
         .then(data => {setEventData(data);})
         .catch(error => console.error('Error fetching catalog data:', error));

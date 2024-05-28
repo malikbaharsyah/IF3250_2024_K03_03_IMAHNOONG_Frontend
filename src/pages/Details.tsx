@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import {useParams} from 'react-router-dom';
 import { DetailsData, Jadwal } from '../interfaces/detailsData';
 import DatePickerComponent from "../components/base/datepicker";
+import api from "../services/api";
 
 
 const Details = () => {
@@ -18,17 +19,16 @@ const Details = () => {
     const [eventData, setEventData] = useState<Jadwal[]>([]);
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     useEffect(() => {
-        fetch("http://localhost:9000/api/details/"+id)
-          .then((response) => response.json())
-          .then((data) => {
-            setDetailsData(data);
+        api.get(`/api/details/${id}`)
+          .then((response) => {
+            setDetailsData(response.data);
           })
     
           .catch((error) => console.error("Error fetching review data:", error));
       }, []);
     
     useEffect(() => {
-        fetch("http://localhost:9000/api/jadwal/closestJadwal/"+id)
+        fetch("https://jopibe-image-mxr5n7vreq-et.a.run.app/api/jadwal/closestJadwal/"+id)
             .then((response) => response.json())
             .then((data) => {
                 console.log(data)

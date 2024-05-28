@@ -11,6 +11,7 @@ import PaymentMethod from "../../layout/ticketreservation/subcontents/PaymentMet
 import { Tiket } from "../../interfaces/Tiket";
 import { Planetarium } from "../../interfaces/Planetarium";
 import { Jadwal } from "../../interfaces/detailsData";
+import api from "../../services/api";
 
 
 interface TicketReqPaymentProps {
@@ -39,20 +40,18 @@ const TicketReqPaymentContent: React.FC<TicketReqPaymentProps> = ({id}) => {
     ]
 
     useEffect(() => {
-        fetch(`http://localhost:9000/api/pesanTiket/tiket/${id}`)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-            setTicketInfo(data);
+        api.get(`/api/pesanTiket/tiket/${id}`)
+        .then(response => {
+            // console.log(response.data)
+            setTicketInfo(response.data);
         })
         .catch(error => console.error('Error fetching catalog data:', error));
     }, []);
 
     useEffect(() => {
-        fetch("http://localhost:9000/api/details/"+ticketInfo?.idPlanetarium)
-            .then((response) => response.json())
-            .then((data) => {
-                setPlanetariumData(data);
+        api.get("/api/details/"+ticketInfo?.idPlanetarium)
+            .then((response) => {
+                setPlanetariumData(response.data);
             })
         
             .catch((error) => console.error("Error fetching review data:", error));

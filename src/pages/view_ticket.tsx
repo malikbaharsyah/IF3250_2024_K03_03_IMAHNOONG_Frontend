@@ -11,6 +11,7 @@ import {
 } from "@mui/icons-material";
 import { Jadwal } from "../interfaces/detailsData";
 import { useNavigate } from 'react-router-dom';
+import api from "../services/api";
 
 
 interface DateItem {
@@ -90,10 +91,9 @@ const ViewTicket: React.FC = () => {
     const [jadwalDefault, setJadwalDefault] = useState<Jadwal[]>([]);
     console.log(date.toString())
     useEffect(() => {
-      fetch("http://localhost:9000/api/jadwalDefault/listjadwal/"+id+"/"+date.toISOString().split('T')[0])
-        .then((response) => response.json())
-        .then((data) => {
-          setJadwalDefault(data);
+      api.get(`/api/jadwalDefault/listjadwal/${id}/${date.toISOString().split('T')[0]}`)
+        .then((response) => {
+          setJadwalDefault(response.data);
         })
 
         .catch((error) =>

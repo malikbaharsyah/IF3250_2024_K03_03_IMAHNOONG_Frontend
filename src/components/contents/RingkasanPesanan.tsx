@@ -2,6 +2,7 @@ import Reschedule from "./Reschedule";
 import { useState, useEffect } from "react";
 import { DetailPesanan } from "../../interfaces/DetailPesanan";
 import axios from "axios";
+import api from "../../services/api";
 
 const RingkasanPesanan = ({ id }: { id: string }) => {
   const [isChecked, setIsChecked] = useState(false);
@@ -16,8 +17,8 @@ const RingkasanPesanan = ({ id }: { id: string }) => {
   const [statusPesanan, setStatusPesanan] = useState<string>("");
   const fetchPesananData = async () => {
     try {
-      const response = await fetch("http://localhost:9000/api/pesanan/detailPesanan/" + id.toString());
-      const data = await response.json();
+      const response = await api.get("/api/pesanan/detailPesanan/" + id.toString());
+      const data = await response.data;
       setPesananData(data);
       setStatusPesanan(data.statusTiket);
       console.log(statusPesanan)
@@ -93,8 +94,8 @@ const RingkasanPesanan = ({ id }: { id: string }) => {
     fetchPesananData();
     console.log(pesananData?.email);
     try {
-      const response = await axios.post(
-        "http://localhost:9000/api/email/sendMail",
+      const response = await api.post(
+        "/api/email/sendMail",
         {
           isTerima: false,
           email: pesananData?.email,
@@ -111,8 +112,8 @@ const RingkasanPesanan = ({ id }: { id: string }) => {
     fetchPesananData();
     console.log(statusPesanan)
     try {
-      const response = await axios.post(
-        "http://localhost:9000/api/email/terima",
+      const response = await api.post(
+        "/api/email/terima",
         {
           id: parseInt(id),
         }
@@ -123,8 +124,8 @@ const RingkasanPesanan = ({ id }: { id: string }) => {
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:9000/api/email/sendMail",
+      const response = await api.post(
+        "/api/email/sendMail",
         {
           isTerima: true,
           email: pesananData?.email,
