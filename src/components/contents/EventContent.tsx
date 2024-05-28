@@ -15,6 +15,7 @@ const EventContent: React.FC<EventContentProps> = ({
     eventDate,
     eventDuration,
     date,
+    price
   }) => {
     let selectedDate = new Date(date!!).toISOString().split('T')[0]
 
@@ -44,7 +45,7 @@ const EventContent: React.FC<EventContentProps> = ({
                                 <FaTicket/>
                             </div>
                             <p className="font-inter text-white text-sm lg:text-lg xl:text-xl font-medium ml-2">
-                                Rp. 100.000
+                                Rp. {price}
                             </p>
                         </div>
                         <div className="flex flex-row items-center">

@@ -114,6 +114,7 @@ const Details = () => {
                             eventImage={event.imagePath[0]}
                             eventDuration={event.durasi.toString()}
                             date={event.date}
+                            price={event.hargaTiket}
                         />
                     ))}
                 </div>

@@ -149,6 +149,7 @@ const LandingPage = () => {
                                 eventImage={eventItem.imagePath[0]}
                                 eventDuration={(eventItem.durasi / 60).toString() + "." + (eventItem.durasi % 60).toString()}
                                 date={eventItem.date}
+                                price={eventItem.hargaTiket}
                             />
                         ))}
                         {/* <EventContent/>
