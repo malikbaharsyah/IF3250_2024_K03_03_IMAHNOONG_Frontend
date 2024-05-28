@@ -25,7 +25,7 @@ const TicketReservationContent: React.FC<TicketReservationProps> = ({planetarium
     if (planetariumId === null || id === null) {
         return
     }
-    const [ticketData, setTicketData] = useState<Jadwal>();
+    const [jadwalData, setJadwalData] = useState<Jadwal>();
     const [planetariumData, setPlanetarium] = useState<Planetarium>();
     const [jumlahTiket, setJumlahTiket] = useState(1);
     const [idTiket, setIdTiket] = useState('');
@@ -33,16 +33,15 @@ const TicketReservationContent: React.FC<TicketReservationProps> = ({planetarium
 
     console.log(planetariumId, id)
     useEffect(() => {
-        fetch("http://localhost:9000/api/pesanTiket/"+planetariumId+"/"+id)
+        fetch("http://localhost:9000/api/pesanTiket/jadwal/"+planetariumId+"/"+id)
             .then((response) => response.json())
             .then((data) => {
-                setTicketData(data);
+                setJadwalData(data);
             })
         
             .catch((error) => console.error("Error fetching review data:", error));
     }, []);
 
-    console.log(ticketData)
 
     useEffect(() => {
         fetch("http://localhost:9000/api/details/"+planetariumId)
@@ -89,9 +88,9 @@ const TicketReservationContent: React.FC<TicketReservationProps> = ({planetarium
                     setPaymentMethod = {setPayment}
                 />
             case 3:
-                return <PaymentPage totalPembayaran={finalData[3]*ticketData?.hargaTiket!!}/>
+                return <PaymentPage totalPembayaran={finalData[3]*jadwalData?.hargaTiket!!}/>
             case 4:
-                return <ConfirmPage idTiket={idTiket} totalPembayaran={finalData[3]*ticketData?.hargaTiket!!}/>
+                return <ConfirmPage idTiket={idTiket} totalPembayaran={finalData[3]*jadwalData?.hargaTiket!!}/>
             default:
         }
     }
@@ -138,7 +137,7 @@ const TicketReservationContent: React.FC<TicketReservationProps> = ({planetarium
                         {setComponent(currentStep)}
                         </StepperContext.Provider>
                         <div className="flex flex-col justify-start size-fit bg-color-4 bg-opacity-20 rounded-[20px] p-8 text-color-4 font-inter gap-4">
-                            <TicketInformation namaPlanetarium={planetariumData?.namaPlanetarium!!} namaShow={ticketData?.namaJadwal!!} tanggal={date} waktu={ticketData?.waktuKunjungan[0]!!} jumlahTiket={jumlahTiket} hargaTiket={ticketData?.hargaTiket!!}/>
+                            <TicketInformation namaPlanetarium={planetariumData?.namaPlanetarium!!} namaShow={jadwalData?.namaJadwal!!} tanggal={date} waktu={jadwalData?.waktuKunjungan[0]!!} jumlahTiket={jumlahTiket} hargaTiket={jadwalData?.hargaTiket!!}/>
                             {/* <TicketInformation/> */}
                             <StepperControl
                                 handleClick={handleClick}

@@ -4,7 +4,7 @@ interface TicketInformationProps extends React.HTMLProps<HTMLDivElement>{
     tanggal: string;
     waktu: string;
     jumlahTiket: number;
-    hargaTiket: number;
+    hargaTiket: number | string;
 }
 
 const TicketInformation: React.FC<TicketInformationProps> = ({namaPlanetarium, namaShow, tanggal, waktu, jumlahTiket, hargaTiket}) =>{

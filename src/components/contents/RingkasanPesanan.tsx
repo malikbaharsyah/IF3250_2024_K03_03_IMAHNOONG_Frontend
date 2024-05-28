@@ -13,15 +13,21 @@ const RingkasanPesanan = ({ id }: { id: string }) => {
   };
 
   const [pesananData, setPesananData] = useState<DetailPesanan>();
+  const [statusPesanan, setStatusPesanan] = useState<string>("");
+  const fetchPesananData = async () => {
+    try {
+      const response = await fetch("http://localhost:9000/api/pesanan/detailPesanan/" + id.toString());
+      const data = await response.json();
+      setPesananData(data);
+      setStatusPesanan(data.statusTiket);
+      console.log(statusPesanan)
+    } catch (error) {
+      console.error("Error fetching pesanan data:", error);
+    }
+  };
 
   useEffect(() => {
-    fetch("http://localhost:9000/api/pesanan/detailPesanan/" + id.toString())
-      .then((response) => response.json())
-      .then((data) => {
-        setPesananData(data);
-      })
-
-      .catch((error) => console.error("Error fetching pesanan data:", error));
+    fetchPesananData();
   }, []);
 
   function getStatusDiv(status: string) {
@@ -84,7 +90,7 @@ const RingkasanPesanan = ({ id }: { id: string }) => {
   }
 
   const Tolak = async () => {
-    console.log("tolak");
+    fetchPesananData();
     console.log(pesananData?.email);
     try {
       const response = await axios.post(
@@ -98,10 +104,12 @@ const RingkasanPesanan = ({ id }: { id: string }) => {
     } catch (error) {
       console.error("Error sent email :", error);
     }
+    window.location.reload();
   };
 
   const Terima = async () => {
-    console.log("terima");
+    fetchPesananData();
+    console.log(statusPesanan)
     try {
       const response = await axios.post(
         "http://localhost:9000/api/email/terima",
@@ -120,13 +128,14 @@ const RingkasanPesanan = ({ id }: { id: string }) => {
         {
           isTerima: true,
           email: pesananData?.email,
-          // id : id,
+          idTiket : pesananData?.id,
         }
       );
       console.log("Email sent successfully:", response.data);
     } catch (error) {
       console.error("Error sent email :", error);
     }
+    window.location.reload();
   };
 
   return (
@@ -294,7 +303,7 @@ const RingkasanPesanan = ({ id }: { id: string }) => {
         </div>
 
         {/* button konfirmasi request */}
-        <div className="flex flex-row justify-end">
+        {statusPesanan !== "Lunas" && (<div className="flex flex-row justify-end">
           <button
             className="bg-color-9 w-fit text-white font-inter font-medium text-xl py-2 px-8 mx-4 rounded-3xl hover:scale-105"
             onClick={Tolak}
@@ -307,7 +316,7 @@ const RingkasanPesanan = ({ id }: { id: string }) => {
           >
             Terima
           </button>
-        </div>
+        </div>)}
       </div>
       {isChecked && rescheduleDiv}
     </div>
