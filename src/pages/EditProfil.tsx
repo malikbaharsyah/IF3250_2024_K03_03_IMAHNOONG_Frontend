@@ -111,7 +111,7 @@ const EditProfil = () => {
             noTelepon: noTelp,
             // imagePath: gambarUrls.map((url) => url.split(',')[1]),
             
-            imagePath: [gambarUrls[0].split(',')[1]],
+            imagePath: gambarUrls.length > 0 ? [gambarUrls[0].split(',')[1]] : [],
             lokasi: lokasi,
             });
             console.log('Planetarium edit successfully:', response.data);
@@ -126,7 +126,7 @@ const EditProfil = () => {
     const planetariumId = parseInt(localStorage.getItem('idPlanetarium'));
 
     useEffect(() => {
-    fetch(`http://localhost:9000/api/details/${planetariumId}`)
+    fetch(`https://jopibe-image-mxr5n7vreq-et.a.run.app/api/details/${planetariumId}`)
         .then(response => response.json())
         .then(data => {setEventData(data);})
         .catch(error => console.error('Error fetching catalog data:', error));
