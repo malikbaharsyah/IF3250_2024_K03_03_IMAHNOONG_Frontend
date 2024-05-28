@@ -5,6 +5,7 @@ import { ApexOptions } from "apexcharts";
 import { CalendarContainer } from "react-datepicker";
 import DatePickerComponent from "../components/base/datepicker";
 import { Pesanan } from "../interfaces/Pesanan";
+import api from "../services/api";
 
 const dashboardFieldStyle = "pb-2 bg-white rounded-[20px] overflow-hidden ";
 const dashboardFieldTitleStyle =
@@ -28,54 +29,21 @@ const TodayOrdersTable = () => {
   const [pesananData, setPesananData] = useState<Pesanan[]>([]);
 
   useEffect(() => {
-    const requestData = {
-      id: 1,
-    };
-    fetch("http://localhost:9000/api/dashboard/listPesananHariIni/", {
-      method: "POST",
+    api.post("/api/dashboard/listPesananHariIni/", {
+      id: parseInt(localStorage.getItem("idPlanetarium")!!),
+    },
+    {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(requestData),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        setPesananData(data);
+      .then((response) => {
+        setPesananData(response.data);
       })
 
       .catch((error) => console.error("Error fetching jadwal data:", error));
   }, []);
 
-  const tableRows = [
-    {
-      nama: "Veveel",
-      email: "iloveppl@gmail.com",
-      waktu_kunjung: "3/30/2024 : 03.00",
-      show: "Show 1",
-      status_bayar: "Telah Membayar",
-    },
-    {
-      nama: "Jauza",
-      email: "iloveppl@gmail.com",
-      waktu_kunjung: "4/03/2024 : 03.00",
-      show: "Show 1",
-      status_bayar: "Menunggu",
-    },
-    {
-      nama: "Laila",
-      email: "iloveppl@gmail.com",
-      waktu_kunjung: "4/05/2024 : 03.00",
-      show: "Show 1",
-      status_bayar: "Telah Membayar",
-    },
-    {
-      nama: "Bintang",
-      email: "iloveppl@gmail.com",
-      waktu_kunjung: "4/11/2024 : 03.00",
-      show: "Show 1",
-      status_bayar: "Telah Membayar",
-    },
-  ];
   return (
     <div className="mr-4 overflow-auto">
       <table className="w-full">
@@ -155,12 +123,34 @@ const DashboardCalendar = () => {
   );
 };
 const DashboardGraph = () => {
-  const penjualanPerHari = Array(31)
-    .fill(0)
-    .map(() => Math.floor(Math.random() * 10) + 1); //TODO(connect to backend)
-  const chartConfig: ApexChart = {
-    type: "line",
+  // const penjualanPerHari = Array(31)
+  //   .fill(0)
+  //   .map(() => Math.floor(Math.random() * 10) + 1); //TODO(connect to backend)
+
+  const [penjualanPerHari, setPenjualanPerHari] = useState<number[]>([]);
+  const [date, setDate] = useState(new Date());
+  const fetchData = (month: number, year: number) => {
+    fetch(`http://localhost:9000/api/dashboard/statistik/${localStorage.getItem("idPlanetarium")}/${month}/${year}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setPenjualanPerHari(data);
+      })
+      .catch((error) => console.error("Error fetching statistic data:", error));
   };
+
+  useEffect(() => {
+    // Fetch data on initial render
+    fetchData(date.getMonth(), date.getFullYear());
+  }, []);
+
+  const onDateChange = (date: Date | null) => {
+    if (date) {
+      setDate(date);
+      // Fetch data based on the new date
+      fetchData(date.getMonth(), date.getFullYear());
+    }
+  };
+
   const chartSeries: ApexAxisChartSeries = [
     {
       name: "penjualan",
@@ -202,8 +192,7 @@ const DashboardGraph = () => {
           fontWeight: 400,
         },
       },
-      categories: Array(31)
-        .fill(0)
+      categories: penjualanPerHari
         .map((_, i) => i + 1), // banyak baris, TODO(sesuaikan dengan jumlah hari dengan bulan yang dipilih)
     },
     yaxis: {
@@ -244,11 +233,11 @@ const DashboardGraph = () => {
     <div className="flex flex-col bg-white p-8 mb-4 w-full h-fit rounded-3xl">
       <div className="flex flex-row items-center justify-between font-bold text-xl border-b-4 pb-4">
         Statistik pemesanan
-        <DatePickerComponent month />
+        <DatePickerComponent selectedDate={date} onDateChange={onDateChange} month={true} />
       </div>
       <div>
         <Chart
-          type={chartConfig.type}
+          type={"line"}
           options={chartOptions}
           series={chartSeries}
         />

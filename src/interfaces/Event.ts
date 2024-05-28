@@ -24,6 +24,7 @@ export interface EventContentProps {
     eventDate: string;
     eventDuration: string;
     date?: Date;
+    price: number;
 }
 
 export interface editEvent{
