@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:9000',
+  baseURL: "https://jopibe-image-mxr5n7vreq-et.a.run.app",
   headers: {
     'Content-Type': 'application/json'
   }
