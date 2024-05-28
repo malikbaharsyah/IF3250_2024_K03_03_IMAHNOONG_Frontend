@@ -151,7 +151,7 @@ const LandingPage = () => {
                     <h1 className="font-inter text-white text-left text-xl sm:text-3xl font-bold py-1">
                         Acara Terdekat
                     </h1>
-                    <div className="flex flex-row justify-center gap-12 w-full my-16">
+                    <div className="flex flex-col justify-center gap-12 w-full my-16">
                         {eventData.map((eventItem) => (
                             <EventContent
                                 key={eventItem.id}
